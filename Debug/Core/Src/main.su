@@ -1,0 +1,15 @@
+../Core/Src/main.c:77:5:main	32	static
+../Core/Src/main.c:134:6:SystemClock_Config	88	static
+../Core/Src/main.c:175:13:MX_I2C1_Init	8	static
+../Core/Src/main.c:223:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:271:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:319:13:MX_USART3_UART_Init	8	static
+../Core/Src/main.c:355:13:MX_GPIO_Init	56	static
+../Core/Src/main.c:401:6:send_debug_logs	24	static
+../Core/Src/main.c:414:6:reset_astronode	8	static
+../Core/Src/main.c:421:6:send_astronode_request	16	static
+../Core/Src/main.c:428:6:is_astronode_character_received	16	static
+../Core/Src/main.c:432:10:get_systick	8	static
+../Core/Src/main.c:436:6:is_systick_timeout_over	16	static
+../Core/Src/main.c:440:6:my_astro_on	8	static
+../Core/Src/main.c:450:6:Error_Handler	8	static,ignoring_inline_asm
