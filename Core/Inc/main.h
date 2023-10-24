@@ -63,6 +63,9 @@ bool is_astronode_character_received ( uint8_t* ) ;
 uint32_t get_systick ( void ) ;
 bool is_systick_timeout_over ( uint32_t , uint16_t ) ;
 void my_astro_on ( void ) ;
+void my_astro_off ( void ) ;
+void my_lx6_on ( void ) ;
+void my_lx6_off ( void ) ;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -72,16 +75,14 @@ void my_astro_on ( void ) ;
 #define L86_RST_GPIO_Port GPIOC
 #define MCO_Pin GPIO_PIN_0
 #define MCO_GPIO_Port GPIOF
-#define ASTRO_PWR_SW_Pin GPIO_PIN_3
-#define ASTRO_PWR_SW_GPIO_Port GPIOC
 #define DBG_TXD_Pin GPIO_PIN_2
 #define DBG_TXD_GPIO_Port GPIOA
 #define DBG_RXD_Pin GPIO_PIN_3
 #define DBG_RXD_GPIO_Port GPIOA
 #define LDG_Pin GPIO_PIN_5
 #define LDG_GPIO_Port GPIOA
-#define ASTRO_PWR_SWA6_Pin GPIO_PIN_6
-#define ASTRO_PWR_SWA6_GPIO_Port GPIOA
+#define ASTRO_PWR_SW_Pin GPIO_PIN_6
+#define ASTRO_PWR_SW_GPIO_Port GPIOA
 #define ASTRO_TXD_Pin GPIO_PIN_9
 #define ASTRO_TXD_GPIO_Port GPIOA
 #define ASTRO_RST_Pin GPIO_PIN_7
@@ -114,7 +115,7 @@ void my_astro_on ( void ) ;
 /* USER CODE BEGIN Private defines */
 #define HUART_ASTRO						&huart1
 #define HUART_DBG						&huart2
-#define HUART_L86						&huart3
+#define HUART_Lx6						&huart3
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100

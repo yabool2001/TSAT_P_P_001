@@ -51,6 +51,7 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 char* 		hello = "Hello TSAT_P_P_001\n" ;
+uint8_t		uart1_rx = 0 ;
 uint32_t	print_housekeeping_timer = 0 ;
 /* USER CODE END PV */
 
@@ -104,13 +105,23 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , DBG_TX_TIMEOUT ) ;
+  my_astro_off () ;
+  /*
   HAL_Delay ( 5000 ) ;
   my_astro_on () ;
-  HAL_Delay ( 1000 ) ;
   reset_astronode () ;
   print_housekeeping_timer = get_systick () ;
   astronode_send_cfg_wr ( true , false , true , false , true , true , true , false ) ;
-  astronode_send_cfg_wr ( true , false , true , false , true , true , true , false ) ;
+  astronode_send_cfg_sr () ;
+  astronode_send_mpn_rr () ;
+  astronode_send_msn_rr () ;
+  astronode_send_mgi_rr () ;
+  my_astro_off () ;
+  */
+  my_lx6_off () ;
+  HAL_Delay ( 5000 ) ;
+  my_lx6_on () ;
+
   //HAL_GPIO_WritePin ( GPIOC , L86_PWR_SW_Pin , GPIO_PIN_SET ) ;
   /* USER CODE END 2 */
 
@@ -118,8 +129,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_Delay ( 2000 ) ;
-	  // HAL_GPIO_TogglePin ( GPIOC , L86_PWR_SW_Pin );
+	  HAL_UART_Receive ( HUART_Lx6 , &uart1_rx , 1 , 1000 ) ;
+	  if ( uart1_rx )
+	  {
+		  HAL_UART_Transmit ( HUART_DBG , &uart1_rx , 1/*rxl*/ , 1000 ) ;
+	  }
+	  uart1_rx = 0 ;
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -365,22 +381,22 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, L86_RST_Pin|ASTRO_PWR_SW_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, L86_RST_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LDG_Pin|ASTRO_PWR_SWA6_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
+  HAL_GPIO_WritePin(GPIOA, LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
                           |ASTRO_WAKEUP_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : L86_RST_Pin ASTRO_PWR_SW_Pin ASTRO_RST_Pin L86_PWR_SW_Pin */
-  GPIO_InitStruct.Pin = L86_RST_Pin|ASTRO_PWR_SW_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin;
+  /*Configure GPIO pins : L86_RST_Pin ASTRO_RST_Pin L86_PWR_SW_Pin */
+  GPIO_InitStruct.Pin = L86_RST_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LDG_Pin ASTRO_PWR_SWA6_Pin ASTRO_RSTA11_Pin ASTRO_EVENT_Pin
+  /*Configure GPIO pins : LDG_Pin ASTRO_PWR_SW_Pin ASTRO_RSTA11_Pin ASTRO_EVENT_Pin
                            ASTRO_WAKEUP_Pin */
-  GPIO_InitStruct.Pin = LDG_Pin|ASTRO_PWR_SWA6_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
+  GPIO_InitStruct.Pin = LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
                           |ASTRO_WAKEUP_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -439,7 +455,25 @@ bool is_systick_timeout_over ( uint32_t starting_value , uint16_t duration )
 }
 void my_astro_on ( void )
 {
-	HAL_GPIO_WritePin ( GPIOC , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
+	HAL_GPIO_WritePin ( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
+	MX_USART1_UART_Init () ;
+}
+void my_astro_off ( void )
+{
+	HAL_GPIO_WritePin ( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_RESET ) ;
+	HAL_UART_DeInit ( HUART_ASTRO ) ;
+}
+void my_lx6_on ( void )
+{
+	HAL_GPIO_WritePin ( GPIOC , L86_PWR_SW_Pin , GPIO_PIN_SET ) ;
+	HAL_GPIO_WritePin ( GPIOC , L86_RST_Pin , GPIO_PIN_SET ) ;
+	MX_USART3_UART_Init () ;
+}
+void my_lx6_off ( void )
+{
+	HAL_GPIO_WritePin ( GPIOC , L86_PWR_SW_Pin , GPIO_PIN_RESET ) ;
+	HAL_GPIO_WritePin ( GPIOC , L86_RST_Pin , GPIO_PIN_RESET ) ;
+	HAL_UART_DeInit ( HUART_Lx6 ) ;
 }
 /* USER CODE END 4 */
 
