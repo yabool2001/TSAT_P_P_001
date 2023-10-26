@@ -14,7 +14,7 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
-  * L86_PWR_SW tested and working
+  *
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -23,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "my_nmea.h"
 #include "astronode_definitions.h"
 #include "astronode_application.h"
 /* USER CODE END Includes */
@@ -34,7 +35,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DBG_TX_TIMEOUT 1000
+#define DBG_TX_TIMEOUT 	1000
+#define NMEA_3D_FIX		'3'
+#define NMEA_PDOP_MIN_THS_D		5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,14 +48,32 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
+TIM_HandleTypeDef htim6;
+
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 char* 		hello = "Hello TSAT_P_P_001\n" ;
-uint8_t		uart1_rx = 0 ;
+
+// Lx6
+uint8_t		rxd_byte = 0 ;
+uint8_t		nmea_message[250] ;
+uint8_t		i_nmea = 0 ;
+char* 		nmea_gngsa_label = "GNGSA" ;
+char* 		nmea_gngll_label = "GNGLL" ;
+char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
+char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
+uint8_t		fix_quality = 0 ; // 0: no fix, 1: fix quality worst than NMEA_PDOP_MIN_THS_D, 2: fix quality better than NMEA_PDOP_MIN_THS_D
+char		nmea_fixed_mode_s ;
+double 		nmea_fixed_pdop_d = 0.0 ;
+
+// Astrocast
 uint32_t	print_housekeeping_timer = 0 ;
+
+// Flags
+bool 		seek_fix_loop_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,6 +83,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_TIM6_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -103,11 +125,12 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART3_UART_Init();
   MX_I2C1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , DBG_TX_TIMEOUT ) ;
+  __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
   my_astro_off () ;
   /*
-  HAL_Delay ( 5000 ) ;
   my_astro_on () ;
   reset_astronode () ;
   print_housekeeping_timer = get_systick () ;
@@ -118,23 +141,55 @@ int main(void)
   astronode_send_mgi_rr () ;
   my_astro_off () ;
   */
-  my_lx6_off () ;
-  HAL_Delay ( 5000 ) ;
   my_lx6_on () ;
+  __NOP () ;
 
-  //HAL_GPIO_WritePin ( GPIOC , L86_PWR_SW_Pin , GPIO_PIN_SET ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_UART_Receive ( HUART_Lx6 , &uart1_rx , 1 , 1000 ) ;
-	  if ( uart1_rx )
+	  seek_fix_loop_flag = true ;
+	  HAL_TIM_Base_Start_IT ( &htim6 ) ;
+	  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_SET ) ;
+	  while ( seek_fix_loop_flag )
 	  {
-		  HAL_UART_Transmit ( HUART_DBG , &uart1_rx , 1/*rxl*/ , 1000 ) ;
+		  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , 1000 ) ;
+		  if ( rxd_byte )
+		  {
+			  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
+			  {
+				  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
+				  {
+					  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
+					  {
+						  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
+						  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
+						  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
+						  {
+							  if ( nmea_fixed_pdop_d <= NMEA_PDOP_MIN_THS_D )
+							  {
+								  fix_quality = 2 ;
+							  }
+							  else
+							  {
+								  fix_quality = 1 ;
+							  }
+
+						  }
+					  }
+					  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
+					  {
+						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
+						  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
+						  seek_fix_loop_flag = false ;
+					  }
+				  }
+			  }
+		  }
+		  rxd_byte = 0 ;
 	  }
-	  uart1_rx = 0 ;
 
     /* USER CODE END WHILE */
 
@@ -228,6 +283,44 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief TIM6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM6_Init(void)
+{
+
+  /* USER CODE BEGIN TIM6_Init 0 */
+
+  /* USER CODE END TIM6_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM6_Init 1 */
+
+  /* USER CODE END TIM6_Init 1 */
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 64000-1;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 65000-1;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM6_Init 2 */
+
+  /* USER CODE END TIM6_Init 2 */
 
 }
 
@@ -475,6 +568,17 @@ void my_lx6_off ( void )
 	HAL_GPIO_WritePin ( GPIOC , L86_RST_Pin , GPIO_PIN_RESET ) ;
 	HAL_UART_DeInit ( HUART_Lx6 ) ;
 }
+
+void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
+{
+	if ( htim->Instance == TIM6 )
+	{
+		HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
+		HAL_TIM_Base_Stop_IT ( &htim6 ) ;
+		seek_fix_loop_flag = false ;
+	}
+}
+
 /* USER CODE END 4 */
 
 /**

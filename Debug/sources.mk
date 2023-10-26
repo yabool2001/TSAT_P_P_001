@@ -24,6 +24,7 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
-Drivers/Astrocast/Src \
 Drivers/STM32G0xx_HAL_Driver/Src \
+my_drivers/Src \
+my_lib/Src \
 

@@ -1,0 +1,6 @@
+../my_lib/Src/my_nmea.c:11:5:my_nmea_message	9
+../my_lib/Src/my_nmea.c:37:12:get_my_nmea_gngsa_fixed_mode_s	1
+../my_lib/Src/my_nmea.c:42:8:get_my_nmea_gngsa_pdop_d	1
+../my_lib/Src/my_nmea.c:55:6:is_my_nmea_checksum_ok	4
+../my_lib/Src/my_nmea.c:65:8:nmea2decimal	3
+../my_lib/Src/my_nmea.c:95:6:get_my_nmea_gngll_coordinates_s	1

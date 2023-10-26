@@ -1,0 +1,8 @@
+../my_drivers/Src/astronode_transport.c:51:13:ascii_to_value	16	static
+../my_drivers/Src/astronode_transport.c:69:17:astronode_create_request_transport	40	static
+../my_drivers/Src/astronode_transport.c:98:24:astronode_decode_answer_transport	56	static
+../my_drivers/Src/astronode_transport.c:184:17:astronode_transport_send_receive	832	static
+../my_drivers/Src/astronode_transport.c:203:17:calculate_crc	32	static
+../my_drivers/Src/astronode_transport.c:216:13:check_for_error	24	static
+../my_drivers/Src/astronode_transport.c:272:24:receive_astronode_answer	40	static
+../my_drivers/Src/astronode_transport.c:320:13:uint8_to_ascii_buffer	16	static

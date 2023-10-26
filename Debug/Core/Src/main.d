@@ -28,11 +28,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_i2c_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_definitions.h \
- C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_application.h \
- C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_definitions.h
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_application.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Core/Inc/stm32g0xx_hal_conf.h:
@@ -63,8 +67,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_i2c_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
-C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_definitions.h:
-C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_application.h:
-C:/Users/mzeml/embedded/TSAT_P_P_001/Drivers/Astrocast/Inc/astronode_definitions.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_application.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h:
