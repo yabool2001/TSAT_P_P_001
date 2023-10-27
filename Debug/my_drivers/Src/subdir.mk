@@ -7,17 +7,20 @@
 C_SRCS += \
 ../my_drivers/Src/astronode_application.c \
 ../my_drivers/Src/astronode_transport.c \
-../my_drivers/Src/my_astronode.c 
+../my_drivers/Src/my_astronode.c \
+../my_drivers/Src/my_lx6_gnss.c 
 
 OBJS += \
 ./my_drivers/Src/astronode_application.o \
 ./my_drivers/Src/astronode_transport.o \
-./my_drivers/Src/my_astronode.o 
+./my_drivers/Src/my_astronode.o \
+./my_drivers/Src/my_lx6_gnss.o 
 
 C_DEPS += \
 ./my_drivers/Src/astronode_application.d \
 ./my_drivers/Src/astronode_transport.d \
-./my_drivers/Src/my_astronode.d 
+./my_drivers/Src/my_astronode.d \
+./my_drivers/Src/my_lx6_gnss.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +30,7 @@ my_drivers/Src/%.o my_drivers/Src/%.su my_drivers/Src/%.cyclo: ../my_drivers/Src
 clean: clean-my_drivers-2f-Src
 
 clean-my_drivers-2f-Src:
-	-$(RM) ./my_drivers/Src/astronode_application.cyclo ./my_drivers/Src/astronode_application.d ./my_drivers/Src/astronode_application.o ./my_drivers/Src/astronode_application.su ./my_drivers/Src/astronode_transport.cyclo ./my_drivers/Src/astronode_transport.d ./my_drivers/Src/astronode_transport.o ./my_drivers/Src/astronode_transport.su ./my_drivers/Src/my_astronode.cyclo ./my_drivers/Src/my_astronode.d ./my_drivers/Src/my_astronode.o ./my_drivers/Src/my_astronode.su
+	-$(RM) ./my_drivers/Src/astronode_application.cyclo ./my_drivers/Src/astronode_application.d ./my_drivers/Src/astronode_application.o ./my_drivers/Src/astronode_application.su ./my_drivers/Src/astronode_transport.cyclo ./my_drivers/Src/astronode_transport.d ./my_drivers/Src/astronode_transport.o ./my_drivers/Src/astronode_transport.su ./my_drivers/Src/my_astronode.cyclo ./my_drivers/Src/my_astronode.d ./my_drivers/Src/my_astronode.o ./my_drivers/Src/my_astronode.su ./my_drivers/Src/my_lx6_gnss.cyclo ./my_drivers/Src/my_lx6_gnss.d ./my_drivers/Src/my_lx6_gnss.o ./my_drivers/Src/my_lx6_gnss.su
 
 .PHONY: clean-my_drivers-2f-Src
 

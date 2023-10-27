@@ -63,6 +63,7 @@ uint8_t		nmea_message[250] ;
 uint8_t		i_nmea = 0 ;
 char* 		nmea_gngsa_label = "GNGSA" ;
 char* 		nmea_gngll_label = "GNGLL" ;
+char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
 uint8_t		fix_quality = 0 ; // 0: no fix, 1: fix quality worst than NMEA_PDOP_MIN_THS_D, 2: fix quality better than NMEA_PDOP_MIN_THS_D
@@ -162,6 +163,10 @@ int main(void)
 			  {
 				  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
 				  {
+					  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
+					  {
+
+					  }
 					  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
 					  {
 						  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;

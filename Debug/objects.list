@@ -28,5 +28,6 @@
 "./my_drivers/Src/astronode_application.o"
 "./my_drivers/Src/astronode_transport.o"
 "./my_drivers/Src/my_astronode.o"
+"./my_drivers/Src/my_lx6_gnss.o"
 "./my_lib/Src/my_conversions.o"
 "./my_lib/Src/my_nmea.o"
