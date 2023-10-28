@@ -4100,6 +4100,168 @@ Discarded input sections
  .comment       0x0000000000000000       0x44 ./my_drivers/Src/my_lx6_gnss.o
  .ARM.attributes
                 0x0000000000000000       0x2c ./my_drivers/Src/my_lx6_gnss.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .group         0x0000000000000000        0xc ./my_drivers/Src/my_rtc.o
+ .text          0x0000000000000000        0x0 ./my_drivers/Src/my_rtc.o
+ .data          0x0000000000000000        0x0 ./my_drivers/Src/my_rtc.o
+ .bss           0x0000000000000000        0x0 ./my_drivers/Src/my_rtc.o
+ .rodata.CHANNEL_OFFSET_TAB
+                0x0000000000000000        0x7 ./my_drivers/Src/my_rtc.o
+ .text.set_my_rtc_time_from_nmeam_rmc
+                0x0000000000000000       0x10 ./my_drivers/Src/my_rtc.o
+ .text.get_my_rtc_time
+                0x0000000000000000        0xa ./my_drivers/Src/my_rtc.o
+ .text.set_my_rtc_alarm
+                0x0000000000000000       0x28 ./my_drivers/Src/my_rtc.o
+ .debug_info    0x0000000000000000      0x163 ./my_drivers/Src/my_rtc.o
+ .debug_abbrev  0x0000000000000000       0xdf ./my_drivers/Src/my_rtc.o
+ .debug_aranges
+                0x0000000000000000       0x30 ./my_drivers/Src/my_rtc.o
+ .debug_rnglists
+                0x0000000000000000       0x1f ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x322 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0xa7e ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x22 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x8e ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x51 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x103 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x6a ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1df ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x61 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x24 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x43 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x34 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x16 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x97 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x369 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0xfd ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x10 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x16 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x43 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x34 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x10 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x58 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x8e ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x1c ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x177 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x16 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x16 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x147 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x123 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x2e ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x28 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x1c ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x22 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0xd1 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x4da ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x11f ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000     0xc730 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x66 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000     0x34fd ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x56 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x56c ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000     0x10d5 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x264 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1cf ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1d8 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x426 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x280 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x3a7 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1b2 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x43 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1f1 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1d6 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x38a ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x28 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0xe4 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x22c ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x67 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0xa5 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x125 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x240 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0xac9 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x1a1 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x693 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0xa6 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x4f2 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x16 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x35 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x20 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000       0x22 ./my_drivers/Src/my_rtc.o
+ .debug_macro   0x0000000000000000      0x124 ./my_drivers/Src/my_rtc.o
+ .debug_line    0x0000000000000000      0x9a5 ./my_drivers/Src/my_rtc.o
+ .debug_str     0x0000000000000000    0x9eb8a ./my_drivers/Src/my_rtc.o
+ .comment       0x0000000000000000       0x44 ./my_drivers/Src/my_rtc.o
+ .debug_frame   0x0000000000000000       0x6c ./my_drivers/Src/my_rtc.o
+ .ARM.attributes
+                0x0000000000000000       0x2c ./my_drivers/Src/my_rtc.o
  .group         0x0000000000000000        0xc ./my_lib/Src/my_conversions.o
  .group         0x0000000000000000        0xc ./my_lib/Src/my_conversions.o
  .group         0x0000000000000000        0xc ./my_lib/Src/my_conversions.o
@@ -4694,6 +4856,7 @@ LOAD ./my_drivers/Src/astronode_application.o
 LOAD ./my_drivers/Src/astronode_transport.o
 LOAD ./my_drivers/Src/my_astronode.o
 LOAD ./my_drivers/Src/my_lx6_gnss.o
+LOAD ./my_drivers/Src/my_rtc.o
 LOAD ./my_lib/Src/my_conversions.o
 LOAD ./my_lib/Src/my_nmea.o
 START GROUP

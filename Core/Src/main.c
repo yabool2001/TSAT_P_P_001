@@ -157,8 +157,10 @@ int main(void)
 	  while ( seek_fix_loop_flag )
 	  {
 		  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , 1000 ) ;
+		  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , 1000 ) ; // Receive nmea from DBG "sim_nmea_uart" python script
 		  if ( rxd_byte )
 		  {
+			  // HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , DBG_TX_TIMEOUT ) ; // Transmit all nmea to DBG
 			  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
 			  {
 				  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
@@ -309,9 +311,9 @@ static void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 64000-1;
+  htim6.Init.Prescaler = 16000-1;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 65000-1;
+  htim6.Init.Period = 1000-1;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {

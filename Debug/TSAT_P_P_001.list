@@ -4791,12 +4791,14 @@ int main(void)
  80025c6:	483b      	ldr	r0, [pc, #236]	; (80026b4 <main+0x168>)
  80025c8:	2201      	movs	r2, #1
  80025ca:	f002 fe0b 	bl	80051e4 <HAL_UART_Receive>
+		  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , 1000 ) ; // Receive nmea from DBG "sim_nmea_uart" python script
 		  if ( rxd_byte )
  80025ce:	4b38      	ldr	r3, [pc, #224]	; (80026b0 <main+0x164>)
  80025d0:	781b      	ldrb	r3, [r3, #0]
  80025d2:	2b00      	cmp	r3, #0
  80025d4:	d05c      	beq.n	8002690 <main+0x144>
 		  {
+			  // HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , DBG_TX_TIMEOUT ) ; // Transmit all nmea to DBG
 			  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
  80025d6:	4a38      	ldr	r2, [pc, #224]	; (80026b8 <main+0x16c>)
  80025d8:	4938      	ldr	r1, [pc, #224]	; (80026bc <main+0x170>)
@@ -5179,7 +5181,7 @@ static void MX_TIM6_Init(void)
  8002808:	4b15      	ldr	r3, [pc, #84]	; (8002860 <MX_TIM6_Init+0x6c>)
  800280a:	4a16      	ldr	r2, [pc, #88]	; (8002864 <MX_TIM6_Init+0x70>)
  800280c:	601a      	str	r2, [r3, #0]
-  htim6.Init.Prescaler = 64000-1;
+  htim6.Init.Prescaler = 16000-1;
  800280e:	4b14      	ldr	r3, [pc, #80]	; (8002860 <MX_TIM6_Init+0x6c>)
  8002810:	4a15      	ldr	r2, [pc, #84]	; (8002868 <MX_TIM6_Init+0x74>)
  8002812:	605a      	str	r2, [r3, #4]
@@ -5187,7 +5189,7 @@ static void MX_TIM6_Init(void)
  8002814:	4b12      	ldr	r3, [pc, #72]	; (8002860 <MX_TIM6_Init+0x6c>)
  8002816:	2200      	movs	r2, #0
  8002818:	609a      	str	r2, [r3, #8]
-  htim6.Init.Period = 65000-1;
+  htim6.Init.Period = 1000-1;
  800281a:	4b11      	ldr	r3, [pc, #68]	; (8002860 <MX_TIM6_Init+0x6c>)
  800281c:	4a13      	ldr	r2, [pc, #76]	; (800286c <MX_TIM6_Init+0x78>)
  800281e:	60da      	str	r2, [r3, #12]
@@ -5237,8 +5239,8 @@ static void MX_TIM6_Init(void)
  800285e:	46c0      	nop			; (mov r8, r8)
  8002860:	20000258 	.word	0x20000258
  8002864:	40001000 	.word	0x40001000
- 8002868:	0000f9ff 	.word	0x0000f9ff
- 800286c:	0000fde7 	.word	0x0000fde7
+ 8002868:	00003e7f 	.word	0x00003e7f
+ 800286c:	000003e7 	.word	0x000003e7
 
 08002870 <MX_USART1_UART_Init>:
   * @brief USART1 Initialization Function
