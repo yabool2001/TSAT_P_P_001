@@ -35,7 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define DBG_TX_TIMEOUT 	1000
+#define UART_TIMEOUT 	1000
 #define NMEA_3D_FIX		'3'
 #define NMEA_PDOP_MIN_THS_D		5
 /* USER CODE END PD */
@@ -71,10 +71,12 @@ char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 0.0 ;
 
 // Astrocast
+uint32_t	tim_seconds = 0 ;
 uint32_t	print_housekeeping_timer = 0 ;
 
 // Flags
 bool 		seek_fix_loop_flag = false ;
+bool		can_see_nmea_rmc_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -128,7 +130,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , DBG_TX_TIMEOUT ) ;
+  HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
   my_astro_off () ;
   /*
@@ -143,7 +145,62 @@ int main(void)
   my_astro_off () ;
   */
   my_lx6_on () ;
-  __NOP () ;
+  my_ldg_on () ;
+  fix_quality = 0 ;
+  can_see_nmea_rmc_flag = false ;
+  tim_seconds = 0 ;
+  HAL_TIM_Base_Start_IT ( &htim6 ) ;
+  while ( tim_seconds < 1200 )
+  {
+	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
+	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
+	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+	  if ( rxd_byte )
+	  {
+		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
+		  {
+			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
+			  {
+				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
+				  {
+					  can_see_nmea_rmc_flag = true ;
+					  __NOP();
+				  }
+				  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
+				  {
+					  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
+					  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
+					  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
+					  {
+						  if ( nmea_fixed_pdop_d <= NMEA_PDOP_MIN_THS_D )
+						  {
+							  fix_quality = 2 ;
+						  }
+						  else
+						  {
+							  fix_quality = 1 ;
+						  }
+
+					  }
+				  }
+				  /*
+				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
+				  {
+					  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
+					  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
+					  seek_fix_loop_flag = false ;
+				  }
+				  */
+			  }
+		  }
+	  }
+	  rxd_byte = 0 ;
+	  if ( tim_seconds > 10 && !can_see_nmea_rmc_flag )
+	  {
+		  break ;
+	  }
+  }
+  HAL_TIM_Base_Stop_IT ( &htim6 ) ;
 
   /* USER CODE END 2 */
 
@@ -151,52 +208,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  seek_fix_loop_flag = true ;
-	  //HAL_TIM_Base_Start_IT ( &htim6 ) ;
-	  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_SET ) ;
-	  while ( seek_fix_loop_flag )
-	  {
-		  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , 1000 ) ;
-		  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , 1000 ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-		  if ( rxd_byte )
-		  {
-			  // HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , DBG_TX_TIMEOUT ) ; // Transmit all nmea to DBG
-			  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
-			  {
-				  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
-				  {
-					  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
-					  {
-
-					  }
-					  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
-					  {
-						  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
-						  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
-						  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
-						  {
-							  if ( nmea_fixed_pdop_d <= NMEA_PDOP_MIN_THS_D )
-							  {
-								  fix_quality = 2 ;
-							  }
-							  else
-							  {
-								  fix_quality = 1 ;
-							  }
-
-						  }
-					  }
-					  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
-					  {
-						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
-						  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
-						  seek_fix_loop_flag = false ;
-					  }
-				  }
-			  }
-		  }
-		  rxd_byte = 0 ;
-	  }
 
     /* USER CODE END WHILE */
 
@@ -553,6 +564,14 @@ bool is_systick_timeout_over ( uint32_t starting_value , uint16_t duration )
 {
     return ( get_systick () - starting_value > duration ) ? true : false ;
 }
+void my_ldg_on ( void )
+{
+	HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_SET ) ;
+}
+void my_ldg_off ( void )
+{
+	HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
+}
 void my_astro_on ( void )
 {
 	HAL_GPIO_WritePin ( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
@@ -580,9 +599,7 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 {
 	if ( htim->Instance == TIM6 )
 	{
-		HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
-		HAL_TIM_Base_Stop_IT ( &htim6 ) ;
-		seek_fix_loop_flag = false ;
+		tim_seconds++ ;
 	}
 }
 
