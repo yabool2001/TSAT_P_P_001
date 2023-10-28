@@ -152,7 +152,7 @@ int main(void)
   while (1)
   {
 	  seek_fix_loop_flag = true ;
-	  HAL_TIM_Base_Start_IT ( &htim6 ) ;
+	  //HAL_TIM_Base_Start_IT ( &htim6 ) ;
 	  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_SET ) ;
 	  while ( seek_fix_loop_flag )
 	  {
