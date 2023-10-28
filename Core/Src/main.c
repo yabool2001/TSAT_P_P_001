@@ -71,7 +71,8 @@ char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 0.0 ;
 
 // TIM
-uint32_t	tim_seconds = 0 ;
+uint16_t	tim_seconds = 0 ;
+uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
 uint32_t	print_housekeeping_timer = 0 ;
@@ -210,7 +211,7 @@ int main(void)
 
   if ( fix_quality >= 1 )
   {
-	  sprintf ( payload , "%.1f,%s,%s,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds ) ;
+	  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
   }
   /* USER CODE END 2 */
 
