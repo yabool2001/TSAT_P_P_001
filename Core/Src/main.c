@@ -70,13 +70,16 @@ uint8_t		fix_quality = 0 ; // 0: no fix, 1: fix quality worst than NMEA_PDOP_MIN
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 0.0 ;
 
-// Astrocast
+// TIM
 uint32_t	tim_seconds = 0 ;
+
+// Astrocast
 uint32_t	print_housekeeping_timer = 0 ;
+char 		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0};
 
 // Flags
 bool 		seek_fix_loop_flag = false ;
-bool		can_see_nmea_rmc_flag = false ;
+bool		received_nmea_rmc_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -147,26 +150,26 @@ int main(void)
   my_lx6_on () ;
   my_ldg_on () ;
   fix_quality = 0 ;
-  can_see_nmea_rmc_flag = false ;
+  nmea_latitude[0] = 0 ;
+  nmea_longitude[0] = 0 ;
+  received_nmea_rmc_flag = false ;
   tim_seconds = 0 ;
-  //HAL_TIM_Base_Start_IT ( &htim6 ) ;
-  while ( tim_seconds < 1200 )
+  HAL_TIM_Base_Start_IT ( &htim6 ) ;
+  while ( tim_seconds < 1200 ) // 1200 = 10 min.
   {
-	  //HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
-	  HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
+	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
+	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
 	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
-		  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
-		  /*
+		  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
 		  {
 			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
 			  {
-				  //HAL_UART_Transmit ( HUART_DBG , nmea_message , strlen ( (char*) nmea_message ) , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
 				  {
-					  can_see_nmea_rmc_flag = true ;
+					  received_nmea_rmc_flag = true ;
 					  __NOP();
 				  }
 				  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
@@ -186,25 +189,29 @@ int main(void)
 
 					  }
 				  }
-				  */
-				  /*
 				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
 				  {
 					  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
-					  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
-					  seek_fix_loop_flag = false ;
 				  }
 			  }
-		  }*/
+		  }
 	  }
 	  rxd_byte = 0 ;
-	  if ( tim_seconds > 10 && !can_see_nmea_rmc_flag )
+	  if ( tim_seconds > 10 && !received_nmea_rmc_flag )
+	  {
+		  break ;
+	  }
+	  if ( fix_quality >= 2 && received_nmea_rmc_flag && nmea_latitude[0] != 0)
 	  {
 		  break ;
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
 
+  if ( fix_quality >= 1 )
+  {
+	  sprintf ( payload , "%.1f,%s,%s,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds ) ;
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */

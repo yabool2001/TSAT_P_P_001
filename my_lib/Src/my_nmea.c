@@ -7,7 +7,30 @@
 
 #include "my_nmea.h"
 
-
+/* Nie chce działać
+int my_nmea_message ( uint8_t* c , uint8_t* m , uint8_t* i )
+{
+    if ( *c == '$' )
+    {
+        *i = 0 ;
+        m[(*i)++] = *c ;
+        m[*i] = '\0' ;
+        return 0 ;
+    }
+    if ( *c >= ' ' && *i > 0 )
+    {
+        m[(*i)++] = *c ;
+        m[*i] = '\0' ;
+        return 1 ;
+    }
+    else if ( *c == '\r' && *i > 0)
+    {
+    	*i = 0 ;
+    	return 2 ;
+    }
+    return -1 ;
+}
+*/
 int my_nmea_message ( uint8_t* c , uint8_t* m , uint8_t* i )
 {
     if ( *c == '$' )
