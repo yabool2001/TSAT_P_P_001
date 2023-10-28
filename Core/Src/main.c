@@ -149,7 +149,7 @@ int main(void)
   fix_quality = 0 ;
   can_see_nmea_rmc_flag = false ;
   tim_seconds = 0 ;
-  HAL_TIM_Base_Start_IT ( &htim6 ) ;
+  //HAL_TIM_Base_Start_IT ( &htim6 ) ;
   while ( tim_seconds < 1200 )
   {
 	  //HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
@@ -157,11 +157,13 @@ int main(void)
 	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
+		  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+		  /*
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
 		  {
 			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
 			  {
-				  HAL_UART_Transmit ( HUART_DBG , nmea_message , strlen ( (char*) nmea_message ) , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+				  //HAL_UART_Transmit ( HUART_DBG , nmea_message , strlen ( (char*) nmea_message ) , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
 				  {
 					  can_see_nmea_rmc_flag = true ;
@@ -184,6 +186,7 @@ int main(void)
 
 					  }
 				  }
+				  */
 				  /*
 				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
 				  {
@@ -191,9 +194,8 @@ int main(void)
 					  HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
 					  seek_fix_loop_flag = false ;
 				  }
-				  */
 			  }
-		  }
+		  }*/
 	  }
 	  rxd_byte = 0 ;
 	  if ( tim_seconds > 10 && !can_see_nmea_rmc_flag )
