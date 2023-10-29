@@ -5,7 +5,9 @@
  *      Author: mzeml
  */
 
+//#include <inttypes.h>
 #include "my_nmea.h"
+
 
 /* Nie chce działać
 int my_nmea_message ( uint8_t* c , uint8_t* m , uint8_t* i )
@@ -74,6 +76,7 @@ double get_my_nmea_gngsa_pdop_d ( const char* m )
 	free ( pdop_s ) ;
 	return pdop ; // przed zwróceniem zaokrąglij do 2 miejsc po przecinku
 }
+
 
 bool is_my_nmea_checksum_ok ( const char* s )
 {
@@ -145,6 +148,90 @@ void get_my_nmea_gngll_coordinates_s ( const char* m , char* latitude , char* lo
 	free ( longitude_s ) ;
 	longitude_d = round ( longitude_d * 1e6 ) / 1e6 ;
 	snprintf ( longitude , 12 , "%.6lf" , longitude_d ) ;
+}
+
+void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_YY_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_DATE_PART_LENGTH] = '\0';
+	//sscanf ( s , SCNu8 , yy ) ;
+
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*yy = (uint8_t) temp ;
+
+}
+void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_MM_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_DATE_PART_LENGTH] = '\0';
+	//sscanf ( date_s , "%hhu" , d ) ;
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*mm = (uint8_t) temp ;
+}
+void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_DD_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_DATE_PART_LENGTH] = '\0';
+	//sscanf ( date_s , "%hhu" , d ) ;
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*dd = (uint8_t) temp ;
+}
+void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_HH_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_UTC_PART_LENGTH] = '\0';
+	//sscanf ( date_s , "%hhu" , d ) ;
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*hh = (uint8_t) temp ;
+}
+void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_MM_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_UTC_PART_LENGTH] = '\0';
+	//sscanf ( date_s , "%hhu" , d ) ;
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*mm = (uint8_t) temp ;
+}
+void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
+{
+	uint16_t temp ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_SS_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_UTC_PART_LENGTH] = '\0';
+	//sscanf ( date_s , "%hhu" , d ) ;
+	sscanf ( s , "%hu" , &temp ) ;
+	free ( s ) ;
+	*ss = (uint8_t) temp ;
+}
+void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
+{
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_SSS_OFFSET ;
+	char* s = (char*) malloc ( ( RMC_UTC_SSS_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , RMC_UTC_SSS_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[RMC_UTC_SSS_LENGTH] = '\0';
+	sscanf ( s , "%lu" , sss ) ;
+	free ( s ) ;
 }
 
 /*

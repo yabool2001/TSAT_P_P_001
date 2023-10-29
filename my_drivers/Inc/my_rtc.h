@@ -12,8 +12,9 @@
 #include <stdio.h>
 
 #include "main.h"
+#include "my_nmea.h"
 
-void set_my_rtc_time_from_nmea_rmc ( const char* ) ;
+void set_my_rtc_from_nmea_rmc ( const char* ) ;
 void get_my_rtc_time	( void ) ;
 void set_my_rtc_alarm	( uint8_t , uint8_t , uint32_t , uint8_t ) ;
 
