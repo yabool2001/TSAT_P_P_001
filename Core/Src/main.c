@@ -71,7 +71,7 @@ char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
-double		nmea_pdop_ths = 0.1 ;
+double		nmea_pdop_ths = 2.1 ;
 uint16_t	nmea_max_active_time = 240 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
