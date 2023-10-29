@@ -38,6 +38,7 @@
 /* USER CODE BEGIN PD */
 #define UART_TIMEOUT 		1000
 #define NMEA_3D_FIX			'3'
+#define NMEA_MESSAGE_SIZE	250
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -61,14 +62,15 @@ char* 		hello = "Hello TSAT_P_P_001\n" ;
 
 // Lx6
 uint8_t		rxd_byte = 0 ;
-uint8_t		nmea_message[250] ;
+uint8_t		nmea_message[NMEA_MESSAGE_SIZE] ;
+uint8_t		gngll_message[NMEA_MESSAGE_SIZE] ;
 uint8_t		i_nmea = 0 ;
 char* 		nmea_gngsa_label = "GNGSA" ;
 char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
-double		nmea_pdop_ths = 2.2 ;
+double		nmea_pdop_ths = 0.1 ;
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 0.0 ;
 
@@ -162,7 +164,7 @@ int main(void)
   received_nmea_rmc_flag = false ;
   tim_seconds = 0 ;
   HAL_TIM_Base_Start_IT ( &htim6 ) ;
-  while ( tim_seconds < 120 ) // 1200 = 10 min.
+  while ( tim_seconds < 3 ) // 1200 = 10 min.
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
@@ -184,9 +186,16 @@ int main(void)
 					  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
 					  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
 				  }
-				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) && nmea_fixed_pdop_d <= nmea_pdop_ths )
+				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) /*&& nmea_fixed_pdop_d <= nmea_pdop_ths */)
 				  {
-					  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
+					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
+					  {
+						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
+					  }
+					  else
+					  {
+						  memcpy ( gngll_message , nmea_message , NMEA_MESSAGE_SIZE ) ; // Zapisuję, żeby potem, jak nie osiągnę jakości nmea_pdop_ths to wykorzystać coordinates do payload
+					  }
 				  }
 			  }
 		  }
@@ -211,7 +220,10 @@ int main(void)
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
-
+  if ( nmea_latitude[0] == 0 && gngll_message[0] != 0 )
+  {
+	  get_my_nmea_gngll_coordinates_s ( (char*) gngll_message , nmea_latitude , nmea_longitude ) ;
+  }
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
 
   /* USER CODE END 2 */
