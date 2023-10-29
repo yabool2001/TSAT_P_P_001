@@ -38,7 +38,6 @@
 /* USER CODE BEGIN PD */
 #define UART_TIMEOUT 		1000
 #define NMEA_3D_FIX			'3'
-#define NMEA_PDOP_MIN_THS_D	5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -69,7 +68,7 @@ char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
-uint8_t		fix_quality = 0 ; // 0: no fix, 1: fix quality worst than NMEA_PDOP_MIN_THS_D, 2: fix quality better than NMEA_PDOP_MIN_THS_D
+double		nmea_pdop_ths = 2.2 ;
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 0.0 ;
 
@@ -158,7 +157,6 @@ int main(void)
 
   my_lx6_on () ;
   my_ldg_on () ;
-  fix_quality = 0 ;
   nmea_latitude[0] = 0 ;
   nmea_longitude[0] = 0 ;
   received_nmea_rmc_flag = false ;
@@ -176,7 +174,7 @@ int main(void)
 		  {
 			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
 			  {
-				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
+				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) && !received_nmea_rmc_flag )
 				  {
 					  set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ;
 					  received_nmea_rmc_flag = true ;
@@ -185,20 +183,8 @@ int main(void)
 				  {
 					  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
 					  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
-					  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
-					  {
-						  if ( nmea_fixed_pdop_d <= NMEA_PDOP_MIN_THS_D )
-						  {
-							  fix_quality = 2 ;
-						  }
-						  else
-						  {
-							  fix_quality = 1 ;
-						  }
-
-					  }
 				  }
-				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
+				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) && nmea_fixed_pdop_d <= nmea_pdop_ths )
 				  {
 					  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
 				  }
@@ -210,17 +196,24 @@ int main(void)
 	  {
 		  break ;
 	  }
-	  if ( fix_quality >= 2 && received_nmea_rmc_flag && nmea_latitude[0] != 0 )
+	  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 	  {
-		  break ;
+		  if ( nmea_latitude[0] != 0 )
+		  {
+			  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
+			  {
+				  if ( received_nmea_rmc_flag )
+				  {
+					  break ;
+				  }
+			  }
+		  }
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
 
-  if ( fix_quality >= 1 )
-  {
-	  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
-  }
+  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

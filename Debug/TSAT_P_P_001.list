@@ -9,43 +9,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .rodata       000005d4  0800f338  0800f338  0001f338  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  0800f90c  0800f90c  000206d0  2**0
+  3 .ARM.extab    00000000  0800f90c  0800f90c  000206d8  2**0
                   CONTENTS
   4 .ARM          00000008  0800f90c  0800f90c  0001f90c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  0800f914  0800f914  000206d0  2**0
+  5 .preinit_array 00000000  0800f914  0800f914  000206d8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   6 .init_array   00000008  0800f914  0800f914  0001f914  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   7 .fini_array   00000004  0800f91c  0800f91c  0001f91c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         000006d0  20000000  0800f920  00020000  2**3
+  8 .data         000006d8  20000000  0800f920  00020000  2**3
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000788  200006d0  0800fff0  000206d0  2**3
+  9 .bss          00000788  200006d8  0800fff8  000206d8  2**3
                   ALLOC
- 10 ._user_heap_stack 00000600  20000e58  0800fff0  00020e58  2**0
+ 10 ._user_heap_stack 00000600  20000e60  0800fff8  00020e60  2**0
                   ALLOC
- 11 .ARM.attributes 00000028  00000000  00000000  000206d0  2**0
+ 11 .ARM.attributes 00000028  00000000  00000000  000206d8  2**0
                   CONTENTS, READONLY
- 12 .comment      00000043  00000000  00000000  000206f8  2**0
+ 12 .comment      00000043  00000000  00000000  00020700  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0001704c  00000000  00000000  0002073b  2**0
+ 13 .debug_info   0001704c  00000000  00000000  00020743  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00003137  00000000  00000000  00037787  2**0
+ 14 .debug_abbrev 00003137  00000000  00000000  0003778f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001540  00000000  00000000  0003a8c0  2**3
+ 15 .debug_aranges 00001540  00000000  00000000  0003a8c8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000010ad  00000000  00000000  0003be00  2**0
+ 16 .debug_rnglists 000010ad  00000000  00000000  0003be08  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001c2fb  00000000  00000000  0003cead  2**0
+ 17 .debug_macro  0001c2f5  00000000  00000000  0003ceb5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0001a3c4  00000000  00000000  000591a8  2**0
+ 18 .debug_line   0001a3c6  00000000  00000000  000591aa  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000add87  00000000  00000000  0007356c  2**0
+ 19 .debug_str    000add73  00000000  00000000  00073570  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00006834  00000000  00000000  001212f4  2**2
+ 20 .debug_frame  00006834  00000000  00000000  001212e4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000053  00000000  00000000  00127b28  2**0
+ 21 .debug_line_str 00000053  00000000  00000000  00127b18  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -65,7 +65,7 @@ Disassembly of section .text:
  80000d2:	2301      	movs	r3, #1
  80000d4:	7023      	strb	r3, [r4, #0]
  80000d6:	bd10      	pop	{r4, pc}
- 80000d8:	200006d0 	.word	0x200006d0
+ 80000d8:	200006d8 	.word	0x200006d8
  80000dc:	00000000 	.word	0x00000000
  80000e0:	0800f31c 	.word	0x0800f31c
 
@@ -81,7 +81,7 @@ Disassembly of section .text:
  80000f4:	bd10      	pop	{r4, pc}
  80000f6:	46c0      	nop			; (mov r8, r8)
  80000f8:	00000000 	.word	0x00000000
- 80000fc:	200006d4 	.word	0x200006d4
+ 80000fc:	200006dc 	.word	0x200006dc
  8000100:	0800f31c 	.word	0x0800f31c
 
 08000104 <strlen>:
@@ -4782,9 +4782,9 @@ int main(void)
  80025ce:	f000 f991 	bl	80028f4 <MX_RTC_Init>
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
- 80025d2:	4b6d      	ldr	r3, [pc, #436]	; (8002788 <main+0x1e0>)
+ 80025d2:	4b6e      	ldr	r3, [pc, #440]	; (800278c <main+0x1e4>)
  80025d4:	681c      	ldr	r4, [r3, #0]
- 80025d6:	4b6c      	ldr	r3, [pc, #432]	; (8002788 <main+0x1e0>)
+ 80025d6:	4b6d      	ldr	r3, [pc, #436]	; (800278c <main+0x1e4>)
  80025d8:	681b      	ldr	r3, [r3, #0]
  80025da:	0018      	movs	r0, r3
  80025dc:	f7fd fd92 	bl	8000104 <strlen>
@@ -4792,11 +4792,11 @@ int main(void)
  80025e2:	b29a      	uxth	r2, r3
  80025e4:	23fa      	movs	r3, #250	; 0xfa
  80025e6:	009b      	lsls	r3, r3, #2
- 80025e8:	4868      	ldr	r0, [pc, #416]	; (800278c <main+0x1e4>)
+ 80025e8:	4869      	ldr	r0, [pc, #420]	; (8002790 <main+0x1e8>)
  80025ea:	0021      	movs	r1, r4
  80025ec:	f003 fb02 	bl	8005bf4 <HAL_UART_Transmit>
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
- 80025f0:	4b67      	ldr	r3, [pc, #412]	; (8002790 <main+0x1e8>)
+ 80025f0:	4b68      	ldr	r3, [pc, #416]	; (8002794 <main+0x1ec>)
  80025f2:	681b      	ldr	r3, [r3, #0]
  80025f4:	2202      	movs	r2, #2
  80025f6:	4252      	negs	r2, r2
@@ -4812,275 +4812,269 @@ int main(void)
  80025fe:	f000 fbd7 	bl	8002db0 <my_lx6_on>
   my_ldg_on () ;
  8002602:	f000 fbb7 	bl	8002d74 <my_ldg_on>
-  fix_quality = 0 ;
- 8002606:	4b63      	ldr	r3, [pc, #396]	; (8002794 <main+0x1ec>)
+  nmea_latitude[0] = 0 ;
+ 8002606:	4b64      	ldr	r3, [pc, #400]	; (8002798 <main+0x1f0>)
  8002608:	2200      	movs	r2, #0
  800260a:	701a      	strb	r2, [r3, #0]
-  nmea_latitude[0] = 0 ;
- 800260c:	4b62      	ldr	r3, [pc, #392]	; (8002798 <main+0x1f0>)
+  nmea_longitude[0] = 0 ;
+ 800260c:	4b63      	ldr	r3, [pc, #396]	; (800279c <main+0x1f4>)
  800260e:	2200      	movs	r2, #0
  8002610:	701a      	strb	r2, [r3, #0]
-  nmea_longitude[0] = 0 ;
- 8002612:	4b62      	ldr	r3, [pc, #392]	; (800279c <main+0x1f4>)
+  received_nmea_rmc_flag = false ;
+ 8002612:	4b63      	ldr	r3, [pc, #396]	; (80027a0 <main+0x1f8>)
  8002614:	2200      	movs	r2, #0
  8002616:	701a      	strb	r2, [r3, #0]
-  received_nmea_rmc_flag = false ;
- 8002618:	4b61      	ldr	r3, [pc, #388]	; (80027a0 <main+0x1f8>)
- 800261a:	2200      	movs	r2, #0
- 800261c:	701a      	strb	r2, [r3, #0]
   tim_seconds = 0 ;
- 800261e:	4b61      	ldr	r3, [pc, #388]	; (80027a4 <main+0x1fc>)
- 8002620:	2200      	movs	r2, #0
- 8002622:	801a      	strh	r2, [r3, #0]
+ 8002618:	4b62      	ldr	r3, [pc, #392]	; (80027a4 <main+0x1fc>)
+ 800261a:	2200      	movs	r2, #0
+ 800261c:	801a      	strh	r2, [r3, #0]
   HAL_TIM_Base_Start_IT ( &htim6 ) ;
- 8002624:	4b5a      	ldr	r3, [pc, #360]	; (8002790 <main+0x1e8>)
- 8002626:	0018      	movs	r0, r3
- 8002628:	f002 ff6c 	bl	8005504 <HAL_TIM_Base_Start_IT>
+ 800261e:	4b5d      	ldr	r3, [pc, #372]	; (8002794 <main+0x1ec>)
+ 8002620:	0018      	movs	r0, r3
+ 8002622:	f002 ff6f 	bl	8005504 <HAL_TIM_Base_Start_IT>
   while ( tim_seconds < 120 ) // 1200 = 10 min.
- 800262c:	e087      	b.n	800273e <main+0x196>
+ 8002626:	e08f      	b.n	8002748 <main+0x1a0>
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
- 800262e:	23fa      	movs	r3, #250	; 0xfa
- 8002630:	009b      	lsls	r3, r3, #2
- 8002632:	495d      	ldr	r1, [pc, #372]	; (80027a8 <main+0x200>)
- 8002634:	485d      	ldr	r0, [pc, #372]	; (80027ac <main+0x204>)
- 8002636:	2201      	movs	r2, #1
- 8002638:	f003 fb78 	bl	8005d2c <HAL_UART_Receive>
+ 8002628:	23fa      	movs	r3, #250	; 0xfa
+ 800262a:	009b      	lsls	r3, r3, #2
+ 800262c:	495e      	ldr	r1, [pc, #376]	; (80027a8 <main+0x200>)
+ 800262e:	485f      	ldr	r0, [pc, #380]	; (80027ac <main+0x204>)
+ 8002630:	2201      	movs	r2, #1
+ 8002632:	f003 fb7b 	bl	8005d2c <HAL_UART_Receive>
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
 	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
- 800263c:	23fa      	movs	r3, #250	; 0xfa
- 800263e:	009b      	lsls	r3, r3, #2
- 8002640:	4959      	ldr	r1, [pc, #356]	; (80027a8 <main+0x200>)
- 8002642:	4852      	ldr	r0, [pc, #328]	; (800278c <main+0x1e4>)
- 8002644:	2201      	movs	r2, #1
- 8002646:	f003 fad5 	bl	8005bf4 <HAL_UART_Transmit>
+ 8002636:	23fa      	movs	r3, #250	; 0xfa
+ 8002638:	009b      	lsls	r3, r3, #2
+ 800263a:	495b      	ldr	r1, [pc, #364]	; (80027a8 <main+0x200>)
+ 800263c:	4854      	ldr	r0, [pc, #336]	; (8002790 <main+0x1e8>)
+ 800263e:	2201      	movs	r2, #1
+ 8002640:	f003 fad8 	bl	8005bf4 <HAL_UART_Transmit>
 	  if ( rxd_byte )
- 800264a:	4b57      	ldr	r3, [pc, #348]	; (80027a8 <main+0x200>)
- 800264c:	781b      	ldrb	r3, [r3, #0]
- 800264e:	2b00      	cmp	r3, #0
- 8002650:	d05b      	beq.n	800270a <main+0x162>
+ 8002644:	4b58      	ldr	r3, [pc, #352]	; (80027a8 <main+0x200>)
+ 8002646:	781b      	ldrb	r3, [r3, #0]
+ 8002648:	2b00      	cmp	r3, #0
+ 800264a:	d058      	beq.n	80026fe <main+0x156>
 	  {
 		  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
- 8002652:	4a57      	ldr	r2, [pc, #348]	; (80027b0 <main+0x208>)
- 8002654:	4957      	ldr	r1, [pc, #348]	; (80027b4 <main+0x20c>)
- 8002656:	4b54      	ldr	r3, [pc, #336]	; (80027a8 <main+0x200>)
- 8002658:	0018      	movs	r0, r3
- 800265a:	f004 fa98 	bl	8006b8e <my_nmea_message>
- 800265e:	0003      	movs	r3, r0
- 8002660:	2b02      	cmp	r3, #2
- 8002662:	d152      	bne.n	800270a <main+0x162>
+ 800264c:	4a58      	ldr	r2, [pc, #352]	; (80027b0 <main+0x208>)
+ 800264e:	4959      	ldr	r1, [pc, #356]	; (80027b4 <main+0x20c>)
+ 8002650:	4b55      	ldr	r3, [pc, #340]	; (80027a8 <main+0x200>)
+ 8002652:	0018      	movs	r0, r3
+ 8002654:	f004 fa9b 	bl	8006b8e <my_nmea_message>
+ 8002658:	0003      	movs	r3, r0
+ 800265a:	2b02      	cmp	r3, #2
+ 800265c:	d14f      	bne.n	80026fe <main+0x156>
 		  {
 			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
- 8002664:	4b53      	ldr	r3, [pc, #332]	; (80027b4 <main+0x20c>)
- 8002666:	0018      	movs	r0, r3
- 8002668:	f004 fb51 	bl	8006d0e <is_my_nmea_checksum_ok>
- 800266c:	1e03      	subs	r3, r0, #0
- 800266e:	d04c      	beq.n	800270a <main+0x162>
+ 800265e:	4b55      	ldr	r3, [pc, #340]	; (80027b4 <main+0x20c>)
+ 8002660:	0018      	movs	r0, r3
+ 8002662:	f004 fb54 	bl	8006d0e <is_my_nmea_checksum_ok>
+ 8002666:	1e03      	subs	r3, r0, #0
+ 8002668:	d049      	beq.n	80026fe <main+0x156>
 			  {
-				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) )
- 8002670:	4b51      	ldr	r3, [pc, #324]	; (80027b8 <main+0x210>)
- 8002672:	681a      	ldr	r2, [r3, #0]
- 8002674:	4b4f      	ldr	r3, [pc, #316]	; (80027b4 <main+0x20c>)
- 8002676:	0011      	movs	r1, r2
- 8002678:	0018      	movs	r0, r3
- 800267a:	f006 f8fa 	bl	8008872 <strstr>
- 800267e:	1e03      	subs	r3, r0, #0
- 8002680:	d006      	beq.n	8002690 <main+0xe8>
+				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) && !received_nmea_rmc_flag )
+ 800266a:	4b53      	ldr	r3, [pc, #332]	; (80027b8 <main+0x210>)
+ 800266c:	681a      	ldr	r2, [r3, #0]
+ 800266e:	4b51      	ldr	r3, [pc, #324]	; (80027b4 <main+0x20c>)
+ 8002670:	0011      	movs	r1, r2
+ 8002672:	0018      	movs	r0, r3
+ 8002674:	f006 f8fd 	bl	8008872 <strstr>
+ 8002678:	1e03      	subs	r3, r0, #0
+ 800267a:	d00d      	beq.n	8002698 <main+0xf0>
+ 800267c:	4b48      	ldr	r3, [pc, #288]	; (80027a0 <main+0x1f8>)
+ 800267e:	781b      	ldrb	r3, [r3, #0]
+ 8002680:	2201      	movs	r2, #1
+ 8002682:	4053      	eors	r3, r2
+ 8002684:	b2db      	uxtb	r3, r3
+ 8002686:	2b00      	cmp	r3, #0
+ 8002688:	d006      	beq.n	8002698 <main+0xf0>
 				  {
 					  set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ;
- 8002682:	4b4c      	ldr	r3, [pc, #304]	; (80027b4 <main+0x20c>)
- 8002684:	0018      	movs	r0, r3
- 8002686:	f004 f9d5 	bl	8006a34 <set_my_rtc_from_nmea_rmc>
+ 800268a:	4b4a      	ldr	r3, [pc, #296]	; (80027b4 <main+0x20c>)
+ 800268c:	0018      	movs	r0, r3
+ 800268e:	f004 f9d1 	bl	8006a34 <set_my_rtc_from_nmea_rmc>
 					  received_nmea_rmc_flag = true ;
- 800268a:	4b45      	ldr	r3, [pc, #276]	; (80027a0 <main+0x1f8>)
- 800268c:	2201      	movs	r2, #1
- 800268e:	701a      	strb	r2, [r3, #0]
+ 8002692:	4b43      	ldr	r3, [pc, #268]	; (80027a0 <main+0x1f8>)
+ 8002694:	2201      	movs	r2, #1
+ 8002696:	701a      	strb	r2, [r3, #0]
 				  }
 				  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
- 8002690:	4b4a      	ldr	r3, [pc, #296]	; (80027bc <main+0x214>)
- 8002692:	681a      	ldr	r2, [r3, #0]
- 8002694:	4b47      	ldr	r3, [pc, #284]	; (80027b4 <main+0x20c>)
- 8002696:	0011      	movs	r1, r2
- 8002698:	0018      	movs	r0, r3
- 800269a:	f006 f8ea 	bl	8008872 <strstr>
- 800269e:	1e03      	subs	r3, r0, #0
- 80026a0:	d024      	beq.n	80026ec <main+0x144>
+ 8002698:	4b48      	ldr	r3, [pc, #288]	; (80027bc <main+0x214>)
+ 800269a:	681a      	ldr	r2, [r3, #0]
+ 800269c:	4b45      	ldr	r3, [pc, #276]	; (80027b4 <main+0x20c>)
+ 800269e:	0011      	movs	r1, r2
+ 80026a0:	0018      	movs	r0, r3
+ 80026a2:	f006 f8e6 	bl	8008872 <strstr>
+ 80026a6:	1e03      	subs	r3, r0, #0
+ 80026a8:	d010      	beq.n	80026cc <main+0x124>
 				  {
 					  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
- 80026a2:	4b44      	ldr	r3, [pc, #272]	; (80027b4 <main+0x20c>)
- 80026a4:	0018      	movs	r0, r3
- 80026a6:	f004 fade 	bl	8006c66 <get_my_nmea_gngsa_fixed_mode_s>
- 80026aa:	0003      	movs	r3, r0
- 80026ac:	001a      	movs	r2, r3
- 80026ae:	4b44      	ldr	r3, [pc, #272]	; (80027c0 <main+0x218>)
- 80026b0:	701a      	strb	r2, [r3, #0]
+ 80026aa:	4b42      	ldr	r3, [pc, #264]	; (80027b4 <main+0x20c>)
+ 80026ac:	0018      	movs	r0, r3
+ 80026ae:	f004 fada 	bl	8006c66 <get_my_nmea_gngsa_fixed_mode_s>
+ 80026b2:	0003      	movs	r3, r0
+ 80026b4:	001a      	movs	r2, r3
+ 80026b6:	4b42      	ldr	r3, [pc, #264]	; (80027c0 <main+0x218>)
+ 80026b8:	701a      	strb	r2, [r3, #0]
 					  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
- 80026b2:	4b40      	ldr	r3, [pc, #256]	; (80027b4 <main+0x20c>)
- 80026b4:	0018      	movs	r0, r3
- 80026b6:	f004 fae1 	bl	8006c7c <get_my_nmea_gngsa_pdop_d>
- 80026ba:	0002      	movs	r2, r0
- 80026bc:	000b      	movs	r3, r1
- 80026be:	4941      	ldr	r1, [pc, #260]	; (80027c4 <main+0x21c>)
- 80026c0:	600a      	str	r2, [r1, #0]
- 80026c2:	604b      	str	r3, [r1, #4]
-					  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
- 80026c4:	4b3e      	ldr	r3, [pc, #248]	; (80027c0 <main+0x218>)
- 80026c6:	781b      	ldrb	r3, [r3, #0]
- 80026c8:	2b33      	cmp	r3, #51	; 0x33
- 80026ca:	d10f      	bne.n	80026ec <main+0x144>
-					  {
-						  if ( nmea_fixed_pdop_d <= NMEA_PDOP_MIN_THS_D )
- 80026cc:	4b3d      	ldr	r3, [pc, #244]	; (80027c4 <main+0x21c>)
- 80026ce:	6818      	ldr	r0, [r3, #0]
- 80026d0:	6859      	ldr	r1, [r3, #4]
- 80026d2:	2200      	movs	r2, #0
- 80026d4:	4b3c      	ldr	r3, [pc, #240]	; (80027c8 <main+0x220>)
- 80026d6:	f7fd fec7 	bl	8000468 <__aeabi_dcmple>
- 80026da:	1e03      	subs	r3, r0, #0
- 80026dc:	d003      	beq.n	80026e6 <main+0x13e>
-						  {
-							  fix_quality = 2 ;
- 80026de:	4b2d      	ldr	r3, [pc, #180]	; (8002794 <main+0x1ec>)
- 80026e0:	2202      	movs	r2, #2
- 80026e2:	701a      	strb	r2, [r3, #0]
- 80026e4:	e002      	b.n	80026ec <main+0x144>
-						  }
-						  else
-						  {
-							  fix_quality = 1 ;
- 80026e6:	4b2b      	ldr	r3, [pc, #172]	; (8002794 <main+0x1ec>)
- 80026e8:	2201      	movs	r2, #1
- 80026ea:	701a      	strb	r2, [r3, #0]
-						  }
-
-					  }
+ 80026ba:	4b3e      	ldr	r3, [pc, #248]	; (80027b4 <main+0x20c>)
+ 80026bc:	0018      	movs	r0, r3
+ 80026be:	f004 fadd 	bl	8006c7c <get_my_nmea_gngsa_pdop_d>
+ 80026c2:	0002      	movs	r2, r0
+ 80026c4:	000b      	movs	r3, r1
+ 80026c6:	493f      	ldr	r1, [pc, #252]	; (80027c4 <main+0x21c>)
+ 80026c8:	600a      	str	r2, [r1, #0]
+ 80026ca:	604b      	str	r3, [r1, #4]
 				  }
-				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) )
- 80026ec:	4b37      	ldr	r3, [pc, #220]	; (80027cc <main+0x224>)
- 80026ee:	681a      	ldr	r2, [r3, #0]
- 80026f0:	4b30      	ldr	r3, [pc, #192]	; (80027b4 <main+0x20c>)
- 80026f2:	0011      	movs	r1, r2
- 80026f4:	0018      	movs	r0, r3
- 80026f6:	f006 f8bc 	bl	8008872 <strstr>
- 80026fa:	1e03      	subs	r3, r0, #0
- 80026fc:	d005      	beq.n	800270a <main+0x162>
+				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) && nmea_fixed_pdop_d <= nmea_pdop_ths )
+ 80026cc:	4b3e      	ldr	r3, [pc, #248]	; (80027c8 <main+0x220>)
+ 80026ce:	681a      	ldr	r2, [r3, #0]
+ 80026d0:	4b38      	ldr	r3, [pc, #224]	; (80027b4 <main+0x20c>)
+ 80026d2:	0011      	movs	r1, r2
+ 80026d4:	0018      	movs	r0, r3
+ 80026d6:	f006 f8cc 	bl	8008872 <strstr>
+ 80026da:	1e03      	subs	r3, r0, #0
+ 80026dc:	d00f      	beq.n	80026fe <main+0x156>
+ 80026de:	4b39      	ldr	r3, [pc, #228]	; (80027c4 <main+0x21c>)
+ 80026e0:	6818      	ldr	r0, [r3, #0]
+ 80026e2:	6859      	ldr	r1, [r3, #4]
+ 80026e4:	4b39      	ldr	r3, [pc, #228]	; (80027cc <main+0x224>)
+ 80026e6:	681a      	ldr	r2, [r3, #0]
+ 80026e8:	685b      	ldr	r3, [r3, #4]
+ 80026ea:	f7fd febd 	bl	8000468 <__aeabi_dcmple>
+ 80026ee:	1e03      	subs	r3, r0, #0
+ 80026f0:	d005      	beq.n	80026fe <main+0x156>
 				  {
 					  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
- 80026fe:	4a27      	ldr	r2, [pc, #156]	; (800279c <main+0x1f4>)
- 8002700:	4925      	ldr	r1, [pc, #148]	; (8002798 <main+0x1f0>)
- 8002702:	4b2c      	ldr	r3, [pc, #176]	; (80027b4 <main+0x20c>)
- 8002704:	0018      	movs	r0, r3
- 8002706:	f004 fbbd 	bl	8006e84 <get_my_nmea_gngll_coordinates_s>
+ 80026f2:	4a2a      	ldr	r2, [pc, #168]	; (800279c <main+0x1f4>)
+ 80026f4:	4928      	ldr	r1, [pc, #160]	; (8002798 <main+0x1f0>)
+ 80026f6:	4b2f      	ldr	r3, [pc, #188]	; (80027b4 <main+0x20c>)
+ 80026f8:	0018      	movs	r0, r3
+ 80026fa:	f004 fbc3 	bl	8006e84 <get_my_nmea_gngll_coordinates_s>
 				  }
 			  }
 		  }
 	  }
 	  rxd_byte = 0 ;
- 800270a:	4b27      	ldr	r3, [pc, #156]	; (80027a8 <main+0x200>)
- 800270c:	2200      	movs	r2, #0
- 800270e:	701a      	strb	r2, [r3, #0]
+ 80026fe:	4b2a      	ldr	r3, [pc, #168]	; (80027a8 <main+0x200>)
+ 8002700:	2200      	movs	r2, #0
+ 8002702:	701a      	strb	r2, [r3, #0]
 	  if ( tim_seconds > 10 && !received_nmea_rmc_flag )
- 8002710:	4b24      	ldr	r3, [pc, #144]	; (80027a4 <main+0x1fc>)
- 8002712:	881b      	ldrh	r3, [r3, #0]
- 8002714:	2b0a      	cmp	r3, #10
- 8002716:	d906      	bls.n	8002726 <main+0x17e>
- 8002718:	4b21      	ldr	r3, [pc, #132]	; (80027a0 <main+0x1f8>)
- 800271a:	781b      	ldrb	r3, [r3, #0]
- 800271c:	2201      	movs	r2, #1
- 800271e:	4053      	eors	r3, r2
- 8002720:	b2db      	uxtb	r3, r3
- 8002722:	2b00      	cmp	r3, #0
- 8002724:	d111      	bne.n	800274a <main+0x1a2>
+ 8002704:	4b27      	ldr	r3, [pc, #156]	; (80027a4 <main+0x1fc>)
+ 8002706:	881b      	ldrh	r3, [r3, #0]
+ 8002708:	2b0a      	cmp	r3, #10
+ 800270a:	d906      	bls.n	800271a <main+0x172>
+ 800270c:	4b24      	ldr	r3, [pc, #144]	; (80027a0 <main+0x1f8>)
+ 800270e:	781b      	ldrb	r3, [r3, #0]
+ 8002710:	2201      	movs	r2, #1
+ 8002712:	4053      	eors	r3, r2
+ 8002714:	b2db      	uxtb	r3, r3
+ 8002716:	2b00      	cmp	r3, #0
+ 8002718:	d11c      	bne.n	8002754 <main+0x1ac>
 	  {
 		  break ;
 	  }
-	  if ( fix_quality >= 2 && received_nmea_rmc_flag && nmea_latitude[0] != 0 )
- 8002726:	4b1b      	ldr	r3, [pc, #108]	; (8002794 <main+0x1ec>)
- 8002728:	781b      	ldrb	r3, [r3, #0]
- 800272a:	2b01      	cmp	r3, #1
- 800272c:	d907      	bls.n	800273e <main+0x196>
- 800272e:	4b1c      	ldr	r3, [pc, #112]	; (80027a0 <main+0x1f8>)
- 8002730:	781b      	ldrb	r3, [r3, #0]
- 8002732:	2b00      	cmp	r3, #0
- 8002734:	d003      	beq.n	800273e <main+0x196>
- 8002736:	4b18      	ldr	r3, [pc, #96]	; (8002798 <main+0x1f0>)
- 8002738:	781b      	ldrb	r3, [r3, #0]
- 800273a:	2b00      	cmp	r3, #0
- 800273c:	d107      	bne.n	800274e <main+0x1a6>
-  while ( tim_seconds < 120 ) // 1200 = 10 min.
- 800273e:	4b19      	ldr	r3, [pc, #100]	; (80027a4 <main+0x1fc>)
- 8002740:	881b      	ldrh	r3, [r3, #0]
- 8002742:	2b77      	cmp	r3, #119	; 0x77
- 8002744:	d800      	bhi.n	8002748 <main+0x1a0>
- 8002746:	e772      	b.n	800262e <main+0x86>
- 8002748:	e002      	b.n	8002750 <main+0x1a8>
-		  break ;
- 800274a:	46c0      	nop			; (mov r8, r8)
- 800274c:	e000      	b.n	8002750 <main+0x1a8>
+	  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
+ 800271a:	4b2a      	ldr	r3, [pc, #168]	; (80027c4 <main+0x21c>)
+ 800271c:	6818      	ldr	r0, [r3, #0]
+ 800271e:	6859      	ldr	r1, [r3, #4]
+ 8002720:	4b2a      	ldr	r3, [pc, #168]	; (80027cc <main+0x224>)
+ 8002722:	681a      	ldr	r2, [r3, #0]
+ 8002724:	685b      	ldr	r3, [r3, #4]
+ 8002726:	f7fd fe9f 	bl	8000468 <__aeabi_dcmple>
+ 800272a:	1e03      	subs	r3, r0, #0
+ 800272c:	d100      	bne.n	8002730 <main+0x188>
+ 800272e:	e00b      	b.n	8002748 <main+0x1a0>
 	  {
+		  if ( nmea_latitude[0] != 0 )
+ 8002730:	4b19      	ldr	r3, [pc, #100]	; (8002798 <main+0x1f0>)
+ 8002732:	781b      	ldrb	r3, [r3, #0]
+ 8002734:	2b00      	cmp	r3, #0
+ 8002736:	d007      	beq.n	8002748 <main+0x1a0>
+		  {
+			  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
+ 8002738:	4b21      	ldr	r3, [pc, #132]	; (80027c0 <main+0x218>)
+ 800273a:	781b      	ldrb	r3, [r3, #0]
+ 800273c:	2b33      	cmp	r3, #51	; 0x33
+ 800273e:	d103      	bne.n	8002748 <main+0x1a0>
+			  {
+				  if ( received_nmea_rmc_flag )
+ 8002740:	4b17      	ldr	r3, [pc, #92]	; (80027a0 <main+0x1f8>)
+ 8002742:	781b      	ldrb	r3, [r3, #0]
+ 8002744:	2b00      	cmp	r3, #0
+ 8002746:	d107      	bne.n	8002758 <main+0x1b0>
+  while ( tim_seconds < 120 ) // 1200 = 10 min.
+ 8002748:	4b16      	ldr	r3, [pc, #88]	; (80027a4 <main+0x1fc>)
+ 800274a:	881b      	ldrh	r3, [r3, #0]
+ 800274c:	2b77      	cmp	r3, #119	; 0x77
+ 800274e:	d800      	bhi.n	8002752 <main+0x1aa>
+ 8002750:	e76a      	b.n	8002628 <main+0x80>
+ 8002752:	e002      	b.n	800275a <main+0x1b2>
 		  break ;
- 800274e:	46c0      	nop			; (mov r8, r8)
+ 8002754:	46c0      	nop			; (mov r8, r8)
+ 8002756:	e000      	b.n	800275a <main+0x1b2>
+				  {
+					  break ;
+ 8002758:	46c0      	nop			; (mov r8, r8)
+				  }
+			  }
+		  }
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
- 8002750:	4b0f      	ldr	r3, [pc, #60]	; (8002790 <main+0x1e8>)
- 8002752:	0018      	movs	r0, r3
- 8002754:	f002 ff32 	bl	80055bc <HAL_TIM_Base_Stop_IT>
+ 800275a:	4b0e      	ldr	r3, [pc, #56]	; (8002794 <main+0x1ec>)
+ 800275c:	0018      	movs	r0, r3
+ 800275e:	f002 ff2d 	bl	80055bc <HAL_TIM_Base_Stop_IT>
 
-  if ( fix_quality >= 1 )
- 8002758:	4b0e      	ldr	r3, [pc, #56]	; (8002794 <main+0x1ec>)
- 800275a:	781b      	ldrb	r3, [r3, #0]
- 800275c:	2b00      	cmp	r3, #0
- 800275e:	d012      	beq.n	8002786 <main+0x1de>
-  {
-	  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
- 8002760:	4b18      	ldr	r3, [pc, #96]	; (80027c4 <main+0x21c>)
- 8002762:	681a      	ldr	r2, [r3, #0]
- 8002764:	685b      	ldr	r3, [r3, #4]
- 8002766:	490f      	ldr	r1, [pc, #60]	; (80027a4 <main+0x1fc>)
- 8002768:	8809      	ldrh	r1, [r1, #0]
- 800276a:	000d      	movs	r5, r1
- 800276c:	4918      	ldr	r1, [pc, #96]	; (80027d0 <main+0x228>)
- 800276e:	6809      	ldr	r1, [r1, #0]
- 8002770:	4c18      	ldr	r4, [pc, #96]	; (80027d4 <main+0x22c>)
- 8002772:	4819      	ldr	r0, [pc, #100]	; (80027d8 <main+0x230>)
- 8002774:	9103      	str	r1, [sp, #12]
- 8002776:	9502      	str	r5, [sp, #8]
- 8002778:	4908      	ldr	r1, [pc, #32]	; (800279c <main+0x1f4>)
- 800277a:	9101      	str	r1, [sp, #4]
- 800277c:	4906      	ldr	r1, [pc, #24]	; (8002798 <main+0x1f0>)
- 800277e:	9100      	str	r1, [sp, #0]
- 8002780:	0021      	movs	r1, r4
- 8002782:	f005 ffb3 	bl	80086ec <sprintf>
-  }
+  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
+ 8002762:	4b18      	ldr	r3, [pc, #96]	; (80027c4 <main+0x21c>)
+ 8002764:	681a      	ldr	r2, [r3, #0]
+ 8002766:	685b      	ldr	r3, [r3, #4]
+ 8002768:	490e      	ldr	r1, [pc, #56]	; (80027a4 <main+0x1fc>)
+ 800276a:	8809      	ldrh	r1, [r1, #0]
+ 800276c:	000d      	movs	r5, r1
+ 800276e:	4918      	ldr	r1, [pc, #96]	; (80027d0 <main+0x228>)
+ 8002770:	6809      	ldr	r1, [r1, #0]
+ 8002772:	4c18      	ldr	r4, [pc, #96]	; (80027d4 <main+0x22c>)
+ 8002774:	4818      	ldr	r0, [pc, #96]	; (80027d8 <main+0x230>)
+ 8002776:	9103      	str	r1, [sp, #12]
+ 8002778:	9502      	str	r5, [sp, #8]
+ 800277a:	4908      	ldr	r1, [pc, #32]	; (800279c <main+0x1f4>)
+ 800277c:	9101      	str	r1, [sp, #4]
+ 800277e:	4906      	ldr	r1, [pc, #24]	; (8002798 <main+0x1f0>)
+ 8002780:	9100      	str	r1, [sp, #0]
+ 8002782:	0021      	movs	r1, r4
+ 8002784:	f005 ffb2 	bl	80086ec <sprintf>
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
- 8002786:	e7fe      	b.n	8002786 <main+0x1de>
- 8002788:	20000000 	.word	0x20000000
- 800278c:	2000084c 	.word	0x2000084c
- 8002790:	2000076c 	.word	0x2000076c
- 8002794:	20000a8c 	.word	0x20000a8c
- 8002798:	20000a74 	.word	0x20000a74
- 800279c:	20000a80 	.word	0x20000a80
- 80027a0:	20000b40 	.word	0x20000b40
- 80027a4:	20000a98 	.word	0x20000a98
- 80027a8:	20000974 	.word	0x20000974
- 80027ac:	200008e0 	.word	0x200008e0
- 80027b0:	20000a72 	.word	0x20000a72
- 80027b4:	20000978 	.word	0x20000978
+ 8002788:	e7fe      	b.n	8002788 <main+0x1e0>
+ 800278a:	46c0      	nop			; (mov r8, r8)
+ 800278c:	20000000 	.word	0x20000000
+ 8002790:	20000854 	.word	0x20000854
+ 8002794:	20000774 	.word	0x20000774
+ 8002798:	20000a7c 	.word	0x20000a7c
+ 800279c:	20000a88 	.word	0x20000a88
+ 80027a0:	20000b48 	.word	0x20000b48
+ 80027a4:	20000aa0 	.word	0x20000aa0
+ 80027a8:	2000097c 	.word	0x2000097c
+ 80027ac:	200008e8 	.word	0x200008e8
+ 80027b0:	20000a7a 	.word	0x20000a7a
+ 80027b4:	20000980 	.word	0x20000980
  80027b8:	2000000c 	.word	0x2000000c
  80027bc:	20000004 	.word	0x20000004
- 80027c0:	20000a8d 	.word	0x20000a8d
- 80027c4:	20000a90 	.word	0x20000a90
- 80027c8:	40140000 	.word	0x40140000
- 80027cc:	20000008 	.word	0x20000008
- 80027d0:	20000a9c 	.word	0x20000a9c
+ 80027c0:	20000a94 	.word	0x20000a94
+ 80027c4:	20000a98 	.word	0x20000a98
+ 80027c8:	20000008 	.word	0x20000008
+ 80027cc:	20000010 	.word	0x20000010
+ 80027d0:	20000aa4 	.word	0x20000aa4
  80027d4:	0800f360 	.word	0x0800f360
- 80027d8:	20000aa0 	.word	0x20000aa0
+ 80027d8:	20000aa8 	.word	0x20000aa8
 
 080027dc <SystemClock_Config>:
 /**
@@ -5289,7 +5283,7 @@ static void MX_I2C1_Init(void)
  80028e2:	46c0      	nop			; (mov r8, r8)
  80028e4:	46bd      	mov	sp, r7
  80028e6:	bd80      	pop	{r7, pc}
- 80028e8:	200006ec 	.word	0x200006ec
+ 80028e8:	200006f4 	.word	0x200006f4
  80028ec:	40005400 	.word	0x40005400
  80028f0:	00303d5b 	.word	0x00303d5b
 
@@ -5522,7 +5516,7 @@ static void MX_RTC_Init(void)
  8002a2e:	b010      	add	sp, #64	; 0x40
  8002a30:	bd80      	pop	{r7, pc}
  8002a32:	46c0      	nop			; (mov r8, r8)
- 8002a34:	20000740 	.word	0x20000740
+ 8002a34:	20000748 	.word	0x20000748
  8002a38:	40002800 	.word	0x40002800
 
 08002a3c <MX_TIM6_Init>:
@@ -5611,7 +5605,7 @@ static void MX_TIM6_Init(void)
  8002aa2:	b004      	add	sp, #16
  8002aa4:	bd80      	pop	{r7, pc}
  8002aa6:	46c0      	nop			; (mov r8, r8)
- 8002aa8:	2000076c 	.word	0x2000076c
+ 8002aa8:	20000774 	.word	0x20000774
  8002aac:	40001000 	.word	0x40001000
  8002ab0:	00003e7f 	.word	0x00003e7f
  8002ab4:	000003e7 	.word	0x000003e7
@@ -5726,7 +5720,7 @@ static void MX_USART1_UART_Init(void)
  8002b46:	46bd      	mov	sp, r7
  8002b48:	bd80      	pop	{r7, pc}
  8002b4a:	46c0      	nop			; (mov r8, r8)
- 8002b4c:	200007b8 	.word	0x200007b8
+ 8002b4c:	200007c0 	.word	0x200007c0
  8002b50:	40013800 	.word	0x40013800
 
 08002b54 <MX_USART2_UART_Init>:
@@ -5839,7 +5833,7 @@ static void MX_USART2_UART_Init(void)
  8002be2:	46bd      	mov	sp, r7
  8002be4:	bd80      	pop	{r7, pc}
  8002be6:	46c0      	nop			; (mov r8, r8)
- 8002be8:	2000084c 	.word	0x2000084c
+ 8002be8:	20000854 	.word	0x20000854
  8002bec:	40004400 	.word	0x40004400
 
 08002bf0 <MX_USART3_UART_Init>:
@@ -5920,7 +5914,7 @@ static void MX_USART3_UART_Init(void)
  8002c4a:	46bd      	mov	sp, r7
  8002c4c:	bd80      	pop	{r7, pc}
  8002c4e:	46c0      	nop			; (mov r8, r8)
- 8002c50:	200008e0 	.word	0x200008e0
+ 8002c50:	200008e8 	.word	0x200008e8
  8002c54:	40004800 	.word	0x40004800
 
 08002c58 <MX_GPIO_Init>:
@@ -6150,7 +6144,7 @@ void my_astro_off ( void )
  8002da6:	46c0      	nop			; (mov r8, r8)
  8002da8:	46bd      	mov	sp, r7
  8002daa:	bd80      	pop	{r7, pc}
- 8002dac:	200007b8 	.word	0x200007b8
+ 8002dac:	200007c0 	.word	0x200007c0
 
 08002db0 <my_lx6_on>:
 void my_lx6_on ( void )
@@ -6213,7 +6207,7 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
  8002e04:	bd80      	pop	{r7, pc}
  8002e06:	46c0      	nop			; (mov r8, r8)
  8002e08:	40001000 	.word	0x40001000
- 8002e0c:	20000a98 	.word	0x20000a98
+ 8002e0c:	20000aa0 	.word	0x20000aa0
 
 08002e10 <Error_Handler>:
 /**
@@ -7076,7 +7070,7 @@ void TIM6_DAC_LPTIM1_IRQHandler(void)
  8003296:	46bd      	mov	sp, r7
  8003298:	bd80      	pop	{r7, pc}
  800329a:	46c0      	nop			; (mov r8, r8)
- 800329c:	2000076c 	.word	0x2000076c
+ 800329c:	20000774 	.word	0x20000774
 
 080032a0 <_getpid>:
 void initialise_monitor_handles()
@@ -7386,8 +7380,8 @@ void *_sbrk(ptrdiff_t incr)
  800340a:	bd80      	pop	{r7, pc}
  800340c:	20009000 	.word	0x20009000
  8003410:	00000400 	.word	0x00000400
- 8003414:	20000b44 	.word	0x20000b44
- 8003418:	20000e58 	.word	0x20000e58
+ 8003414:	20000b4c 	.word	0x20000b4c
+ 8003418:	20000e60 	.word	0x20000e60
 
 0800341c <SystemInit>:
   * @brief  Setup the microcontroller system.
@@ -7498,13 +7492,13 @@ LoopForever:
   ldr r0, =_sdata
  8003464:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 8003468:	200006d0 	.word	0x200006d0
+ 8003468:	200006d8 	.word	0x200006d8
   ldr r2, =_sidata
  800346c:	0800f920 	.word	0x0800f920
   ldr r2, =_sbss
- 8003470:	200006d0 	.word	0x200006d0
+ 8003470:	200006d8 	.word	0x200006d8
   ldr r4, =_ebss
- 8003474:	20000e58 	.word	0x20000e58
+ 8003474:	20000e60 	.word	0x20000e60
 
 08003478 <ADC1_COMP_IRQHandler>:
  * @retval None
@@ -7679,9 +7673,9 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  800353e:	b005      	add	sp, #20
  8003540:	bd90      	pop	{r4, r7, pc}
  8003542:	46c0      	nop			; (mov r8, r8)
- 8003544:	20000018 	.word	0x20000018
- 8003548:	20000010 	.word	0x20000010
- 800354c:	20000014 	.word	0x20000014
+ 8003544:	20000020 	.word	0x20000020
+ 8003548:	20000018 	.word	0x20000018
+ 800354c:	2000001c 	.word	0x2000001c
 
 08003550 <HAL_IncTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -7706,8 +7700,8 @@ __weak void HAL_IncTick(void)
  8003566:	46bd      	mov	sp, r7
  8003568:	bd80      	pop	{r7, pc}
  800356a:	46c0      	nop			; (mov r8, r8)
- 800356c:	20000018 	.word	0x20000018
- 8003570:	20000b48 	.word	0x20000b48
+ 800356c:	20000020 	.word	0x20000020
+ 8003570:	20000b50 	.word	0x20000b50
 
 08003574 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other
@@ -7726,7 +7720,7 @@ __weak uint32_t HAL_GetTick(void)
  800357e:	46bd      	mov	sp, r7
  8003580:	bd80      	pop	{r7, pc}
  8003582:	46c0      	nop			; (mov r8, r8)
- 8003584:	20000b48 	.word	0x20000b48
+ 8003584:	20000b50 	.word	0x20000b50
 
 08003588 <__NVIC_EnableIRQ>:
   \details Enables a device specific interrupt in the NVIC interrupt controller.
@@ -9397,7 +9391,7 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
  8003eb2:	46c0      	nop			; (mov r8, r8)
  8003eb4:	40007000 	.word	0x40007000
  8003eb8:	fffff9ff 	.word	0xfffff9ff
- 8003ebc:	20000010 	.word	0x20000010
+ 8003ebc:	20000018 	.word	0x20000018
  8003ec0:	000f4240 	.word	0x000f4240
 
 08003ec4 <LL_RCC_GetAPB1Prescaler>:
@@ -10047,8 +10041,8 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
  8004214:	ffff80ff 	.word	0xffff80ff
  8004218:	ffffc7ff 	.word	0xffffc7ff
  800421c:	00f42400 	.word	0x00f42400
- 8004220:	20000010 	.word	0x20000010
- 8004224:	20000014 	.word	0x20000014
+ 8004220:	20000018 	.word	0x20000018
+ 8004224:	2000001c 	.word	0x2000001c
  8004228:	fffffeff 	.word	0xfffffeff
     }
     else
@@ -10974,8 +10968,8 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  800470c:	fffff0ff 	.word	0xfffff0ff
  8004710:	ffff8fff 	.word	0xffff8fff
  8004714:	0800f41c 	.word	0x0800f41c
- 8004718:	20000010 	.word	0x20000010
- 800471c:	20000014 	.word	0x20000014
+ 8004718:	20000018 	.word	0x20000018
+ 800471c:	2000001c 	.word	0x2000001c
 
 08004720 <HAL_RCC_GetSysClockFreq>:
   *
@@ -11181,7 +11175,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  800482e:	46bd      	mov	sp, r7
  8004830:	bd80      	pop	{r7, pc}
  8004832:	46c0      	nop			; (mov r8, r8)
- 8004834:	20000010 	.word	0x20000010
+ 8004834:	20000018 	.word	0x20000018
 
 08004838 <HAL_RCC_GetPCLK1Freq>:
   * @note   Each time PCLK1 changes, this function must be called to update the
@@ -17642,7 +17636,7 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
  8006ad6:	46bd      	mov	sp, r7
  8006ad8:	b008      	add	sp, #32
  8006ada:	bdb0      	pop	{r4, r5, r7, pc}
- 8006adc:	20000740 	.word	0x20000740
+ 8006adc:	20000748 	.word	0x20000748
 
 08006ae0 <my_string2double_conv>:
  */
@@ -18868,7 +18862,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80072f8:	f000 f80e 	bl	8007318 <_malloc_r>
  80072fc:	bd10      	pop	{r4, pc}
  80072fe:	46c0      	nop			; (mov r8, r8)
- 8007300:	200006c8 	.word	0x200006c8
+ 8007300:	200006d0 	.word	0x200006d0
 
 08007304 <free>:
  8007304:	b510      	push	{r4, lr}
@@ -18878,7 +18872,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800730c:	f001 fbe4 	bl	8008ad8 <_free_r>
  8007310:	bd10      	pop	{r4, pc}
  8007312:	46c0      	nop			; (mov r8, r8)
- 8007314:	200006c8 	.word	0x200006c8
+ 8007314:	200006d0 	.word	0x200006d0
 
 08007318 <_malloc_r>:
  8007318:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -19281,14 +19275,14 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800763a:	9b02      	ldr	r3, [sp, #8]
  800763c:	e7fa      	b.n	8007634 <_malloc_r+0x31c>
  800763e:	46c0      	nop			; (mov r8, r8)
- 8007640:	2000001c 	.word	0x2000001c
- 8007644:	20000024 	.word	0x20000024
+ 8007640:	20000024 	.word	0x20000024
+ 8007644:	2000002c 	.word	0x2000002c
  8007648:	00000554 	.word	0x00000554
- 800764c:	20000b7c 	.word	0x20000b7c
- 8007650:	20000424 	.word	0x20000424
- 8007654:	20000b4c 	.word	0x20000b4c
- 8007658:	20000b74 	.word	0x20000b74
- 800765c:	20000b78 	.word	0x20000b78
+ 800764c:	20000b84 	.word	0x20000b84
+ 8007650:	2000042c 	.word	0x2000042c
+ 8007654:	20000b54 	.word	0x20000b54
+ 8007658:	20000b7c 	.word	0x20000b7c
+ 800765c:	20000b80 	.word	0x20000b80
  8007660:	4934      	ldr	r1, [pc, #208]	; (8007734 <_malloc_r+0x41c>)
  8007662:	6808      	ldr	r0, [r1, #0]
  8007664:	3001      	adds	r0, #1
@@ -19392,9 +19386,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800772e:	1963      	adds	r3, r4, r5
  8007730:	6083      	str	r3, [r0, #8]
  8007732:	e623      	b.n	800737c <_malloc_r+0x64>
- 8007734:	20000424 	.word	0x20000424
- 8007738:	20000b4c 	.word	0x20000b4c
- 800773c:	2000001c 	.word	0x2000001c
+ 8007734:	2000042c 	.word	0x2000042c
+ 8007738:	20000b54 	.word	0x20000b54
+ 800773c:	20000024 	.word	0x20000024
 
 08007740 <__malloc_lock>:
  8007740:	b510      	push	{r4, lr}
@@ -19402,7 +19396,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8007744:	f001 f940 	bl	80089c8 <__retarget_lock_acquire_recursive>
  8007748:	bd10      	pop	{r4, pc}
  800774a:	46c0      	nop			; (mov r8, r8)
- 800774c:	20000cc1 	.word	0x20000cc1
+ 800774c:	20000cc9 	.word	0x20000cc9
 
 08007750 <__malloc_unlock>:
  8007750:	b510      	push	{r4, lr}
@@ -19410,7 +19404,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8007754:	f001 f939 	bl	80089ca <__retarget_lock_release_recursive>
  8007758:	bd10      	pop	{r4, pc}
  800775a:	46c0      	nop			; (mov r8, r8)
- 800775c:	20000cc1 	.word	0x20000cc1
+ 800775c:	20000cc9 	.word	0x20000cc9
 
 08007760 <sulp>:
  8007760:	b570      	push	{r4, r5, r6, lr}
@@ -20873,7 +20867,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80083a8:	f7ff f9f2 	bl	8007790 <_strtod_l>
  80083ac:	bd10      	pop	{r4, pc}
  80083ae:	46c0      	nop			; (mov r8, r8)
- 80083b0:	20000438 	.word	0x20000438
+ 80083b0:	20000440 	.word	0x20000440
 
 080083b4 <strtod>:
  80083b4:	b510      	push	{r4, lr}
@@ -20885,8 +20879,8 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80083c0:	f7ff f9e6 	bl	8007790 <_strtod_l>
  80083c4:	bd10      	pop	{r4, pc}
  80083c6:	46c0      	nop			; (mov r8, r8)
- 80083c8:	200006c8 	.word	0x200006c8
- 80083cc:	20000438 	.word	0x20000438
+ 80083c8:	200006d0 	.word	0x200006d0
+ 80083cc:	20000440 	.word	0x20000440
 
 080083d0 <_strtol_l.constprop.0>:
  80083d0:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -21035,7 +21029,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80084f0:	f7ff ff6e 	bl	80083d0 <_strtol_l.constprop.0>
  80084f4:	bd10      	pop	{r4, pc}
  80084f6:	46c0      	nop			; (mov r8, r8)
- 80084f8:	200006c8 	.word	0x200006c8
+ 80084f8:	200006d0 	.word	0x200006d0
 
 080084fc <std>:
  80084fc:	2300      	movs	r3, #0
@@ -21080,9 +21074,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008550:	080087a9 	.word	0x080087a9
  8008554:	080087e1 	.word	0x080087e1
  8008558:	0800880d 	.word	0x0800880d
- 800855c:	20000b80 	.word	0x20000b80
- 8008560:	20000be8 	.word	0x20000be8
- 8008564:	20000c50 	.word	0x20000c50
+ 800855c:	20000b88 	.word	0x20000b88
+ 8008560:	20000bf0 	.word	0x20000bf0
+ 8008564:	20000c58 	.word	0x20000c58
 
 08008568 <stdio_exit_handler>:
  8008568:	b510      	push	{r4, lr}
@@ -21092,9 +21086,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008570:	f000 f86c 	bl	800864c <_fwalk_sglue>
  8008574:	bd10      	pop	{r4, pc}
  8008576:	46c0      	nop			; (mov r8, r8)
- 8008578:	2000042c 	.word	0x2000042c
+ 8008578:	20000434 	.word	0x20000434
  800857c:	0800c4c5 	.word	0x0800c4c5
- 8008580:	200005a8 	.word	0x200005a8
+ 8008580:	200005b0 	.word	0x200005b0
 
 08008584 <cleanup_stdio>:
  8008584:	6841      	ldr	r1, [r0, #4]
@@ -21118,9 +21112,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80085ac:	f003 ff8a 	bl	800c4c4 <_fclose_r>
  80085b0:	bd10      	pop	{r4, pc}
  80085b2:	46c0      	nop			; (mov r8, r8)
- 80085b4:	20000b80 	.word	0x20000b80
- 80085b8:	20000be8 	.word	0x20000be8
- 80085bc:	20000c50 	.word	0x20000c50
+ 80085b4:	20000b88 	.word	0x20000b88
+ 80085b8:	20000bf0 	.word	0x20000bf0
+ 80085bc:	20000c58 	.word	0x20000c58
 
 080085c0 <global_stdio_init.part.0>:
  80085c0:	b510      	push	{r4, lr}
@@ -21140,11 +21134,11 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80085e0:	4805      	ldr	r0, [pc, #20]	; (80085f8 <global_stdio_init.part.0+0x38>)
  80085e2:	f7ff ff8b 	bl	80084fc <std>
  80085e6:	bd10      	pop	{r4, pc}
- 80085e8:	20000cb8 	.word	0x20000cb8
+ 80085e8:	20000cc0 	.word	0x20000cc0
  80085ec:	08008569 	.word	0x08008569
- 80085f0:	20000b80 	.word	0x20000b80
- 80085f4:	20000be8 	.word	0x20000be8
- 80085f8:	20000c50 	.word	0x20000c50
+ 80085f0:	20000b88 	.word	0x20000b88
+ 80085f4:	20000bf0 	.word	0x20000bf0
+ 80085f8:	20000c58 	.word	0x20000c58
 
 080085fc <__sfp_lock_acquire>:
  80085fc:	b510      	push	{r4, lr}
@@ -21152,7 +21146,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008600:	f000 f9e2 	bl	80089c8 <__retarget_lock_acquire_recursive>
  8008604:	bd10      	pop	{r4, pc}
  8008606:	46c0      	nop			; (mov r8, r8)
- 8008608:	20000cc2 	.word	0x20000cc2
+ 8008608:	20000cca 	.word	0x20000cca
 
 0800860c <__sfp_lock_release>:
  800860c:	b510      	push	{r4, lr}
@@ -21160,7 +21154,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008610:	f000 f9db 	bl	80089ca <__retarget_lock_release_recursive>
  8008614:	bd10      	pop	{r4, pc}
  8008616:	46c0      	nop			; (mov r8, r8)
- 8008618:	20000cc2 	.word	0x20000cc2
+ 8008618:	20000cca 	.word	0x20000cca
 
 0800861c <__sinit>:
  800861c:	b510      	push	{r4, lr}
@@ -21181,7 +21175,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008640:	e7f3      	b.n	800862a <__sinit+0xe>
  8008642:	46c0      	nop			; (mov r8, r8)
  8008644:	08008585 	.word	0x08008585
- 8008648:	20000cb8 	.word	0x20000cb8
+ 8008648:	20000cc0 	.word	0x20000cc0
 
 0800864c <_fwalk_sglue>:
  800864c:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -21263,7 +21257,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80086e2:	9b02      	ldr	r3, [sp, #8]
  80086e4:	701a      	strb	r2, [r3, #0]
  80086e6:	e7d9      	b.n	800869c <snprintf+0x18>
- 80086e8:	200006c8 	.word	0x200006c8
+ 80086e8:	200006d0 	.word	0x200006d0
 
 080086ec <sprintf>:
  80086ec:	b40e      	push	{r1, r2, r3}
@@ -21292,7 +21286,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800871c:	4718      	bx	r3
  800871e:	46c0      	nop			; (mov r8, r8)
  8008720:	7fffffff 	.word	0x7fffffff
- 8008724:	200006c8 	.word	0x200006c8
+ 8008724:	200006d0 	.word	0x200006d0
  8008728:	ffff0208 	.word	0xffff0208
 
 0800872c <sscanf>:
@@ -21331,7 +21325,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008770:	b003      	add	sp, #12
  8008772:	4718      	bx	r3
  8008774:	080087a5 	.word	0x080087a5
- 8008778:	200006c8 	.word	0x200006c8
+ 8008778:	200006d0 	.word	0x200006d0
 
 0800877c <__sread>:
  800877c:	b570      	push	{r4, r5, r6, lr}
@@ -21496,7 +21490,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80088a6:	5c98      	ldrb	r0, [r3, r2]
  80088a8:	4770      	bx	lr
  80088aa:	46c0      	nop			; (mov r8, r8)
- 80088ac:	20000438 	.word	0x20000438
+ 80088ac:	20000440 	.word	0x20000440
 
 080088b0 <_close_r>:
  80088b0:	2300      	movs	r3, #0
@@ -21514,7 +21508,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80088ca:	6023      	str	r3, [r4, #0]
  80088cc:	bd70      	pop	{r4, r5, r6, pc}
  80088ce:	46c0      	nop			; (mov r8, r8)
- 80088d0:	20000cbc 	.word	0x20000cbc
+ 80088d0:	20000cc4 	.word	0x20000cc4
 
 080088d4 <_lseek_r>:
  80088d4:	b570      	push	{r4, r5, r6, lr}
@@ -21534,7 +21528,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  80088f2:	6023      	str	r3, [r4, #0]
  80088f4:	bd70      	pop	{r4, r5, r6, pc}
  80088f6:	46c0      	nop			; (mov r8, r8)
- 80088f8:	20000cbc 	.word	0x20000cbc
+ 80088f8:	20000cc4 	.word	0x20000cc4
 
 080088fc <_read_r>:
  80088fc:	b570      	push	{r4, r5, r6, lr}
@@ -21554,7 +21548,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800891a:	6023      	str	r3, [r4, #0]
  800891c:	bd70      	pop	{r4, r5, r6, pc}
  800891e:	46c0      	nop			; (mov r8, r8)
- 8008920:	20000cbc 	.word	0x20000cbc
+ 8008920:	20000cc4 	.word	0x20000cc4
 
 08008924 <_sbrk_r>:
  8008924:	2300      	movs	r3, #0
@@ -21572,7 +21566,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800893e:	6023      	str	r3, [r4, #0]
  8008940:	bd70      	pop	{r4, r5, r6, pc}
  8008942:	46c0      	nop			; (mov r8, r8)
- 8008944:	20000cbc 	.word	0x20000cbc
+ 8008944:	20000cc4 	.word	0x20000cc4
 
 08008948 <_write_r>:
  8008948:	b570      	push	{r4, r5, r6, lr}
@@ -21592,14 +21586,14 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008966:	6023      	str	r3, [r4, #0]
  8008968:	bd70      	pop	{r4, r5, r6, pc}
  800896a:	46c0      	nop			; (mov r8, r8)
- 800896c:	20000cbc 	.word	0x20000cbc
+ 800896c:	20000cc4 	.word	0x20000cc4
 
 08008970 <__errno>:
  8008970:	4b01      	ldr	r3, [pc, #4]	; (8008978 <__errno+0x8>)
  8008972:	6818      	ldr	r0, [r3, #0]
  8008974:	4770      	bx	lr
  8008976:	46c0      	nop			; (mov r8, r8)
- 8008978:	200006c8 	.word	0x200006c8
+ 8008978:	200006d0 	.word	0x200006d0
 
 0800897c <__libc_init_array>:
  800897c:	b570      	push	{r4, r5, r6, lr}
@@ -21772,9 +21766,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008ac4:	f7fe fe44 	bl	8007750 <__malloc_unlock>
  8008ac8:	0030      	movs	r0, r6
  8008aca:	e7cf      	b.n	8008a6c <_malloc_trim_r+0x3c>
- 8008acc:	2000001c 	.word	0x2000001c
- 8008ad0:	20000424 	.word	0x20000424
- 8008ad4:	20000b4c 	.word	0x20000b4c
+ 8008acc:	20000024 	.word	0x20000024
+ 8008ad0:	2000042c 	.word	0x2000042c
+ 8008ad4:	20000b54 	.word	0x20000b54
 
 08008ad8 <_free_r>:
  8008ad8:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -21942,10 +21936,10 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  8008c22:	d8f8      	bhi.n	8008c16 <_free_r+0x13e>
  8008c24:	68ee      	ldr	r6, [r5, #12]
  8008c26:	e7d9      	b.n	8008bdc <_free_r+0x104>
- 8008c28:	2000001c 	.word	0x2000001c
- 8008c2c:	20000428 	.word	0x20000428
- 8008c30:	20000b7c 	.word	0x20000b7c
- 8008c34:	20000024 	.word	0x20000024
+ 8008c28:	20000024 	.word	0x20000024
+ 8008c2c:	20000430 	.word	0x20000430
+ 8008c30:	20000b84 	.word	0x20000b84
+ 8008c34:	2000002c 	.word	0x2000002c
  8008c38:	00000554 	.word	0x00000554
 
 08008c3c <rshift>:
@@ -27444,7 +27438,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800b960:	d0de      	beq.n	800b920 <__ssvfscanf_r+0x894>
  800b962:	e657      	b.n	800b614 <__ssvfscanf_r+0x588>
  800b964:	0000fff6 	.word	0x0000fff6
- 800b968:	20000438 	.word	0x20000438
+ 800b968:	20000440 	.word	0x20000440
  800b96c:	6b3b      	ldr	r3, [r7, #48]	; 0x30
  800b96e:	0032      	movs	r2, r6
  800b970:	cb20      	ldmia	r3!, {r5}
@@ -29113,7 +29107,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
 0800c774 <_localeconv_r>:
  800c774:	4800      	ldr	r0, [pc, #0]	; (800c778 <_localeconv_r+0x4>)
  800c776:	4770      	bx	lr
- 800c778:	20000528 	.word	0x20000528
+ 800c778:	20000530 	.word	0x20000530
 
 0800c77c <__libc_fini_array>:
  800c77c:	b570      	push	{r4, r5, r6, lr}
@@ -29249,9 +29243,9 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800c88e:	2000      	movs	r0, #0
  800c890:	e7dd      	b.n	800c84e <__register_exitproc+0x2e>
  800c892:	46c0      	nop			; (mov r8, r8)
- 800c894:	200006cc 	.word	0x200006cc
- 800c898:	20000cc4 	.word	0x20000cc4
- 800c89c:	20000cc8 	.word	0x20000cc8
+ 800c894:	200006d4 	.word	0x200006d4
+ 800c898:	20000ccc 	.word	0x20000ccc
+ 800c89c:	20000cd0 	.word	0x20000cd0
 
 0800c8a0 <__assert_func>:
  800c8a0:	b57f      	push	{r0, r1, r2, r3, r4, r5, r6, lr}
@@ -29274,7 +29268,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800c8c2:	9600      	str	r6, [sp, #0]
  800c8c4:	f001 faa6 	bl	800de14 <fiprintf>
  800c8c8:	f002 fb8e 	bl	800efe8 <abort>
- 800c8cc:	200006c8 	.word	0x200006c8
+ 800c8cc:	200006d0 	.word	0x200006d0
  800c8d0:	0800f848 	.word	0x0800f848
  800c8d4:	0800f883 	.word	0x0800f883
  800c8d8:	0800f855 	.word	0x0800f855
@@ -30892,7 +30886,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800d688:	6818      	ldr	r0, [r3, #0]
  800d68a:	f000 f803 	bl	800d694 <_realloc_r>
  800d68e:	bd10      	pop	{r4, pc}
- 800d690:	200006c8 	.word	0x200006c8
+ 800d690:	200006d0 	.word	0x200006d0
 
 0800d694 <_realloc_r>:
  800d694:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -31303,7 +31297,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800d9d6:	430b      	orrs	r3, r1
  800d9d8:	6053      	str	r3, [r2, #4]
  800d9da:	e6da      	b.n	800d792 <_realloc_r+0xfe>
- 800d9dc:	2000001c 	.word	0x2000001c
+ 800d9dc:	20000024 	.word	0x20000024
 
 0800d9e0 <_strtoul_l.constprop.0>:
  800d9e0:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -31820,7 +31814,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800dde2:	9500      	str	r5, [sp, #0]
  800dde4:	e7f3      	b.n	800ddce <_mbrtowc_r+0x1a>
  800dde6:	46c0      	nop			; (mov r8, r8)
- 800dde8:	20000438 	.word	0x20000438
+ 800dde8:	20000440 	.word	0x20000440
  800ddec:	0800f883 	.word	0x0800f883
 
 0800ddf0 <iswspace>:
@@ -31857,7 +31851,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800de2a:	bc08      	pop	{r3}
  800de2c:	b003      	add	sp, #12
  800de2e:	4718      	bx	r3
- 800de30:	200006c8 	.word	0x200006c8
+ 800de30:	200006d0 	.word	0x200006d0
 
 0800de34 <__ssprint_r>:
  800de34:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -33888,7 +33882,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800eeea:	60a2      	str	r2, [r4, #8]
  800eeec:	e7ef      	b.n	800eece <__swsetup_r+0xa2>
  800eeee:	46c0      	nop			; (mov r8, r8)
- 800eef0:	200006c8 	.word	0x200006c8
+ 800eef0:	200006d0 	.word	0x200006d0
 
 0800eef4 <__fputwc>:
  800eef4:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -34043,7 +34037,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800f01e:	b004      	add	sp, #16
  800f020:	bd70      	pop	{r4, r5, r6, pc}
  800f022:	46c0      	nop			; (mov r8, r8)
- 800f024:	20000438 	.word	0x20000438
+ 800f024:	20000440 	.word	0x20000440
 
 0800f028 <__swhatbuf_r>:
  800f028:	b570      	push	{r4, r5, r6, lr}
@@ -34283,7 +34277,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800f204:	f7ff ffce 	bl	800f1a4 <_raise_r>
  800f208:	bd10      	pop	{r4, pc}
  800f20a:	46c0      	nop			; (mov r8, r8)
- 800f20c:	200006c8 	.word	0x200006c8
+ 800f20c:	200006d0 	.word	0x200006d0
 
 0800f210 <_fstat_r>:
  800f210:	2300      	movs	r3, #0
@@ -34301,7 +34295,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800f22a:	d000      	beq.n	800f22e <_fstat_r+0x1e>
  800f22c:	6023      	str	r3, [r4, #0]
  800f22e:	bd70      	pop	{r4, r5, r6, pc}
- 800f230:	20000cbc 	.word	0x20000cbc
+ 800f230:	20000cc4 	.word	0x20000cc4
 
 0800f234 <_isatty_r>:
  800f234:	2300      	movs	r3, #0
@@ -34319,7 +34313,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800f24e:	6023      	str	r3, [r4, #0]
  800f250:	bd70      	pop	{r4, r5, r6, pc}
  800f252:	46c0      	nop			; (mov r8, r8)
- 800f254:	20000cbc 	.word	0x20000cbc
+ 800f254:	20000cc4 	.word	0x20000cc4
 
 0800f258 <_kill_r>:
  800f258:	2300      	movs	r3, #0
@@ -34337,7 +34331,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800f272:	d000      	beq.n	800f276 <_kill_r+0x1e>
  800f274:	6023      	str	r3, [r4, #0]
  800f276:	bd70      	pop	{r4, r5, r6, pc}
- 800f278:	20000cbc 	.word	0x20000cbc
+ 800f278:	20000cc4 	.word	0x20000cc4
 
 0800f27c <_getpid_r>:
  800f27c:	b510      	push	{r4, lr}
