@@ -36,9 +36,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define UART_TIMEOUT 		1000
-#define NMEA_3D_FIX			'3'
-#define NMEA_MESSAGE_SIZE	250
+#define UART_TIMEOUT 			1000
+#define NMEA_3D_FIX				'3'
+#define NMEA_MESSAGE_SIZE		250
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -71,11 +72,12 @@ char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
 double		nmea_pdop_ths = 0.1 ;
+uint16_t	nmea_max_active_time = 240 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
-double 		nmea_fixed_pdop_d = 0.0 ;
+double 		nmea_fixed_pdop_d = 1000.0 ;
 
 // TIM
-uint16_t	tim_seconds = 0 ;
+uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co nmea_max_active_time
 uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
@@ -161,10 +163,12 @@ int main(void)
   my_ldg_on () ;
   nmea_latitude[0] = 0 ;
   nmea_longitude[0] = 0 ;
+  gngll_message[0] = 0 ;
+  nmea_fixed_pdop_d = 1000.0 ;
   received_nmea_rmc_flag = false ;
   tim_seconds = 0 ;
   HAL_TIM_Base_Start_IT ( &htim6 ) ;
-  while ( tim_seconds < 3 ) // 1200 = 10 min.
+  while ( tim_seconds < nmea_max_active_time ) // 1200 = 10 min.
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
@@ -190,7 +194,7 @@ int main(void)
 				  {
 					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 					  {
-						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ;
+						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
 					  }
 					  else
 					  {
@@ -220,7 +224,7 @@ int main(void)
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
-  if ( nmea_latitude[0] == 0 && gngll_message[0] != 0 )
+  if ( nmea_latitude[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
   {
 	  get_my_nmea_gngll_coordinates_s ( (char*) gngll_message , nmea_latitude , nmea_longitude ) ;
   }
