@@ -152,87 +152,87 @@ void get_my_nmea_gngll_coordinates_s ( const char* m , char* latitude , char* lo
 
 void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_YY_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_DATE_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , yy ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , yy ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*yy = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_MM_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_DATE_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , mm ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , mm ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*mm = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_DD_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_DATE_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_DATE_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_DATE_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , dd ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , dd ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*dd = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_HH_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_UTC_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , hh ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , hh ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*hh = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_MM_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_UTC_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , mm ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , mm ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*mm = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
 {
-	//uint16_t temp ;
+	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_SS_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_UTC_PART_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
 	strncpy ( s , m + position , RMC_UTC_PART_LENGTH ) ; // Kopiowanie fragmentu łańcucha
 	s[RMC_UTC_PART_LENGTH] = '\0';
-	sscanf ( s , SCNu8 , ss ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
-	/* Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
+	//sscanf ( s , SCNu8 , ss ) ; // Version requires Properties: C build/Settings/MCU Settings/Standard C
+	// Version for Properties: C build/Settings/MCU Settings/Reduced C (--specs=nano.specs)
 	sscanf ( s , "%hu" , &temp ) ;
 	free ( s ) ;
 	*ss = (uint8_t) temp ;
-	*/
+
 }
 void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
 {

@@ -34,9 +34,17 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
 	  HAL_RTC_SetDate ( &hrtc , &sDate , RTC_FORMAT_BIN ) ;
 	  HAL_RTCEx_DisableBypassShadow ( &hrtc ) ;
 }
-void get_my_rtc_time ( void )
+void get_my_rtc_time ( char* dt )
 {
-	//__NOP () ;
+	RTC_DateTypeDef gDate;
+	RTC_TimeTypeDef gTime;
+
+	//char cdt[20];
+
+	HAL_RTC_GetTime ( &hrtc , &gTime , RTC_FORMAT_BIN ) ;
+	HAL_RTC_GetDate ( &hrtc , &gDate , RTC_FORMAT_BIN ) ;
+
+	sprintf ( dt , "%4d.%02d.%02d %02d:%02d:%02d" , 2000 + gDate.Year , gDate.Month , gDate.Date , gTime.Hours , gTime.Minutes , gTime.Seconds) ;
 }
 void set_my_rtc_alarm ( uint8_t Hours , uint8_t Minutes , uint32_t Seconds , uint8_t Date )
 {

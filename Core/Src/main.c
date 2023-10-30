@@ -60,6 +60,7 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 char* 		hello = "Hello TSAT_P_P_001\n" ;
+char		dt[20] ;
 
 // Lx6
 uint8_t		rxd_byte = 0 ;
@@ -71,8 +72,8 @@ char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
-double		nmea_pdop_ths = 2.1 ;
-uint16_t	nmea_max_active_time = 240 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+double		nmea_pdop_ths = 5.1 ;
+uint16_t	nmea_max_active_time = 60 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
 
@@ -229,7 +230,7 @@ int main(void)
 	  get_my_nmea_gngll_coordinates_s ( (char*) gngll_message , nmea_latitude , nmea_longitude ) ;
   }
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
-
+  get_my_rtc_time ( dt ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */

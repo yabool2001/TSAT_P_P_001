@@ -4,10 +4,10 @@
 ../my_lib/Src/my_nmea.c:81:6:is_my_nmea_checksum_ok	32	static
 ../my_lib/Src/my_nmea.c:91:8:nmea2decimal	40	static
 ../my_lib/Src/my_nmea.c:121:6:get_my_nmea_gngll_coordinates_s	88	static
-../my_lib/Src/my_nmea.c:153:6:get_my_nmea_rmc_date_yy	32	static
-../my_lib/Src/my_nmea.c:167:6:get_my_nmea_rmc_date_mm	32	static
-../my_lib/Src/my_nmea.c:181:6:get_my_nmea_rmc_date_dd	32	static
-../my_lib/Src/my_nmea.c:195:6:get_my_nmea_rmc_utc_hh	32	static
-../my_lib/Src/my_nmea.c:209:6:get_my_nmea_rmc_utc_mm	32	static
-../my_lib/Src/my_nmea.c:223:6:get_my_nmea_rmc_utc_ss	32	static
+../my_lib/Src/my_nmea.c:153:6:get_my_nmea_rmc_date_yy	40	static
+../my_lib/Src/my_nmea.c:167:6:get_my_nmea_rmc_date_mm	40	static
+../my_lib/Src/my_nmea.c:181:6:get_my_nmea_rmc_date_dd	40	static
+../my_lib/Src/my_nmea.c:195:6:get_my_nmea_rmc_utc_hh	40	static
+../my_lib/Src/my_nmea.c:209:6:get_my_nmea_rmc_utc_mm	40	static
+../my_lib/Src/my_nmea.c:223:6:get_my_nmea_rmc_utc_ss	40	static
 ../my_lib/Src/my_nmea.c:237:6:get_my_nmea_rmc_utc_sss	32	static
