@@ -73,6 +73,7 @@ char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
 double		nmea_pdop_ths = 5.1 ;
+uint16_t	nmea_max_rmc_time = 5 ;
 uint16_t	nmea_max_active_time = 60 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
@@ -161,7 +162,6 @@ int main(void)
 
 
   my_lx6_on () ;
-  my_ldg_on () ;
   nmea_latitude[0] = 0 ;
   nmea_longitude[0] = 0 ;
   gngll_message[0] = 0 ;
@@ -173,10 +173,9 @@ int main(void)
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
-		  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
 		  {
 			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
@@ -206,7 +205,7 @@ int main(void)
 		  }
 	  }
 	  rxd_byte = 0 ;
-	  if ( tim_seconds > 10 && !received_nmea_rmc_flag )
+	  if ( tim_seconds > nmea_max_rmc_time && !received_nmea_rmc_flag )
 	  {
 		  break ;
 	  }
