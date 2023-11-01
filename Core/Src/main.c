@@ -284,12 +284,13 @@ int main(void)
 	  }
 	  if ( get_systick () - print_housekeeping_timer >  astro_message_timer )
 	  {
-		  astronode_send_rtc_rr ();
+		  //astronode_send_rtc_rr ();
 		  astronode_send_nco_rr () ;
-		  astronode_send_lcd_rr () ;
-		  astronode_send_end_rr () ;
-		  astronode_send_per_rr () ;
+		  //astronode_send_lcd_rr () ;
+		  //astronode_send_end_rr () ;
+		  //astronode_send_per_rr () ;
 		  print_housekeeping_timer = get_systick () ;
+		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
 	  }
 
     /* USER CODE END WHILE */
