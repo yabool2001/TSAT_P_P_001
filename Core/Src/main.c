@@ -60,7 +60,7 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 char* 		hello = "Hello TSAT_P_P_001\n" ;
-char		dt[20] ;
+char		rtc_dt[20] ;
 
 // Lx6
 uint8_t		rxd_byte = 0 ;
@@ -73,8 +73,8 @@ char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
 double		nmea_pdop_ths = 5.1 ;
-uint16_t	nmea_max_rmc_time = 5 ;
-uint16_t	nmea_max_active_time = 60 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+uint16_t	nmea_max_rmc_time = 60 ;
+uint16_t	nmea_max_active_time = 240 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
 
@@ -84,7 +84,8 @@ uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
 uint32_t	print_housekeeping_timer = 0 ;
-char 		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0};
+uint16_t	g_payload_id_counter = 0 ;
+uint32_t 	astro_message_timer = 900000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
 
 // Flags
 bool 		seek_fix_loop_flag = false ;
@@ -147,7 +148,7 @@ int main(void)
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
   my_astro_off () ;
-  /*
+
   my_astro_on () ;
   reset_astronode () ;
   print_housekeeping_timer = get_systick () ;
@@ -156,8 +157,22 @@ int main(void)
   astronode_send_mpn_rr () ;
   astronode_send_msn_rr () ;
   astronode_send_mgi_rr () ;
-  my_astro_off () ;
+  /*
+  if ( is_evt_pin_high() )
+  {
+	  astro_manage_evt () ;
+  }
+  if ( is_evt_pin_high() )
+  {
+	  astro_manage_evt () ;
+  }
+  if ( is_evt_pin_high() )
+  {
+	  astro_manage_evt () ;
+  }
   */
+  //my_astro_off () ;
+
 
 
 
@@ -173,7 +188,7 @@ int main(void)
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
@@ -228,14 +243,54 @@ int main(void)
   {
 	  get_my_nmea_gngll_coordinates_s ( (char*) gngll_message , nmea_latitude , nmea_longitude ) ;
   }
+  get_my_rtc_time ( rtc_dt ) ;
+  send_debug_logs ( rtc_dt ) ;
+  char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0};
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
-  get_my_rtc_time ( dt ) ;
+  send_debug_logs ( payload ) ;
+  g_payload_id_counter++ ;
+  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
+  print_housekeeping_timer = get_systick () ;
+
+  //HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  if ( is_evt_pin_high() )
+	  {
+		  send_debug_logs ( "Evt pin is high." ) ;
+		  astronode_send_evt_rr () ;
+		  if (is_sak_available () )
+		  {
+			  astronode_send_sak_rr () ;
+			  astronode_send_sak_cr () ;
+			  send_debug_logs ( "Message has been acknowledged." ) ;
+			  astronode_send_per_rr () ;
+		  }
+		  if ( is_astronode_reset () )
+		  {
+			  send_debug_logs ( "Terminal has been reset." ) ;
+			  astronode_send_res_cr () ;
+		  }
+		  if ( is_command_available () )
+		  {
+			  send_debug_logs ( "Unicast command is available" ) ;
+			  astronode_send_cmd_rr () ;
+			  astronode_send_cmd_cr () ;
+		  }
+	  }
+	  if ( get_systick () - print_housekeeping_timer >  astro_message_timer )
+	  {
+		  astronode_send_rtc_rr ();
+		  astronode_send_nco_rr () ;
+		  astronode_send_lcd_rr () ;
+		  astronode_send_end_rr () ;
+		  astronode_send_per_rr () ;
+		  print_housekeeping_timer = get_systick () ;
+	  }
 
     /* USER CODE END WHILE */
 
@@ -669,6 +724,33 @@ void send_astronode_request ( uint8_t* p_tx_buffer , uint32_t length )
 bool is_astronode_character_received ( uint8_t* p_rx_char )
 {
     return ( HAL_UART_Receive ( HUART_ASTRO , p_rx_char , 1 , 100 ) == HAL_OK ? true : false ) ;
+}
+bool is_evt_pin_high ( void )
+{
+	return ( HAL_GPIO_ReadPin ( GPIOA , ASTRO_EVENT_Pin ) == GPIO_PIN_SET ? true : false);
+}
+void astro_manage_evt ( void )
+{
+	send_debug_logs ( "Evt pin is high." ) ;
+	astronode_send_evt_rr () ;
+	if (is_sak_available () )
+	{
+		astronode_send_sak_rr () ;
+		astronode_send_sak_cr () ;
+		send_debug_logs ( "Message has been acknowledged." ) ;
+		astronode_send_per_rr () ;
+	}
+	if ( is_astronode_reset () )
+	{
+		send_debug_logs ( "Terminal has been reset." ) ;
+		astronode_send_res_cr () ;
+	}
+	if ( is_command_available () )
+	{
+		send_debug_logs ( "Unicast command is available" ) ;
+		astronode_send_cmd_rr () ;
+		astronode_send_cmd_cr () ;
+	}
 }
 uint32_t get_systick ( void )
 {
