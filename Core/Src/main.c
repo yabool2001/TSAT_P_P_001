@@ -72,8 +72,8 @@ char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
-double 		nmea_latitude_d ;
-double 		nmea_longitude_d ;
+int32_t		astro_geo_wr_latitude ;
+int32_t		astro_geo_wr_longitude ;
 double		nmea_pdop_ths = 5.1 ;
 uint16_t	nmea_max_rmc_time = 60 ;
 uint16_t	nmea_max_active_time = 480 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
@@ -211,8 +211,8 @@ int main(void)
 				  {
 					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 					  {
-						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
-						  get_my_nmea_gngll_coordinates_d ( (char*) nmea_message , &nmea_latitude_d , &nmea_longitude_d ) ; // Ten wariant jest na potrzeby funkcji Astro GEO_WR
+						  get_my_nmea_gngll_coordinates ( (char*) nmea_message , nmea_latitude , nmea_longitude , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
+						  //get_my_nmea_gngll_coordinates_d ( (char*) nmea_message , &nmea_latitude_d , &nmea_longitude_d ) ; // Ten wariant jest na potrzeby funkcji Astro GEO_WR
 					  }
 					  else
 					  {
@@ -244,11 +244,11 @@ int main(void)
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
   if ( nmea_latitude[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
   {
-	  get_my_nmea_gngll_coordinates_s ( (char*) gngll_message , nmea_latitude , nmea_longitude ) ;
+	  get_my_nmea_gngll_coordinates ( (char*) gngll_message , nmea_latitude , nmea_longitude , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ;
   }
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
-  astronode_send_geo_wr ( nmea_latitude_d , nmea_longitude_d ) ;
+  astronode_send_geo_wr ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
   send_debug_logs ( payload ) ;

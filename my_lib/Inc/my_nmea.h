@@ -41,7 +41,7 @@ const char	get_my_nmea_gngsa_fixed_mode_s ( const char* ) ;
 double		get_my_nmea_gngsa_pdop_d ( const char* ) ;
 double 		nmea2decimal ( const char* , char ) ;
 double 		nmea2double ( const char* , char ) ;
-void		get_my_nmea_gngll_coordinates_s ( const char* , char* , char* ) ;
+void		get_my_nmea_gngll_coordinates ( const char* , char* , char* , int32_t* , int32_t* ) ;
 void		get_my_nmea_gngll_coordinates_d ( const char* , double* , double* ) ;
 void		get_my_nmea_rmc_date_yy	( const char* , uint8_t* ) ;
 void		get_my_nmea_rmc_date_mm	( const char* , uint8_t* ) ;
