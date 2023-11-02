@@ -35,6 +35,7 @@ my_drivers/Src/my_rtc.o: ../my_drivers/Src/my_rtc.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_rtc.h:
@@ -74,5 +75,6 @@ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_rtc.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h:

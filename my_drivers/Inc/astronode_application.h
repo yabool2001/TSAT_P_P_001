@@ -18,7 +18,7 @@
 // Definitions
 //------------------------------------------------------------------------------
 #define ASTRONODE_APP_MSG_MAX_LEN_BYTES     194 // Wi-Fi write is 194 bytes
-#define ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES 160 // 152 if geolocation is used
+#define ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES 160 // In newer firmware (2.4.0 and later) the maximum length is 160 bytes regardless of the geolocation setting. My firmware is 2.9.0
 
 
 //------------------------------------------------------------------------------

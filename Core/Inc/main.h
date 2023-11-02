@@ -35,6 +35,7 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include "my_astronode.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

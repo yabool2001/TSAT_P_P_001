@@ -150,11 +150,11 @@ int main(void)
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
   my_astro_off () ;
-
+  HAL_Delay ( 1000 ) ; // TO JEST KONIECZNE! Chodzi o to, żeby po restarcie przed wgraniem firmware nie rozpoczęła siękomunikacja z Astro, co potem zawiesza komunikację z Astro się nie zawieszała po ponownym restarcie po wgraniu nowego firmware
   my_astro_on () ;
   reset_astronode () ;
   print_housekeeping_timer = get_systick () ;
-  astronode_send_cfg_wr ( true , false , true , false , true , true , true , false ) ;
+  astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
   astronode_send_cfg_sr () ;
   astronode_send_mpn_rr () ;
   astronode_send_msn_rr () ;
@@ -249,18 +249,24 @@ int main(void)
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
   astronode_send_geo_wr ( nmea_latitude_d , nmea_longitude_d ) ;
-  char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0};
+  char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
   send_debug_logs ( payload ) ;
-  g_payload_id_counter++ ;
-  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
-  print_housekeeping_timer = get_systick () ;
-
+  if ( strlen ( payload ) <= ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES )
+  {
+	  g_payload_id_counter++ ;
+	  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
+  }
+  else
+  {
+	  send_debug_logs ( "ERROR: Payload exceeded ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES value." ) ;
+  }
   //HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  print_housekeeping_timer = get_systick () ;
   while (1)
   {
 	  if ( is_evt_pin_high() )
@@ -272,7 +278,7 @@ int main(void)
 			  astronode_send_sak_rr () ;
 			  astronode_send_sak_cr () ;
 			  send_debug_logs ( "Message has been acknowledged." ) ;
-			  astronode_send_per_rr () ;
+			  //astronode_send_per_rr () ;
 		  }
 		  if ( is_astronode_reset () )
 		  {
