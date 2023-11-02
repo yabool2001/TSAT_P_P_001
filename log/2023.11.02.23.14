@@ -1,0 +1,610 @@
+[2023-11-02 23:14:43.588] GPRMC,221426.473,V,,,,,0.03,0.00,021123,,,N,V*36
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPVTG,0.00,T,,M,0.03,N,0.06,K,N*37
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGGA,221426.473,,,,,0,0,,,M,,M,,*49
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,1,11,29,61,077,,18,57,195,,26,53,290,,31,34,248,,0*6F
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,2,11,05,33,073,20,16,27,305,,25,23,144,,28,22,223,,0*6D
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,3,11,20,18,039,,23,03,164,,09,02,341,,0*58
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GLGSV,1,1,02,77,67,278,,78,16,328,,1*77
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGLL,,,,,221426.473,V,N*7B
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPRMC,221427.473,V,,,,,0.03,0.00,021123,,,N,V*37
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPVTG,0.00,T,,M,0.03,N,0.06,K,N*37
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGGA,221427.473,,,,,0,0,,,M,,M,,*48
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,1,11,29,61,077,,18,57,195,,26,53,290,,31,34,248,,0*6F
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,2,11,05,33,073,19,16,27,305,20,25,23,144,,28,22,223,,0*65
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGSV,3,3,11,20,18,039,,23,03,164,,09,02,341,,0*58
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GLGSV,1,1,02,77,67,278,,78,16,328,,1*77
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPGLL,,,,,221427.473,V,N*7A
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.616] 
+[2023-11-02 23:14:43.616] $GPRMC,221428.473,V,,,,,0.15,0.00,021123,,,N,V*3F
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPVTG,0.00,T,,M,0.15,N,0.29,K,N*3D
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGGA,221428.473,,,,,0,0,,,M,,M,,*47
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,1,11,29,61,077,,18,57,195,,26,53,290,,31,34,248,,0*6F
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,2,11,05,33,073,20,16,27,305,22,25,23,144,,28,22,223,,0*6D
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,3,11,20,18,039,,23,03,164,,09,02,341,,0*58
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GLGSV,1,1,02,77,67,278,,78,16,328,,1*77
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGLL,,,,,221428.473,V,N*75
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPRMC,221429.473,V,,,,,0.07,0.00,021123,,,N,V*3D
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPVTG,0.00,T,,M,0.07,N,0.12,K,N*36
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGGA,221429.473,,,,,0,0,,,M,,M,,*46
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,1,11,29,61,077,,18,57,195,,26,53,290,,31,34,248,,0*6F
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,2,11,05,33,073,20,16,27,305,22,25,23,144,,28,22,223,,0*6D
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGSV,3,3,11,20,18,039,,23,03,164,,09,02,341,,0*58
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GLGSV,1,1,02,77,67,278,,78,16,328,,1*77
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPGLL,,,,,221429.473,V,N*74
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.631] 
+[2023-11-02 23:14:43.631] $GPRMC,221430.503,V,,,,,1.88,319.75,021123,,,N,V*3C
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPVTG,319.75,T,,M,1.88,N,3.48,K,N*35
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGGA,221430.503,,,,,0,0,,,M,,M,,*48
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,1,11,29,61,077,20,18,57,195,,26,53,290,,31,34,248,,0*6D
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,2,11,05,33,073,19,16,27,305,21,25,23,144,18,28,22,223,,0*6D
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,3,11,20,18,039,18,23,03,164,,09,02,341,,0*51
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GLGSV,1,1,02,77,67,278,,78,16,328,21,1*74
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGLL,,,,,221430.503,V,N*7A
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPRMC,221431.505,V,,,,,0.20,319.75,021123,,,N,V*38
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPVTG,319.75,T,,M,0.20,N,0.37,K,N*3D
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGGA,221431.505,,,,,0,0,,,M,,M,,*4F
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSA,A,1,,,,,,,,,,,,,,,,1*03
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSA,A,1,,,,,,,,,,,,,,,,2*00
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,1,11,29,61,077,21,18,57,195,,26,53,290,,31,34,248,,0*6C
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,2,11,05,33,073,19,16,27,305,21,25,23,144,18,28,22,223,,0*6D
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGSV,3,3,11,20,18,039,18,23,03,164,,09,02,341,,0*51
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GLGSV,1,1,02,77,67,278,,78,16,328,20,1*75
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPGLL,,,,,221431.505,V,N*7D
+[2023-11-02 23:14:43.647] 
+[2023-11-02 23:14:43.647] $GPTXT,01,01,02,ANTSTATUS=OPEN*2B
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GNRMC,221432.490,A,5216.6937,N,02048.5737,E,0.18,319.75,021123,,,A,V*03
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GPVTG,319.75,T,,M,0.18,N,0.32,K,A*3C
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GPGGA,221432.490,5216.6937,N,02048.5737,E,1,4,4.40,77.1,M,39.0,M,,*69
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GNGSA,A,3,05,20,29,25,,,,,,,,,4.49,4.40,0.92,1*08
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GNGSA,A,3,,,,,,,,,,,,,4.49,4.40,0.92,2*00
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GPGSV,3,1,11,29,61,077,22,18,57,195,,26,53,290,,31,34,248,,0*6F
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GPGSV,3,2,11,05,33,073,19,16,27,305,21,25,23,144,20,28,22,223,,0*66
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GPGSV,3,3,11,20,18,039,17,23,03,164,,09,02,341,,0*5E
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GLGSV,1,1,02,77,67,278,,78,16,328,19,1*7F
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] $GNGLL,5216.6937,N,02048.5737,E,221432.490,A,A*4D
+[2023-11-02 23:14:43.661] 
+[2023-11-02 23:14:43.661] 2027.11.02 22:14:32
+[2023-11-02 23:14:43.661] Message sent to the Astronode --> 
+[2023-11-02 23:14:43.661] 354806291F8449670C1E09
+[2023-11-02 23:14:43.661] Message received from the Astronode <-- 
+[2023-11-02 23:14:43.661] B58E16
+[2023-11-02 23:14:43.661] Geolocation values were set successfully.
+[2023-11-02 23:14:43.661] Astronode payload: 4.5,13,0
+[2023-11-02 23:14:43.661] NMEA coordinates: 52.278228,20.809562
+[2023-11-02 23:14:43.661] Message sent to the Astronode --> 
+[2023-11-02 23:14:43.661] 250100342E352C31332C3093D1
+[2023-11-02 23:14:43.661] Message received from the Astronode <-- 
+[2023-11-02 23:14:43.661] A50100C1A9
+[2023-11-02 23:14:43.661] Payload was successfully queued.
+[2023-11-02 23:14:43.661] Evt pin is high.
+[2023-11-02 23:14:43.661] Message sent to the Astronode --> 
+[2023-11-02 23:14:43.667] 65F3DD
+[2023-11-02 23:14:43.667] Message received from the Astronode <-- 
+[2023-11-02 23:14:43.667] E50A0253
+[2023-11-02 23:14:43.667] Astronode has reset.
+[2023-11-02 23:14:43.667] TX message pending.
+[2023-11-02 23:14:43.667] Terminal has been reset.
+[2023-11-02 23:14:43.667] Message sent to the Astronode --> 
+[2023-11-02 23:14:43.667] 55A0EB
+[2023-11-02 23:14:43.667] Message received from the Astronode <-- 
+[2023-11-02 23:14:43.667] D5287A
+[2023-11-02 23:14:43.667] The reset has been cleared.
+[2023-11-02 23:15:32.183] Message sent to the Astronode --> 
+[2023-11-02 23:15:32.186] 172683
+[2023-11-02 23:15:32.211] Message received from the Astronode <-- 
+[2023-11-02 23:15:32.215] 97F5A2FA0AE6FD
+[2023-11-02 23:15:32.217] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184197877s.
+[2023-11-02 23:15:32.224] Message sent to the Astronode --> 
+[2023-11-02 23:15:32.228] 18C972
+[2023-11-02 23:15:32.253] Message received from the Astronode <-- 
+[2023-11-02 23:15:32.256] 9800000000AB35
+[2023-11-02 23:15:32.259] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:15:32.267] Message sent to the Astronode --> 
+[2023-11-02 23:15:32.270] 250100342E352C31332C3093D1
+[2023-11-02 23:15:32.313] Message received from the Astronode <-- 
+[2023-11-02 23:15:32.317] FF11257A47
+[2023-11-02 23:15:32.318] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:15:32.331] Payload failed to be queued.
+[2023-11-02 23:16:32.020] Message sent to the Astronode --> 
+[2023-11-02 23:16:32.023] 172683
+[2023-11-02 23:16:32.049] Message received from the Astronode <-- 
+[2023-11-02 23:16:32.054] 9731A3FA0A83B3
+[2023-11-02 23:16:32.055] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184197937s.
+[2023-11-02 23:16:32.061] Message sent to the Astronode --> 
+[2023-11-02 23:16:32.065] 18C972
+[2023-11-02 23:16:32.090] Message received from the Astronode <-- 
+[2023-11-02 23:16:32.096] 9800000000AB35
+[2023-11-02 23:16:32.097] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:16:32.104] Message sent to the Astronode --> 
+[2023-11-02 23:16:32.108] 250100342E352C31332C3093D1
+[2023-11-02 23:16:32.150] Message received from the Astronode <-- 
+[2023-11-02 23:16:32.156] FF11257A47
+[2023-11-02 23:16:32.156] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:16:32.169] Payload failed to be queued.
+[2023-11-02 23:17:31.861] Message sent to the Astronode --> 
+[2023-11-02 23:17:31.865] 172683
+[2023-11-02 23:17:31.890] Message received from the Astronode <-- 
+[2023-11-02 23:17:31.895] 976CA3FA0A3EFF
+[2023-11-02 23:17:31.896] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184197996s.
+[2023-11-02 23:17:31.903] Message sent to the Astronode --> 
+[2023-11-02 23:17:31.906] 18C972
+[2023-11-02 23:17:31.932] Message received from the Astronode <-- 
+[2023-11-02 23:17:31.935] 9800000000AB35
+[2023-11-02 23:17:31.938] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:17:31.945] Message sent to the Astronode --> 
+[2023-11-02 23:17:31.947] 250100342E352C31332C3093D1
+[2023-11-02 23:17:31.992] Message received from the Astronode <-- 
+[2023-11-02 23:17:31.995] FF11257A47
+[2023-11-02 23:17:31.998] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:17:32.010] Payload failed to be queued.
+[2023-11-02 23:18:31.703] Message sent to the Astronode --> 
+[2023-11-02 23:18:31.706] 172683
+[2023-11-02 23:18:31.732] Message received from the Astronode <-- 
+[2023-11-02 23:18:31.736] 97A8A3FA0A6B86
+[2023-11-02 23:18:31.738] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198056s.
+[2023-11-02 23:18:31.744] Message sent to the Astronode --> 
+[2023-11-02 23:18:31.746] 18C972
+[2023-11-02 23:18:31.774] Message received from the Astronode <-- 
+[2023-11-02 23:18:31.778] 9800000000AB35
+[2023-11-02 23:18:31.779] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:18:31.785] Message sent to the Astronode --> 
+[2023-11-02 23:18:31.790] 250100342E352C31332C3093D1
+[2023-11-02 23:18:31.834] Message received from the Astronode <-- 
+[2023-11-02 23:18:31.838] FF11257A47
+[2023-11-02 23:18:31.839] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:18:31.851] Payload failed to be queued.
+[2023-11-02 23:19:31.544] Message sent to the Astronode --> 
+[2023-11-02 23:19:31.546] 172683
+[2023-11-02 23:19:31.574] Message received from the Astronode <-- 
+[2023-11-02 23:19:31.576] 97E4A3FA0AC5A7
+[2023-11-02 23:19:31.579] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198116s.
+[2023-11-02 23:19:31.585] Message sent to the Astronode --> 
+[2023-11-02 23:19:31.589] 18C972
+[2023-11-02 23:19:31.615] Message received from the Astronode <-- 
+[2023-11-02 23:19:31.619] 9800000000AB35
+[2023-11-02 23:19:31.621] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:19:31.626] Message sent to the Astronode --> 
+[2023-11-02 23:19:31.630] 250100342E352C31332C3093D1
+[2023-11-02 23:19:31.674] Message received from the Astronode <-- 
+[2023-11-02 23:19:31.678] FF11257A47
+[2023-11-02 23:19:31.679] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:19:31.692] Payload failed to be queued.
+[2023-11-02 23:20:31.373] Message sent to the Astronode --> 
+[2023-11-02 23:20:31.376] 172683
+[2023-11-02 23:20:31.401] Message received from the Astronode <-- 
+[2023-11-02 23:20:31.406] 9720A4FA0A005B
+[2023-11-02 23:20:31.408] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198176s.
+[2023-11-02 23:20:31.414] Message sent to the Astronode --> 
+[2023-11-02 23:20:31.418] 18C972
+[2023-11-02 23:20:31.443] Message received from the Astronode <-- 
+[2023-11-02 23:20:31.449] 9800000000AB35
+[2023-11-02 23:20:31.449] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:20:31.456] Message sent to the Astronode --> 
+[2023-11-02 23:20:31.459] 250100342E352C31332C3093D1
+[2023-11-02 23:20:31.503] Message received from the Astronode <-- 
+[2023-11-02 23:20:31.508] FF11257A47
+[2023-11-02 23:20:31.510] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:20:31.520] Payload failed to be queued.
+[2023-11-02 23:21:31.206] Message sent to the Astronode --> 
+[2023-11-02 23:21:31.210] 172683
+[2023-11-02 23:21:31.236] Message received from the Astronode <-- 
+[2023-11-02 23:21:31.240] 975CA4FA0A4756
+[2023-11-02 23:21:31.242] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198236s.
+[2023-11-02 23:21:31.248] Message sent to the Astronode --> 
+[2023-11-02 23:21:31.253] 18C972
+[2023-11-02 23:21:31.278] Message received from the Astronode <-- 
+[2023-11-02 23:21:31.281] 9800000000AB35
+[2023-11-02 23:21:31.284] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:21:31.291] Message sent to the Astronode --> 
+[2023-11-02 23:21:31.294] 250100342E352C31332C3093D1
+[2023-11-02 23:21:31.338] Message received from the Astronode <-- 
+[2023-11-02 23:21:31.341] FF11257A47
+[2023-11-02 23:21:31.343] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:21:31.356] Payload failed to be queued.
+[2023-11-02 23:22:31.043] Message sent to the Astronode --> 
+[2023-11-02 23:22:31.048] 172683
+[2023-11-02 23:22:31.073] Message received from the Astronode <-- 
+[2023-11-02 23:22:31.079] 9798A4FA0A122F
+[2023-11-02 23:22:31.079] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198296s.
+[2023-11-02 23:22:31.086] Message sent to the Astronode --> 
+[2023-11-02 23:22:31.091] 18C972
+[2023-11-02 23:22:31.115] Message received from the Astronode <-- 
+[2023-11-02 23:22:31.122] 9800000000AB35
+[2023-11-02 23:22:31.122] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:22:31.131] Message sent to the Astronode --> 
+[2023-11-02 23:22:31.132] 250100342E352C31332C3093D1
+[2023-11-02 23:22:31.175] Message received from the Astronode <-- 
+[2023-11-02 23:22:31.179] FF11257A47
+[2023-11-02 23:22:31.181] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:22:31.194] Payload failed to be queued.
+[2023-11-02 23:23:30.881] Message sent to the Astronode --> 
+[2023-11-02 23:23:30.885] 172683
+[2023-11-02 23:23:30.911] Message received from the Astronode <-- 
+[2023-11-02 23:23:30.914] 97D3A4FA0A915F
+[2023-11-02 23:23:30.917] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198355s.
+[2023-11-02 23:23:30.924] Message sent to the Astronode --> 
+[2023-11-02 23:23:30.928] 18C972
+[2023-11-02 23:23:30.952] Message received from the Astronode <-- 
+[2023-11-02 23:23:30.956] 9800000000AB35
+[2023-11-02 23:23:30.957] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:23:30.965] Message sent to the Astronode --> 
+[2023-11-02 23:23:30.970] 250100342E352C31332C3093D1
+[2023-11-02 23:23:31.012] Message received from the Astronode <-- 
+[2023-11-02 23:23:31.016] FF11257A47
+[2023-11-02 23:23:31.019] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:23:31.029] Payload failed to be queued.
+[2023-11-02 23:24:30.720] Message sent to the Astronode --> 
+[2023-11-02 23:24:30.723] 172683
+[2023-11-02 23:24:30.749] Message received from the Astronode <-- 
+[2023-11-02 23:24:30.753] 970FA5FA0A908F
+[2023-11-02 23:24:30.755] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198415s.
+[2023-11-02 23:24:30.762] Message sent to the Astronode --> 
+[2023-11-02 23:24:30.765] 18C972
+[2023-11-02 23:24:30.791] Message received from the Astronode <-- 
+[2023-11-02 23:24:30.795] 9800000000AB35
+[2023-11-02 23:24:30.797] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:24:30.802] Message sent to the Astronode --> 
+[2023-11-02 23:24:30.805] 250100342E352C31332C3093D1
+[2023-11-02 23:24:30.851] Message received from the Astronode <-- 
+[2023-11-02 23:24:30.855] FF11257A47
+[2023-11-02 23:24:30.857] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:24:30.869] Payload failed to be queued.
+[2023-11-02 23:25:30.561] Message sent to the Astronode --> 
+[2023-11-02 23:25:30.564] 172683
+[2023-11-02 23:25:30.589] Message received from the Astronode <-- 
+[2023-11-02 23:25:30.595] 974BA5FA0AFD2B
+[2023-11-02 23:25:30.596] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198475s.
+[2023-11-02 23:25:30.603] Message sent to the Astronode --> 
+[2023-11-02 23:25:30.606] 18C972
+[2023-11-02 23:25:30.631] Message received from the Astronode <-- 
+[2023-11-02 23:25:30.635] 9800000000AB35
+[2023-11-02 23:25:30.636] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:25:30.643] Message sent to the Astronode --> 
+[2023-11-02 23:25:30.646] 250100342E352C31332C3093D1
+[2023-11-02 23:25:30.691] Message received from the Astronode <-- 
+[2023-11-02 23:25:30.695] FF11257A47
+[2023-11-02 23:25:30.696] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:25:30.709] Payload failed to be queued.
+[2023-11-02 23:26:30.396] Message sent to the Astronode --> 
+[2023-11-02 23:26:30.400] 172683
+[2023-11-02 23:26:30.427] Message received from the Astronode <-- 
+[2023-11-02 23:26:30.430] 9787A5FA0A6BD7
+[2023-11-02 23:26:30.434] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198535s.
+[2023-11-02 23:26:30.440] Message sent to the Astronode --> 
+[2023-11-02 23:26:30.443] 18C972
+[2023-11-02 23:26:30.469] Message received from the Astronode <-- 
+[2023-11-02 23:26:30.472] 9800000000AB35
+[2023-11-02 23:26:30.475] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:26:30.482] Message sent to the Astronode --> 
+[2023-11-02 23:26:30.484] 250100342E352C31332C3093D1
+[2023-11-02 23:26:30.529] Message received from the Astronode <-- 
+[2023-11-02 23:26:30.532] FF11257A47
+[2023-11-02 23:26:30.534] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:26:30.546] Payload failed to be queued.
+[2023-11-02 23:27:30.241] Message sent to the Astronode --> 
+[2023-11-02 23:27:30.245] 172683
+[2023-11-02 23:27:30.270] Message received from the Astronode <-- 
+[2023-11-02 23:27:30.275] 97C3A5FA0A0673
+[2023-11-02 23:27:30.277] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198595s.
+[2023-11-02 23:27:30.283] Message sent to the Astronode --> 
+[2023-11-02 23:27:30.286] 18C972
+[2023-11-02 23:27:30.312] Message received from the Astronode <-- 
+[2023-11-02 23:27:30.315] 9800000000AB35
+[2023-11-02 23:27:30.317] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:27:30.324] Message sent to the Astronode --> 
+[2023-11-02 23:27:30.328] 250100342E352C31332C3093D1
+[2023-11-02 23:27:30.372] Message received from the Astronode <-- 
+[2023-11-02 23:27:30.377] FF11257A47
+[2023-11-02 23:27:30.379] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:27:30.390] Payload failed to be queued.
+[2023-11-02 23:28:30.081] Message sent to the Astronode --> 
+[2023-11-02 23:28:30.086] 172683
+[2023-11-02 23:28:30.111] Message received from the Astronode <-- 
+[2023-11-02 23:28:30.116] 97FFA5FA0ADD10
+[2023-11-02 23:28:30.118] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198655s.
+[2023-11-02 23:28:30.124] Message sent to the Astronode --> 
+[2023-11-02 23:28:30.127] 18C972
+[2023-11-02 23:28:30.153] Message received from the Astronode <-- 
+[2023-11-02 23:28:30.157] 9800000000AB35
+[2023-11-02 23:28:30.158] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:28:30.166] Message sent to the Astronode --> 
+[2023-11-02 23:28:30.170] 250100342E352C31332C3093D1
+[2023-11-02 23:28:30.213] Message received from the Astronode <-- 
+[2023-11-02 23:28:30.216] FF11257A47
+[2023-11-02 23:28:30.218] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:28:30.231] Payload failed to be queued.
+[2023-11-02 23:29:29.932] Message sent to the Astronode --> 
+[2023-11-02 23:29:29.935] 172683
+[2023-11-02 23:29:29.961] Message received from the Astronode <-- 
+[2023-11-02 23:29:29.965] 973AA6FA0A6C46
+[2023-11-02 23:29:29.967] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198714s.
+[2023-11-02 23:29:29.974] Message sent to the Astronode --> 
+[2023-11-02 23:29:29.978] 18C972
+[2023-11-02 23:29:30.003] Message received from the Astronode <-- 
+[2023-11-02 23:29:30.007] 9800000000AB35
+[2023-11-02 23:29:30.008] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:29:30.015] Message sent to the Astronode --> 
+[2023-11-02 23:29:30.019] 250100342E352C31332C3093D1
+[2023-11-02 23:29:30.063] Message received from the Astronode <-- 
+[2023-11-02 23:29:30.067] FF11257A47
+[2023-11-02 23:29:30.068] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:29:30.079] Payload failed to be queued.
+[2023-11-02 23:30:29.775] Message sent to the Astronode --> 
+[2023-11-02 23:30:29.778] 172683
+[2023-11-02 23:30:29.805] Message received from the Astronode <-- 
+[2023-11-02 23:30:29.807] 9776A6FA0AC267
+[2023-11-02 23:30:29.809] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198774s.
+[2023-11-02 23:30:29.817] Message sent to the Astronode --> 
+[2023-11-02 23:30:29.820] 18C972
+[2023-11-02 23:30:29.847] Message received from the Astronode <-- 
+[2023-11-02 23:30:29.850] 9800000000AB35
+[2023-11-02 23:30:29.852] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:30:29.857] Message sent to the Astronode --> 
+[2023-11-02 23:30:29.862] 250100342E352C31332C3093D1
+[2023-11-02 23:30:29.906] Message received from the Astronode <-- 
+[2023-11-02 23:30:29.911] FF11257A47
+[2023-11-02 23:30:29.913] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:30:29.922] Payload failed to be queued.
+[2023-11-02 23:31:29.606] Message sent to the Astronode --> 
+[2023-11-02 23:31:29.609] 172683
+[2023-11-02 23:31:29.635] Message received from the Astronode <-- 
+[2023-11-02 23:31:29.638] 97B2A6FA0A971E
+[2023-11-02 23:31:29.640] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198834s.
+[2023-11-02 23:31:29.648] Message sent to the Astronode --> 
+[2023-11-02 23:31:29.652] 18C972
+[2023-11-02 23:31:29.677] Message received from the Astronode <-- 
+[2023-11-02 23:31:29.681] 9800000000AB35
+[2023-11-02 23:31:29.682] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:31:29.689] Message sent to the Astronode --> 
+[2023-11-02 23:31:29.693] 250100342E352C31332C3093D1
+[2023-11-02 23:31:29.736] Message received from the Astronode <-- 
+[2023-11-02 23:31:29.740] FF11257A47
+[2023-11-02 23:31:29.741] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:31:29.752] Payload failed to be queued.
+[2023-11-02 23:32:29.430] Message sent to the Astronode --> 
+[2023-11-02 23:32:29.433] 172683
+[2023-11-02 23:32:29.459] Message received from the Astronode <-- 
+[2023-11-02 23:32:29.464] 97EEA6FA0A9E24
+[2023-11-02 23:32:29.465] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198894s.
+[2023-11-02 23:32:29.471] Message sent to the Astronode --> 
+[2023-11-02 23:32:29.476] 18C972
+[2023-11-02 23:32:29.501] Message received from the Astronode <-- 
+[2023-11-02 23:32:29.505] 9800000000AB35
+[2023-11-02 23:32:29.507] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:32:29.514] Message sent to the Astronode --> 
+[2023-11-02 23:32:29.517] 250100342E352C31332C3093D1
+[2023-11-02 23:32:29.561] Message received from the Astronode <-- 
+[2023-11-02 23:32:29.567] FF11257A47
+[2023-11-02 23:32:29.567] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:32:29.579] Payload failed to be queued.
+[2023-11-02 23:33:29.254] Message sent to the Astronode --> 
+[2023-11-02 23:33:29.257] 172683
+[2023-11-02 23:33:29.284] Message received from the Astronode <-- 
+[2023-11-02 23:33:29.287] 972AA7FA0AFB6A
+[2023-11-02 23:33:29.289] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184198954s.
+[2023-11-02 23:33:29.296] Message sent to the Astronode --> 
+[2023-11-02 23:33:29.300] 18C972
+[2023-11-02 23:33:29.325] Message received from the Astronode <-- 
+[2023-11-02 23:33:29.330] 9800000000AB35
+[2023-11-02 23:33:29.331] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:33:29.337] Message sent to the Astronode --> 
+[2023-11-02 23:33:29.341] 250100342E352C31332C3093D1
+[2023-11-02 23:33:29.385] Message received from the Astronode <-- 
+[2023-11-02 23:33:29.390] FF11257A47
+[2023-11-02 23:33:29.391] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:33:29.404] Payload failed to be queued.
+[2023-11-02 23:34:29.080] Message sent to the Astronode --> 
+[2023-11-02 23:34:29.084] 172683
+[2023-11-02 23:34:29.109] Message received from the Astronode <-- 
+[2023-11-02 23:34:29.113] 9766A7FA0A554B
+[2023-11-02 23:34:29.115] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199014s.
+[2023-11-02 23:34:29.121] Message sent to the Astronode --> 
+[2023-11-02 23:34:29.126] 18C972
+[2023-11-02 23:34:29.151] Message received from the Astronode <-- 
+[2023-11-02 23:34:29.155] 9800000000AB35
+[2023-11-02 23:34:29.157] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:34:29.163] Message sent to the Astronode --> 
+[2023-11-02 23:34:29.166] 250100342E352C31332C3093D1
+[2023-11-02 23:34:29.211] Message received from the Astronode <-- 
+[2023-11-02 23:34:29.214] FF11257A47
+[2023-11-02 23:34:29.216] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:34:29.229] Payload failed to be queued.
+[2023-11-02 23:35:28.905] Message sent to the Astronode --> 
+[2023-11-02 23:35:28.907] 172683
+[2023-11-02 23:35:28.933] Message received from the Astronode <-- 
+[2023-11-02 23:35:28.938] 97A1A7FA0ADCA9
+[2023-11-02 23:35:28.939] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199073s.
+[2023-11-02 23:35:28.947] Message sent to the Astronode --> 
+[2023-11-02 23:35:28.951] 18C972
+[2023-11-02 23:35:28.976] Message received from the Astronode <-- 
+[2023-11-02 23:35:28.980] 9800000000AB35
+[2023-11-02 23:35:28.982] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:35:28.988] Message sent to the Astronode --> 
+[2023-11-02 23:35:28.991] 250100342E352C31332C3093D1
+[2023-11-02 23:35:29.036] Message received from the Astronode <-- 
+[2023-11-02 23:35:29.040] FF11257A47
+[2023-11-02 23:35:29.042] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:35:29.053] Payload failed to be queued.
+[2023-11-02 23:36:28.734] Message sent to the Astronode --> 
+[2023-11-02 23:36:28.738] 172683
+[2023-11-02 23:36:28.764] Message received from the Astronode <-- 
+[2023-11-02 23:36:28.769] 97DDA7FA0A9BA4
+[2023-11-02 23:36:28.771] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199133s.
+[2023-11-02 23:36:28.777] Message sent to the Astronode --> 
+[2023-11-02 23:36:28.781] 18C972
+[2023-11-02 23:36:28.806] Message received from the Astronode <-- 
+[2023-11-02 23:36:28.812] 9800000000AB35
+[2023-11-02 23:36:28.812] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:36:28.818] Message sent to the Astronode --> 
+[2023-11-02 23:36:28.822] 250100342E352C31332C3093D1
+[2023-11-02 23:36:28.866] Message received from the Astronode <-- 
+[2023-11-02 23:36:28.870] FF11257A47
+[2023-11-02 23:36:28.872] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:36:28.884] Payload failed to be queued.
+[2023-11-02 23:37:28.569] Message sent to the Astronode --> 
+[2023-11-02 23:37:28.573] 172683
+[2023-11-02 23:37:28.599] Message received from the Astronode <-- 
+[2023-11-02 23:37:28.603] 9719A8FA0AFFF1
+[2023-11-02 23:37:28.606] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199193s.
+[2023-11-02 23:37:28.613] Message sent to the Astronode --> 
+[2023-11-02 23:37:28.615] 18C972
+[2023-11-02 23:37:28.640] Message received from the Astronode <-- 
+[2023-11-02 23:37:28.644] 9800000000AB35
+[2023-11-02 23:37:28.647] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:37:28.652] Message sent to the Astronode --> 
+[2023-11-02 23:37:28.657] 250100342E352C31332C3093D1
+[2023-11-02 23:37:28.701] Message received from the Astronode <-- 
+[2023-11-02 23:37:28.704] FF11257A47
+[2023-11-02 23:37:28.706] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:37:28.718] Payload failed to be queued.
+[2023-11-02 23:38:28.385] Message sent to the Astronode --> 
+[2023-11-02 23:38:28.390] 172683
+[2023-11-02 23:38:28.416] Message received from the Astronode <-- 
+[2023-11-02 23:38:28.419] 9755A8FA0A51D0
+[2023-11-02 23:38:28.422] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199253s.
+[2023-11-02 23:38:28.428] Message sent to the Astronode --> 
+[2023-11-02 23:38:28.431] 18C972
+[2023-11-02 23:38:28.458] Message received from the Astronode <-- 
+[2023-11-02 23:38:28.461] 9800000000AB35
+[2023-11-02 23:38:28.464] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:38:28.470] Message sent to the Astronode --> 
+[2023-11-02 23:38:28.473] 250100342E352C31332C3093D1
+[2023-11-02 23:38:28.518] Message received from the Astronode <-- 
+[2023-11-02 23:38:28.521] FF11257A47
+[2023-11-02 23:38:28.523] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:38:28.537] Payload failed to be queued.
+[2023-11-02 23:39:28.217] Message sent to the Astronode --> 
+[2023-11-02 23:39:28.221] 172683
+[2023-11-02 23:39:28.247] Message received from the Astronode <-- 
+[2023-11-02 23:39:28.251] 9791A8FA0A04A9
+[2023-11-02 23:39:28.253] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199313s.
+[2023-11-02 23:39:28.259] Message sent to the Astronode --> 
+[2023-11-02 23:39:28.265] 18C972
+[2023-11-02 23:39:28.289] Message received from the Astronode <-- 
+[2023-11-02 23:39:28.293] 9800000000AB35
+[2023-11-02 23:39:28.295] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:39:28.301] Message sent to the Astronode --> 
+[2023-11-02 23:39:28.304] 250100342E352C31332C3093D1
+[2023-11-02 23:39:28.349] Message received from the Astronode <-- 
+[2023-11-02 23:39:28.353] FF11257A47
+[2023-11-02 23:39:28.355] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:39:28.366] Payload failed to be queued.
+[2023-11-02 23:40:28.056] Message sent to the Astronode --> 
+[2023-11-02 23:40:28.058] 172683
+[2023-11-02 23:40:28.084] Message received from the Astronode <-- 
+[2023-11-02 23:40:28.088] 97CDA8FA0A0D93
+[2023-11-02 23:40:28.091] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199373s.
+[2023-11-02 23:40:28.096] Message sent to the Astronode --> 
+[2023-11-02 23:40:28.101] 18C972
+[2023-11-02 23:40:28.126] Message received from the Astronode <-- 
+[2023-11-02 23:40:28.131] 9800000000AB35
+[2023-11-02 23:40:28.133] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:40:28.139] Message sent to the Astronode --> 
+[2023-11-02 23:40:28.142] 250100342E352C31332C3093D1
+[2023-11-02 23:40:28.186] Message received from the Astronode <-- 
+[2023-11-02 23:40:28.192] FF11257A47
+[2023-11-02 23:40:28.192] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:40:28.204] Payload failed to be queued.
+[2023-11-02 23:41:27.892] Message sent to the Astronode --> 
+[2023-11-02 23:41:27.894] 172683
+[2023-11-02 23:41:27.921] Message received from the Astronode <-- 
+[2023-11-02 23:41:27.925] 9708A9FA0ADCAB
+[2023-11-02 23:41:27.926] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184199432s.
+[2023-11-02 23:41:27.933] Message sent to the Astronode --> 
+[2023-11-02 23:41:27.936] 18C972
+[2023-11-02 23:41:27.963] Message received from the Astronode <-- 
+[2023-11-02 23:41:27.965] 9800000000AB35
+[2023-11-02 23:41:27.969] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 23:41:27.975] Message sent to the Astronode --> 
+[2023-11-02 23:41:27.978] 250100342E352C31332C3093D1
+[2023-11-02 23:41:28.023] Message received from the Astronode <-- 
+[2023-11-02 23:41:28.025] FF11257A47
+[2023-11-02 23:41:28.029] [ERROR] DUPLICATE_ID : Failed to queue the payload because the Payload ID provided by the asset is already in use in the Astronode queue.
+[2023-11-02 23:41:28.040] Payload failed to be queued.

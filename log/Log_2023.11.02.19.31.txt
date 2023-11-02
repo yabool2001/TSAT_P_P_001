@@ -1,0 +1,775 @@
+[2023-11-02 19:31:51.153] Message sent to the Astronode --> 
+[2023-11-02 19:31:51.153] 35D82F291F6635670CFA48
+[2023-11-02 19:31:51.153] Message received from the Astronode <-- 
+[2023-11-02 19:31:51.153] B58E16
+[2023-11-02 19:31:51.153] Geolocation values were set successfully.
+[2023-11-02 19:31:51.153] Astronode payload: 1.8,28,0
+[2023-11-02 19:31:51.153] NMEA coordinates: 52.279292,20.809047
+[2023-11-02 19:31:51.153] Message sent to the Astronode --> 
+[2023-11-02 19:31:51.153] 250100312E382C32382C3043BC
+[2023-11-02 19:31:51.153] Message received from the Astronode <-- 
+[2023-11-02 19:31:51.153] A50100C1A9
+[2023-11-02 19:31:51.153] Payload was successfully queued.
+[2023-11-02 19:31:51.156] Evt pin is high.
+[2023-11-02 19:31:51.156] Message sent to the Astronode --> 
+[2023-11-02 19:31:51.156] 65F3DD
+[2023-11-02 19:31:51.156] Message received from the Astronode <-- 
+[2023-11-02 19:31:51.156] E50A0253
+[2023-11-02 19:31:51.156] Astronode has reset.
+[2023-11-02 19:31:51.156] TX message pending.
+[2023-11-02 19:31:51.156] Terminal has been reset.
+[2023-11-02 19:31:51.156] Message sent to the Astronode --> 
+[2023-11-02 19:31:51.156] 55A0EB
+[2023-11-02 19:31:51.156] Message received from the Astronode <-- 
+[2023-11-02 19:31:51.156] D5287A
+[2023-11-02 19:31:51.156] The reset has been cleared.
+[2023-11-02 19:32:31.611] Message sent to the Astronode --> 
+[2023-11-02 19:32:31.611] 172683
+[2023-11-02 19:32:31.642] Message received from the Astronode <-- 
+[2023-11-02 19:32:31.642] 97DA6FFA0AE07A
+[2023-11-02 19:32:31.642] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184184794s.
+[2023-11-02 19:32:31.642] Message sent to the Astronode --> 
+[2023-11-02 19:32:31.658] 18C972
+[2023-11-02 19:32:31.682] Message received from the Astronode <-- 
+[2023-11-02 19:32:31.682] 98CD0E000088A4
+[2023-11-02 19:32:31.690] Next opportunity for communication with the Astrocast Network: 3789s.
+[2023-11-02 19:33:31.462] Message sent to the Astronode --> 
+[2023-11-02 19:33:31.465] 172683
+[2023-11-02 19:33:31.481] Message received from the Astronode <-- 
+[2023-11-02 19:33:31.497] 971670FA0A24E9
+[2023-11-02 19:33:31.497] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184184854s.
+[2023-11-02 19:33:31.497] Message sent to the Astronode --> 
+[2023-11-02 19:33:31.497] 18C972
+[2023-11-02 19:33:31.528] Message received from the Astronode <-- 
+[2023-11-02 19:33:31.528] 98910E0000819E
+[2023-11-02 19:33:31.528] Next opportunity for communication with the Astrocast Network: 3729s.
+[2023-11-02 19:34:31.311] Message sent to the Astronode --> 
+[2023-11-02 19:34:31.316] 172683
+[2023-11-02 19:34:31.331] Message received from the Astronode <-- 
+[2023-11-02 19:34:31.331] 975170FA0A95D6
+[2023-11-02 19:34:31.347] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184184913s.
+[2023-11-02 19:34:31.347] Message sent to the Astronode --> 
+[2023-11-02 19:34:31.347] 18C972
+[2023-11-02 19:34:31.379] Message received from the Astronode <-- 
+[2023-11-02 19:34:31.379] 98550E0000D4E7
+[2023-11-02 19:34:31.379] Next opportunity for communication with the Astrocast Network: 3669s.
+[2023-11-02 19:35:31.158] Message sent to the Astronode --> 
+[2023-11-02 19:35:31.158] 172683
+[2023-11-02 19:35:31.190] Message received from the Astronode <-- 
+[2023-11-02 19:35:31.190] 978D70FA0AA431
+[2023-11-02 19:35:31.190] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184184973s.
+[2023-11-02 19:35:31.206] Message sent to the Astronode --> 
+[2023-11-02 19:35:31.206] 18C972
+[2023-11-02 19:35:31.237] Message received from the Astronode <-- 
+[2023-11-02 19:35:31.237] 98190E00007AC6
+[2023-11-02 19:35:31.237] Next opportunity for communication with the Astrocast Network: 3609s.
+[2023-11-02 19:36:31.017] Message sent to the Astronode --> 
+[2023-11-02 19:36:31.017] 172683
+[2023-11-02 19:36:31.045] Message received from the Astronode <-- 
+[2023-11-02 19:36:31.049] 97C970FA0AC995
+[2023-11-02 19:36:31.049] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185033s.
+[2023-11-02 19:36:31.049] Message sent to the Astronode --> 
+[2023-11-02 19:36:31.061] 18C972
+[2023-11-02 19:36:31.076] Message received from the Astronode <-- 
+[2023-11-02 19:36:31.092] 98DD0D00007FE6
+[2023-11-02 19:36:31.092] Next opportunity for communication with the Astrocast Network: 3549s.
+[2023-11-02 19:37:30.869] Message sent to the Astronode --> 
+[2023-11-02 19:37:30.869] 172683
+[2023-11-02 19:37:30.901] Message received from the Astronode <-- 
+[2023-11-02 19:37:30.901] 970571FA0A6F5E
+[2023-11-02 19:37:30.901] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185093s.
+[2023-11-02 19:37:30.901] Message sent to the Astronode --> 
+[2023-11-02 19:37:30.917] 18C972
+[2023-11-02 19:37:30.932] Message received from the Astronode <-- 
+[2023-11-02 19:37:30.932] 98A20D0000E470
+[2023-11-02 19:37:30.948] Next opportunity for communication with the Astrocast Network: 3490s.
+[2023-11-02 19:38:30.728] Message sent to the Astronode --> 
+[2023-11-02 19:38:30.728] 172683
+[2023-11-02 19:38:30.749] Message received from the Astronode <-- 
+[2023-11-02 19:38:30.749] 974171FA0A02FA
+[2023-11-02 19:38:30.749] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185153s.
+[2023-11-02 19:38:30.765] Message sent to the Astronode --> 
+[2023-11-02 19:38:30.765] 18C972
+[2023-11-02 19:38:30.796] Message received from the Astronode <-- 
+[2023-11-02 19:38:30.796] 98660D0000B109
+[2023-11-02 19:38:30.796] Next opportunity for communication with the Astrocast Network: 3430s.
+[2023-11-02 19:39:30.585] Message sent to the Astronode --> 
+[2023-11-02 19:39:30.585] 172683
+[2023-11-02 19:39:30.616] Message received from the Astronode <-- 
+[2023-11-02 19:39:30.616] 977D71FA0AD999
+[2023-11-02 19:39:30.616] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185213s.
+[2023-11-02 19:39:30.616] Message sent to the Astronode --> 
+[2023-11-02 19:39:30.632] 18C972
+[2023-11-02 19:39:30.648] Message received from the Astronode <-- 
+[2023-11-02 19:39:30.648] 982A0D00001F28
+[2023-11-02 19:39:30.663] Next opportunity for communication with the Astrocast Network: 3370s.
+[2023-11-02 19:40:30.451] Message sent to the Astronode --> 
+[2023-11-02 19:40:30.457] 172683
+[2023-11-02 19:40:30.467] Message received from the Astronode <-- 
+[2023-11-02 19:40:30.483] 97B971FA0A8CE0
+[2023-11-02 19:40:30.483] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185273s.
+[2023-11-02 19:40:30.483] Message sent to the Astronode --> 
+[2023-11-02 19:40:30.483] 18C972
+[2023-11-02 19:40:30.514] Message received from the Astronode <-- 
+[2023-11-02 19:40:30.526] 98EE0C00007A66
+[2023-11-02 19:40:30.526] Next opportunity for communication with the Astrocast Network: 3310s.
+[2023-11-02 19:41:30.297] Message sent to the Astronode --> 
+[2023-11-02 19:41:30.297] 172683
+[2023-11-02 19:41:30.329] Message received from the Astronode <-- 
+[2023-11-02 19:41:30.329] 97F471FA0A96B7
+[2023-11-02 19:41:30.329] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185332s.
+[2023-11-02 19:41:30.345] Message sent to the Astronode --> 
+[2023-11-02 19:41:30.345] 18C972
+[2023-11-02 19:41:30.376] Message received from the Astronode <-- 
+[2023-11-02 19:41:30.376] 98B20C0000735C
+[2023-11-02 19:41:30.376] Next opportunity for communication with the Astrocast Network: 3250s.
+[2023-11-02 19:42:30.172] Message sent to the Astronode --> 
+[2023-11-02 19:42:30.172] 172683
+[2023-11-02 19:42:30.188] Message received from the Astronode <-- 
+[2023-11-02 19:42:30.204] 973072FA0A9397
+[2023-11-02 19:42:30.204] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185392s.
+[2023-11-02 19:42:30.204] Message sent to the Astronode --> 
+[2023-11-02 19:42:30.217] 18C972
+[2023-11-02 19:42:30.236] Message received from the Astronode <-- 
+[2023-11-02 19:42:30.236] 98760C00002625
+[2023-11-02 19:42:30.236] Next opportunity for communication with the Astrocast Network: 3190s.
+[2023-11-02 19:43:30.031] Message sent to the Astronode --> 
+[2023-11-02 19:43:30.031] 172683
+[2023-11-02 19:43:30.059] Message received from the Astronode <-- 
+[2023-11-02 19:43:30.059] 976C72FA0A9AAD
+[2023-11-02 19:43:30.059] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185452s.
+[2023-11-02 19:43:30.074] Message sent to the Astronode --> 
+[2023-11-02 19:43:30.074] 18C972
+[2023-11-02 19:43:30.101] Message received from the Astronode <-- 
+[2023-11-02 19:43:30.106] 983A0C00008804
+[2023-11-02 19:43:30.106] Next opportunity for communication with the Astrocast Network: 3130s.
+[2023-11-02 19:44:29.891] Message sent to the Astronode --> 
+[2023-11-02 19:44:29.891] 172683
+[2023-11-02 19:44:29.921] Message received from the Astronode <-- 
+[2023-11-02 19:44:29.921] 97A872FA0ACFD4
+[2023-11-02 19:44:29.921] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185512s.
+[2023-11-02 19:44:29.936] Message sent to the Astronode --> 
+[2023-11-02 19:44:29.937] 18C972
+[2023-11-02 19:44:29.953] Message received from the Astronode <-- 
+[2023-11-02 19:44:29.969] 98FF0B0000F98E
+[2023-11-02 19:44:29.969] Next opportunity for communication with the Astrocast Network: 3071s.
+[2023-11-02 19:45:29.762] Message sent to the Astronode --> 
+[2023-11-02 19:45:29.762] 172683
+[2023-11-02 19:45:29.786] Message received from the Astronode <-- 
+[2023-11-02 19:45:29.793] 97E472FA0A61F5
+[2023-11-02 19:45:29.793] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185572s.
+[2023-11-02 19:45:29.793] Message sent to the Astronode --> 
+[2023-11-02 19:45:29.793] 18C972
+[2023-11-02 19:45:29.826] Message received from the Astronode <-- 
+[2023-11-02 19:45:29.826] 98C30B000022ED
+[2023-11-02 19:45:29.826] Next opportunity for communication with the Astrocast Network: 3011s.
+[2023-11-02 19:46:29.632] Message sent to the Astronode --> 
+[2023-11-02 19:46:29.632] 172683
+[2023-11-02 19:46:29.657] Message received from the Astronode <-- 
+[2023-11-02 19:46:29.657] 972073FA0A04BB
+[2023-11-02 19:46:29.657] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185632s.
+[2023-11-02 19:46:29.657] Message sent to the Astronode --> 
+[2023-11-02 19:46:29.673] 18C972
+[2023-11-02 19:46:29.688] Message received from the Astronode <-- 
+[2023-11-02 19:46:29.704] 98870B00004F49
+[2023-11-02 19:46:29.704] Next opportunity for communication with the Astrocast Network: 2951s.
+[2023-11-02 19:47:29.511] Message sent to the Astronode --> 
+[2023-11-02 19:47:29.511] 172683
+[2023-11-02 19:47:29.528] Message received from the Astronode <-- 
+[2023-11-02 19:47:29.528] 975C73FA0A43B6
+[2023-11-02 19:47:29.528] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185692s.
+[2023-11-02 19:47:29.528] Message sent to the Astronode --> 
+[2023-11-02 19:47:29.543] 18C972
+[2023-11-02 19:47:29.559] Message received from the Astronode <-- 
+[2023-11-02 19:47:29.574] 984B0B0000D9B5
+[2023-11-02 19:47:29.574] Next opportunity for communication with the Astrocast Network: 2891s.
+[2023-11-02 19:48:29.371] Message sent to the Astronode --> 
+[2023-11-02 19:48:29.385] 172683
+[2023-11-02 19:48:29.385] Message received from the Astronode <-- 
+[2023-11-02 19:48:29.401] 979773FA0AF81B
+[2023-11-02 19:48:29.401] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185751s.
+[2023-11-02 19:48:29.401] Message sent to the Astronode --> 
+[2023-11-02 19:48:29.401] 18C972
+[2023-11-02 19:48:29.432] Message received from the Astronode <-- 
+[2023-11-02 19:48:29.432] 980F0B0000B411
+[2023-11-02 19:48:29.432] Next opportunity for communication with the Astrocast Network: 2831s.
+[2023-11-02 19:49:29.237] Message sent to the Astronode --> 
+[2023-11-02 19:49:29.248] 172683
+[2023-11-02 19:49:29.263] Message received from the Astronode <-- 
+[2023-11-02 19:49:29.263] 97D373FA0A95BF
+[2023-11-02 19:49:29.263] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185811s.
+[2023-11-02 19:49:29.279] Message sent to the Astronode --> 
+[2023-11-02 19:49:29.279] 18C972
+[2023-11-02 19:49:29.296] Message received from the Astronode <-- 
+[2023-11-02 19:49:29.311] 98D30A0000B5C1
+[2023-11-02 19:49:29.311] Next opportunity for communication with the Astrocast Network: 2771s.
+[2023-11-02 19:50:29.110] Message sent to the Astronode --> 
+[2023-11-02 19:50:29.121] 172683
+[2023-11-02 19:50:29.121] Message received from the Astronode <-- 
+[2023-11-02 19:50:29.137] 970F74FA0A34DD
+[2023-11-02 19:50:29.137] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185871s.
+[2023-11-02 19:50:29.142] Message sent to the Astronode --> 
+[2023-11-02 19:50:29.142] 18C972
+[2023-11-02 19:50:29.169] Message received from the Astronode <-- 
+[2023-11-02 19:50:29.169] 98970A0000D865
+[2023-11-02 19:50:29.169] Next opportunity for communication with the Astrocast Network: 2711s.
+[2023-11-02 19:51:28.988] Message sent to the Astronode --> 
+[2023-11-02 19:51:28.988] 172683
+[2023-11-02 19:51:28.997] Message received from the Astronode <-- 
+[2023-11-02 19:51:29.004] 974B74FA0A5979
+[2023-11-02 19:51:29.004] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185931s.
+[2023-11-02 19:51:29.004] Message sent to the Astronode --> 
+[2023-11-02 19:51:29.020] 18C972
+[2023-11-02 19:51:29.036] Message received from the Astronode <-- 
+[2023-11-02 19:51:29.036] 985C0A000063C8
+[2023-11-02 19:51:29.051] Next opportunity for communication with the Astrocast Network: 2652s.
+[2023-11-02 19:52:28.849] Message sent to the Astronode --> 
+[2023-11-02 19:52:28.849] 172683
+[2023-11-02 19:52:28.864] Message received from the Astronode <-- 
+[2023-11-02 19:52:28.879] 978774FA0ACF85
+[2023-11-02 19:52:28.879] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184185991s.
+[2023-11-02 19:52:28.879] Message sent to the Astronode --> 
+[2023-11-02 19:52:28.879] 18C972
+[2023-11-02 19:52:28.911] Message received from the Astronode <-- 
+[2023-11-02 19:52:28.911] 98200A000024C5
+[2023-11-02 19:52:28.927] Next opportunity for communication with the Astrocast Network: 2592s.
+[2023-11-02 19:53:28.735] Message sent to the Astronode --> 
+[2023-11-02 19:53:28.735] 172683
+[2023-11-02 19:53:28.735] Message received from the Astronode <-- 
+[2023-11-02 19:53:28.751] 97C374FA0AA221
+[2023-11-02 19:53:28.751] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186051s.
+[2023-11-02 19:53:28.751] Message sent to the Astronode --> 
+[2023-11-02 19:53:28.767] 18C972
+[2023-11-02 19:53:28.782] Message received from the Astronode <-- 
+[2023-11-02 19:53:28.798] 98E409000021E5
+[2023-11-02 19:53:28.798] Next opportunity for communication with the Astrocast Network: 2532s.
+[2023-11-02 19:54:28.613] Message sent to the Astronode --> 
+[2023-11-02 19:54:28.613] 172683
+[2023-11-02 19:54:28.613] Message received from the Astronode <-- 
+[2023-11-02 19:54:28.629] 97FF74FA0A7942
+[2023-11-02 19:54:28.629] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186111s.
+[2023-11-02 19:54:28.629] Message sent to the Astronode --> 
+[2023-11-02 19:54:28.629] 18C972
+[2023-11-02 19:54:28.660] Message received from the Astronode <-- 
+[2023-11-02 19:54:28.660] 98A80900008FC4
+[2023-11-02 19:54:28.660] Next opportunity for communication with the Astrocast Network: 2472s.
+[2023-11-02 19:55:28.475] Message sent to the Astronode --> 
+[2023-11-02 19:55:28.475] 172683
+[2023-11-02 19:55:28.497] Message received from the Astronode <-- 
+[2023-11-02 19:55:28.497] 973B75FA0A1C0C
+[2023-11-02 19:55:28.497] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186171s.
+[2023-11-02 19:55:28.513] Message sent to the Astronode --> 
+[2023-11-02 19:55:28.513] 18C972
+[2023-11-02 19:55:28.544] Message received from the Astronode <-- 
+[2023-11-02 19:55:28.544] 986C090000DABD
+[2023-11-02 19:55:28.544] Next opportunity for communication with the Astrocast Network: 2412s.
+[2023-11-02 19:56:28.353] Message sent to the Astronode --> 
+[2023-11-02 19:56:28.353] 172683
+[2023-11-02 19:56:28.369] Message received from the Astronode <-- 
+[2023-11-02 19:56:28.385] 977675FA0A065B
+[2023-11-02 19:56:28.385] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186230s.
+[2023-11-02 19:56:28.385] Message sent to the Astronode --> 
+[2023-11-02 19:56:28.400] 18C972
+[2023-11-02 19:56:28.416] Message received from the Astronode <-- 
+[2023-11-02 19:56:28.416] 9830090000D387
+[2023-11-02 19:56:28.416] Next opportunity for communication with the Astrocast Network: 2352s.
+[2023-11-02 19:57:28.243] Message sent to the Astronode --> 
+[2023-11-02 19:57:28.243] 172683
+[2023-11-02 19:57:28.257] Message received from the Astronode <-- 
+[2023-11-02 19:57:28.257] 97B275FA0A5322
+[2023-11-02 19:57:28.257] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186290s.
+[2023-11-02 19:57:28.273] Message sent to the Astronode --> 
+[2023-11-02 19:57:28.273] 18C972
+[2023-11-02 19:57:28.297] Message received from the Astronode <-- 
+[2023-11-02 19:57:28.305] 98F4080000B6C9
+[2023-11-02 19:57:28.305] Next opportunity for communication with the Astrocast Network: 2292s.
+[2023-11-02 19:58:28.120] Message sent to the Astronode --> 
+[2023-11-02 19:58:28.120] 172683
+[2023-11-02 19:58:28.136] Message received from the Astronode <-- 
+[2023-11-02 19:58:28.136] 97EE75FA0A5A18
+[2023-11-02 19:58:28.136] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186350s.
+[2023-11-02 19:58:28.136] Message sent to the Astronode --> 
+[2023-11-02 19:58:28.151] 18C972
+[2023-11-02 19:58:28.171] Message received from the Astronode <-- 
+[2023-11-02 19:58:28.183] 98B808000018E8
+[2023-11-02 19:58:28.183] Next opportunity for communication with the Astrocast Network: 2232s.
+[2023-11-02 19:59:27.991] Message sent to the Astronode --> 
+[2023-11-02 19:59:28.001] 172683
+[2023-11-02 19:59:28.017] Message received from the Astronode <-- 
+[2023-11-02 19:59:28.017] 972A76FA0A5F38
+[2023-11-02 19:59:28.017] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186410s.
+[2023-11-02 19:59:28.032] Message sent to the Astronode --> 
+[2023-11-02 19:59:28.032] 18C972
+[2023-11-02 19:59:28.048] Message received from the Astronode <-- 
+[2023-11-02 19:59:28.064] 987D080000F9E7
+[2023-11-02 19:59:28.064] Next opportunity for communication with the Astrocast Network: 2173s.
+[2023-11-02 20:00:27.890] Message sent to the Astronode --> 
+[2023-11-02 20:00:27.890] 172683
+[2023-11-02 20:00:27.890] Message received from the Astronode <-- 
+[2023-11-02 20:00:27.910] 976676FA0AF119
+[2023-11-02 20:00:27.910] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186470s.
+[2023-11-02 20:00:27.910] Message sent to the Astronode --> 
+[2023-11-02 20:00:27.921] 18C972
+[2023-11-02 20:00:27.937] Message received from the Astronode <-- 
+[2023-11-02 20:00:27.937] 98410800002284
+[2023-11-02 20:00:27.937] Next opportunity for communication with the Astrocast Network: 2113s.
+[2023-11-02 20:01:27.758] Message sent to the Astronode --> 
+[2023-11-02 20:01:27.768] 172683
+[2023-11-02 20:01:27.783] Message received from the Astronode <-- 
+[2023-11-02 20:01:27.783] 97A276FA0AA460
+[2023-11-02 20:01:27.783] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186530s.
+[2023-11-02 20:01:27.798] Message sent to the Astronode --> 
+[2023-11-02 20:01:27.798] 18C972
+[2023-11-02 20:01:27.814] Message received from the Astronode <-- 
+[2023-11-02 20:01:27.830] 98050800004F20
+[2023-11-02 20:01:27.830] Next opportunity for communication with the Astrocast Network: 2053s.
+[2023-11-02 20:02:27.641] Message sent to the Astronode --> 
+[2023-11-02 20:02:27.641] 172683
+[2023-11-02 20:02:27.667] Message received from the Astronode <-- 
+[2023-11-02 20:02:27.667] 97DE76FA0AE36D
+[2023-11-02 20:02:27.667] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186590s.
+[2023-11-02 20:02:27.667] Message sent to the Astronode --> 
+[2023-11-02 20:02:27.683] 18C972
+[2023-11-02 20:02:27.698] Message received from the Astronode <-- 
+[2023-11-02 20:02:27.714] 98C9070000E8F0
+[2023-11-02 20:02:27.714] Next opportunity for communication with the Astrocast Network: 1993s.
+[2023-11-02 20:03:27.521] Message sent to the Astronode --> 
+[2023-11-02 20:03:27.535] 172683
+[2023-11-02 20:03:27.551] Message received from the Astronode <-- 
+[2023-11-02 20:03:27.551] 971A77FA0A8623
+[2023-11-02 20:03:27.551] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186650s.
+[2023-11-02 20:03:27.551] Message sent to the Astronode --> 
+[2023-11-02 20:03:27.566] 18C972
+[2023-11-02 20:03:27.582] Message received from the Astronode <-- 
+[2023-11-02 20:03:27.582] 988D0700008554
+[2023-11-02 20:03:27.597] Next opportunity for communication with the Astrocast Network: 1933s.
+[2023-11-02 20:04:27.388] Message sent to the Astronode --> 
+[2023-11-02 20:04:27.404] 172683
+[2023-11-02 20:04:27.420] Message received from the Astronode <-- 
+[2023-11-02 20:04:27.430] 975577FA0AF499
+[2023-11-02 20:04:27.430] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186709s.
+[2023-11-02 20:04:27.436] Message sent to the Astronode --> 
+[2023-11-02 20:04:27.436] 18C972
+[2023-11-02 20:04:27.468] Message received from the Astronode <-- 
+[2023-11-02 20:04:27.468] 9851070000B4B3
+[2023-11-02 20:04:27.468] Next opportunity for communication with the Astrocast Network: 1873s.
+[2023-11-02 20:05:27.280] Message sent to the Astronode --> 
+[2023-11-02 20:05:27.290] 172683
+[2023-11-02 20:05:27.294] Message received from the Astronode <-- 
+[2023-11-02 20:05:27.310] 979177FA0AA1E0
+[2023-11-02 20:05:27.310] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186769s.
+[2023-11-02 20:05:27.310] Message sent to the Astronode --> 
+[2023-11-02 20:05:27.325] 18C972
+[2023-11-02 20:05:27.341] Message received from the Astronode <-- 
+[2023-11-02 20:05:27.341] 9815070000D917
+[2023-11-02 20:05:27.357] Next opportunity for communication with the Astrocast Network: 1813s.
+[2023-11-02 20:06:27.147] Message sent to the Astronode --> 
+[2023-11-02 20:06:27.167] 172683
+[2023-11-02 20:06:27.179] Message received from the Astronode <-- 
+[2023-11-02 20:06:27.179] 97CD77FA0AA8DA
+[2023-11-02 20:06:27.179] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186829s.
+[2023-11-02 20:06:27.195] Message sent to the Astronode --> 
+[2023-11-02 20:06:27.195] 18C972
+[2023-11-02 20:06:27.226] Message received from the Astronode <-- 
+[2023-11-02 20:06:27.226] 98D90600007FDC
+[2023-11-02 20:06:27.226] Next opportunity for communication with the Astrocast Network: 1753s.
+[2023-11-02 20:07:27.041] Message sent to the Astronode --> 
+[2023-11-02 20:07:27.050] 172683
+[2023-11-02 20:07:27.057] Message received from the Astronode <-- 
+[2023-11-02 20:07:27.073] 970978FA0ACC8F
+[2023-11-02 20:07:27.073] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186889s.
+[2023-11-02 20:07:27.080] Message sent to the Astronode --> 
+[2023-11-02 20:07:27.089] 18C972
+[2023-11-02 20:07:27.104] Message received from the Astronode <-- 
+[2023-11-02 20:07:27.104] 989D0600001278
+[2023-11-02 20:07:27.104] Next opportunity for communication with the Astrocast Network: 1693s.
+[2023-11-02 20:08:26.921] Message sent to the Astronode --> 
+[2023-11-02 20:08:26.931] 172683
+[2023-11-02 20:08:26.935] Message received from the Astronode <-- 
+[2023-11-02 20:08:26.951] 974578FA0A62AE
+[2023-11-02 20:08:26.951] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184186949s.
+[2023-11-02 20:08:26.958] Message sent to the Astronode --> 
+[2023-11-02 20:08:26.967] 18C972
+[2023-11-02 20:08:26.983] Message received from the Astronode <-- 
+[2023-11-02 20:08:26.983] 9862060000B133
+[2023-11-02 20:08:26.998] Next opportunity for communication with the Astrocast Network: 1634s.
+[2023-11-02 20:09:26.798] Message sent to the Astronode --> 
+[2023-11-02 20:09:26.798] 172683
+[2023-11-02 20:09:26.825] Message received from the Astronode <-- 
+[2023-11-02 20:09:26.831] 978178FA0A37D7
+[2023-11-02 20:09:26.831] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187009s.
+[2023-11-02 20:09:26.831] Message sent to the Astronode --> 
+[2023-11-02 20:09:26.841] 18C972
+[2023-11-02 20:09:26.857] Message received from the Astronode <-- 
+[2023-11-02 20:09:26.857] 9826060000DC97
+[2023-11-02 20:09:26.873] Next opportunity for communication with the Astrocast Network: 1574s.
+[2023-11-02 20:10:26.669] Message sent to the Astronode --> 
+[2023-11-02 20:10:26.673] 172683
+[2023-11-02 20:10:26.685] Message received from the Astronode <-- 
+[2023-11-02 20:10:26.701] 97BD78FA0AECB4
+[2023-11-02 20:10:26.701] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187069s.
+[2023-11-02 20:10:26.701] Message sent to the Astronode --> 
+[2023-11-02 20:10:26.701] 18C972
+[2023-11-02 20:10:26.732] Message received from the Astronode <-- 
+[2023-11-02 20:10:26.732] 98EA0500001A32
+[2023-11-02 20:10:26.732] Next opportunity for communication with the Astrocast Network: 1514s.
+[2023-11-02 20:11:26.545] Message sent to the Astronode --> 
+[2023-11-02 20:11:26.550] 172683
+[2023-11-02 20:11:26.565] Message received from the Astronode <-- 
+[2023-11-02 20:11:26.565] 97F978FA0A8110
+[2023-11-02 20:11:26.581] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187129s.
+[2023-11-02 20:11:26.581] Message sent to the Astronode --> 
+[2023-11-02 20:11:26.581] 18C972
+[2023-11-02 20:11:26.612] Message received from the Astronode <-- 
+[2023-11-02 20:11:26.612] 98AE0500007796
+[2023-11-02 20:11:26.612] Next opportunity for communication with the Astrocast Network: 1454s.
+[2023-11-02 20:12:26.421] Message sent to the Astronode --> 
+[2023-11-02 20:12:26.421] 172683
+[2023-11-02 20:12:26.452] Message received from the Astronode <-- 
+[2023-11-02 20:12:26.452] 973579FA0A27DB
+[2023-11-02 20:12:26.452] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187189s.
+[2023-11-02 20:12:26.452] Message sent to the Astronode --> 
+[2023-11-02 20:12:26.467] 18C972
+[2023-11-02 20:12:26.483] Message received from the Astronode <-- 
+[2023-11-02 20:12:26.499] 98720500004671
+[2023-11-02 20:12:26.500] Next opportunity for communication with the Astrocast Network: 1394s.
+[2023-11-02 20:13:26.302] Message sent to the Astronode --> 
+[2023-11-02 20:13:26.302] 172683
+[2023-11-02 20:13:26.335] Message received from the Astronode <-- 
+[2023-11-02 20:13:26.335] 977079FA0AFE09
+[2023-11-02 20:13:26.335] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187248s.
+[2023-11-02 20:13:26.335] Message sent to the Astronode --> 
+[2023-11-02 20:13:26.350] 18C972
+[2023-11-02 20:13:26.366] Message received from the Astronode <-- 
+[2023-11-02 20:13:26.381] 98360500002BD5
+[2023-11-02 20:13:26.381] Next opportunity for communication with the Astrocast Network: 1334s.
+[2023-11-02 20:14:26.187] Message sent to the Astronode --> 
+[2023-11-02 20:14:26.187] 172683
+[2023-11-02 20:14:26.203] Message received from the Astronode <-- 
+[2023-11-02 20:14:26.219] 97AC79FA0ACFEE
+[2023-11-02 20:14:26.219] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187308s.
+[2023-11-02 20:14:26.234] Message sent to the Astronode --> 
+[2023-11-02 20:14:26.234] 18C972
+[2023-11-02 20:14:26.253] Message received from the Astronode <-- 
+[2023-11-02 20:14:26.253] 98FA0400008D1E
+[2023-11-02 20:14:26.253] Next opportunity for communication with the Astrocast Network: 1274s.
+[2023-11-02 20:15:26.069] Message sent to the Astronode --> 
+[2023-11-02 20:15:26.069] 172683
+[2023-11-02 20:15:26.085] Message received from the Astronode <-- 
+[2023-11-02 20:15:26.101] 97E879FA0AA24A
+[2023-11-02 20:15:26.101] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187368s.
+[2023-11-02 20:15:26.101] Message sent to the Astronode --> 
+[2023-11-02 20:15:26.101] 18C972
+[2023-11-02 20:15:26.132] Message received from the Astronode <-- 
+[2023-11-02 20:15:26.132] 98BE040000E0BA
+[2023-11-02 20:15:26.132] Next opportunity for communication with the Astrocast Network: 1214s.
+[2023-11-02 20:16:25.955] Message sent to the Astronode --> 
+[2023-11-02 20:16:25.955] 172683
+[2023-11-02 20:16:25.986] Message received from the Astronode <-- 
+[2023-11-02 20:16:25.986] 97247AFA0A64EF
+[2023-11-02 20:16:25.986] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187428s.
+[2023-11-02 20:16:26.002] Message sent to the Astronode --> 
+[2023-11-02 20:16:26.002] 18C972
+[2023-11-02 20:16:26.018] Message received from the Astronode <-- 
+[2023-11-02 20:16:26.018] 98830400008FAF
+[2023-11-02 20:16:26.033] Next opportunity for communication with the Astrocast Network: 1155s.
+[2023-11-02 20:17:25.824] Message sent to the Astronode --> 
+[2023-11-02 20:17:25.840] 172683
+[2023-11-02 20:17:25.856] Message received from the Astronode <-- 
+[2023-11-02 20:17:25.871] 97607AFA0A094B
+[2023-11-02 20:17:25.871] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187488s.
+[2023-11-02 20:17:25.877] Message sent to the Astronode --> 
+[2023-11-02 20:17:25.877] 18C972
+[2023-11-02 20:17:25.903] Message received from the Astronode <-- 
+[2023-11-02 20:17:25.903] 9847040000DAD6
+[2023-11-02 20:17:25.903] Next opportunity for communication with the Astrocast Network: 1095s.
+[2023-11-02 20:18:25.721] Message sent to the Astronode --> 
+[2023-11-02 20:18:25.721] 172683
+[2023-11-02 20:18:25.749] Message received from the Astronode <-- 
+[2023-11-02 20:18:25.749] 979C7AFA0A769B
+[2023-11-02 20:18:25.749] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187548s.
+[2023-11-02 20:18:25.749] Message sent to the Astronode --> 
+[2023-11-02 20:18:25.764] 18C972
+[2023-11-02 20:18:25.780] Message received from the Astronode <-- 
+[2023-11-02 20:18:25.796] 980B04000074F7
+[2023-11-02 20:18:25.796] Next opportunity for communication with the Astrocast Network: 1035s.
+[2023-11-02 20:19:25.604] Message sent to the Astronode --> 
+[2023-11-02 20:19:25.604] 172683
+[2023-11-02 20:19:25.620] Message received from the Astronode <-- 
+[2023-11-02 20:19:25.635] 97D87AFA0A1B3F
+[2023-11-02 20:19:25.635] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187608s.
+[2023-11-02 20:19:25.635] Message sent to the Astronode --> 
+[2023-11-02 20:19:25.635] 18C972
+[2023-11-02 20:19:25.667] Message received from the Astronode <-- 
+[2023-11-02 20:19:25.667] 98CF030000B10B
+[2023-11-02 20:19:25.667] Next opportunity for communication with the Astrocast Network: 975s.
+[2023-11-02 20:20:25.493] Message sent to the Astronode --> 
+[2023-11-02 20:20:25.493] 172683
+[2023-11-02 20:20:25.509] Message received from the Astronode <-- 
+[2023-11-02 20:20:25.525] 97147BFA0ABDF4
+[2023-11-02 20:20:25.525] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187668s.
+[2023-11-02 20:20:25.525] Message sent to the Astronode --> 
+[2023-11-02 20:20:25.525] 18C972
+[2023-11-02 20:20:25.556] Message received from the Astronode <-- 
+[2023-11-02 20:20:25.556] 9893030000B831
+[2023-11-02 20:20:25.556] Next opportunity for communication with the Astrocast Network: 915s.
+[2023-11-02 20:21:25.378] Message sent to the Astronode --> 
+[2023-11-02 20:21:25.394] 172683
+[2023-11-02 20:21:25.410] Message received from the Astronode <-- 
+[2023-11-02 20:21:25.410] 974F7BFA0A999F
+[2023-11-02 20:21:25.426] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187727s.
+[2023-11-02 20:21:25.426] Message sent to the Astronode --> 
+[2023-11-02 20:21:25.426] 18C972
+[2023-11-02 20:21:25.457] Message received from the Astronode <-- 
+[2023-11-02 20:21:25.457] 9857030000ED48
+[2023-11-02 20:21:25.457] Next opportunity for communication with the Astrocast Network: 855s.
+[2023-11-02 20:22:25.273] Message sent to the Astronode --> 
+[2023-11-02 20:22:25.273] 172683
+[2023-11-02 20:22:25.304] Message received from the Astronode <-- 
+[2023-11-02 20:22:25.304] 978B7BFA0ACCE6
+[2023-11-02 20:22:25.304] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187787s.
+[2023-11-02 20:22:25.304] Message sent to the Astronode --> 
+[2023-11-02 20:22:25.321] 18C972
+[2023-11-02 20:22:25.336] Message received from the Astronode <-- 
+[2023-11-02 20:22:25.351] 981B0300004369
+[2023-11-02 20:22:25.351] Next opportunity for communication with the Astrocast Network: 795s.
+[2023-11-02 20:23:25.167] Message sent to the Astronode --> 
+[2023-11-02 20:23:25.167] 172683
+[2023-11-02 20:23:25.183] Message received from the Astronode <-- 
+[2023-11-02 20:23:25.199] 97C77BFA0A62C7
+[2023-11-02 20:23:25.199] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187847s.
+[2023-11-02 20:23:25.199] Message sent to the Astronode --> 
+[2023-11-02 20:23:25.199] 18C972
+[2023-11-02 20:23:25.231] Message received from the Astronode <-- 
+[2023-11-02 20:23:25.231] 98DF0200002627
+[2023-11-02 20:23:25.231] Next opportunity for communication with the Astrocast Network: 735s.
+[2023-11-02 20:24:25.063] Message sent to the Astronode --> 
+[2023-11-02 20:24:25.063] 172683
+[2023-11-02 20:24:25.093] Message received from the Astronode <-- 
+[2023-11-02 20:24:25.093] 97037CFA0AA73B
+[2023-11-02 20:24:25.093] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187907s.
+[2023-11-02 20:24:25.093] Message sent to the Astronode --> 
+[2023-11-02 20:24:25.108] 18C972
+[2023-11-02 20:24:25.129] Message received from the Astronode <-- 
+[2023-11-02 20:24:25.129] 98A3020000612A
+[2023-11-02 20:24:25.140] Next opportunity for communication with the Astrocast Network: 675s.
+[2023-11-02 20:25:24.964] Message sent to the Astronode --> 
+[2023-11-02 20:25:24.964] 172683
+[2023-11-02 20:25:24.974] Message received from the Astronode <-- 
+[2023-11-02 20:25:24.980] 973F7CFA0A7C58
+[2023-11-02 20:25:24.980] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184187967s.
+[2023-11-02 20:25:24.980] Message sent to the Astronode --> 
+[2023-11-02 20:25:24.980] 18C972
+[2023-11-02 20:25:25.011] Message received from the Astronode <-- 
+[2023-11-02 20:25:25.011] 9868020000DA87
+[2023-11-02 20:25:25.011] Next opportunity for communication with the Astrocast Network: 616s.
+[2023-11-02 20:26:24.821] Message sent to the Astronode --> 
+[2023-11-02 20:26:24.842] 172683
+[2023-11-02 20:26:24.853] Message received from the Astronode <-- 
+[2023-11-02 20:26:24.853] 977B7CFA0A11FC
+[2023-11-02 20:26:24.853] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188027s.
+[2023-11-02 20:26:24.869] Message sent to the Astronode --> 
+[2023-11-02 20:26:24.869] 18C972
+[2023-11-02 20:26:24.900] Message received from the Astronode <-- 
+[2023-11-02 20:26:24.900] 982C020000B723
+[2023-11-02 20:26:24.900] Next opportunity for communication with the Astrocast Network: 556s.
+[2023-11-02 20:27:24.727] Message sent to the Astronode --> 
+[2023-11-02 20:27:24.727] 172683
+[2023-11-02 20:27:24.727] Message received from the Astronode <-- 
+[2023-11-02 20:27:24.741] 97B77CFA0A8700
+[2023-11-02 20:27:24.743] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188087s.
+[2023-11-02 20:27:24.743] Message sent to the Astronode --> 
+[2023-11-02 20:27:24.743] 18C972
+[2023-11-02 20:27:24.775] Message received from the Astronode <-- 
+[2023-11-02 20:27:24.775] 98F0010000D69D
+[2023-11-02 20:27:24.775] Next opportunity for communication with the Astrocast Network: 496s.
+[2023-11-02 20:28:24.594] Message sent to the Astronode --> 
+[2023-11-02 20:28:24.608] 172683
+[2023-11-02 20:28:24.608] Message received from the Astronode <-- 
+[2023-11-02 20:28:24.624] 97F37CFA0AEAA4
+[2023-11-02 20:28:24.624] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188147s.
+[2023-11-02 20:28:24.624] Message sent to the Astronode --> 
+[2023-11-02 20:28:24.624] 18C972
+[2023-11-02 20:28:24.656] Message received from the Astronode <-- 
+[2023-11-02 20:28:24.656] 98B4010000BB39
+[2023-11-02 20:28:24.656] Next opportunity for communication with the Astrocast Network: 436s.
+[2023-11-02 20:29:24.475] Message sent to the Astronode --> 
+[2023-11-02 20:29:24.490] 172683
+[2023-11-02 20:29:24.506] Message received from the Astronode <-- 
+[2023-11-02 20:29:24.506] 972F7DFA0AEB74
+[2023-11-02 20:29:24.506] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188207s.
+[2023-11-02 20:29:24.506] Message sent to the Astronode --> 
+[2023-11-02 20:29:24.522] 18C972
+[2023-11-02 20:29:24.537] Message received from the Astronode <-- 
+[2023-11-02 20:29:24.553] 98780100002DC5
+[2023-11-02 20:29:24.553] Next opportunity for communication with the Astrocast Network: 376s.
+[2023-11-02 20:30:24.373] Message sent to the Astronode --> 
+[2023-11-02 20:30:24.386] 172683
+[2023-11-02 20:30:24.402] Message received from the Astronode <-- 
+[2023-11-02 20:30:24.402] 976A7DFA0A32A6
+[2023-11-02 20:30:24.402] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188266s.
+[2023-11-02 20:30:24.402] Message sent to the Astronode --> 
+[2023-11-02 20:30:24.417] 18C972
+[2023-11-02 20:30:24.433] Message received from the Astronode <-- 
+[2023-11-02 20:30:24.448] 983C0100004061
+[2023-11-02 20:30:24.450] Next opportunity for communication with the Astrocast Network: 316s.
+[2023-11-02 20:31:24.254] Message sent to the Astronode --> 
+[2023-11-02 20:31:24.277] 172683
+[2023-11-02 20:31:24.293] Message received from the Astronode <-- 
+[2023-11-02 20:31:24.293] 97A67DFA0AA45A
+[2023-11-02 20:31:24.302] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188326s.
+[2023-11-02 20:31:24.302] Message sent to the Astronode --> 
+[2023-11-02 20:31:24.302] 18C972
+[2023-11-02 20:31:24.333] Message received from the Astronode <-- 
+[2023-11-02 20:31:24.333] 98000100009B02
+[2023-11-02 20:31:24.333] Next opportunity for communication with the Astrocast Network: 256s.
+[2023-11-02 20:32:24.165] Message sent to the Astronode --> 
+[2023-11-02 20:32:24.178] 172683
+[2023-11-02 20:32:24.178] Message received from the Astronode <-- 
+[2023-11-02 20:32:24.194] 97E27DFA0AC9FE
+[2023-11-02 20:32:24.194] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188386s.
+[2023-11-02 20:32:24.194] Message sent to the Astronode --> 
+[2023-11-02 20:32:24.210] 18C972
+[2023-11-02 20:32:24.225] Message received from the Astronode <-- 
+[2023-11-02 20:32:24.225] 98C4000000FE4C
+[2023-11-02 20:32:24.241] Next opportunity for communication with the Astrocast Network: 196s.
+[2023-11-02 20:33:24.056] Message sent to the Astronode --> 
+[2023-11-02 20:33:24.069] 172683
+[2023-11-02 20:33:24.069] Message received from the Astronode <-- 
+[2023-11-02 20:33:24.085] 971E7EFA0AE677
+[2023-11-02 20:33:24.085] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188446s.
+[2023-11-02 20:33:24.085] Message sent to the Astronode --> 
+[2023-11-02 20:33:24.100] 18C972
+[2023-11-02 20:33:24.121] Message received from the Astronode <-- 
+[2023-11-02 20:33:24.121] 9888000000506D
+[2023-11-02 20:33:24.132] Next opportunity for communication with the Astrocast Network: 136s.
+[2023-11-02 20:34:23.944] Message sent to the Astronode --> 
+[2023-11-02 20:34:23.944] 172683
+[2023-11-02 20:34:23.960] Message received from the Astronode <-- 
+[2023-11-02 20:34:23.975] 975A7EFA0A8BD3
+[2023-11-02 20:34:23.975] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188506s.
+[2023-11-02 20:34:23.975] Message sent to the Astronode --> 
+[2023-11-02 20:34:23.991] 18C972
+[2023-11-02 20:34:24.007] Message received from the Astronode <-- 
+[2023-11-02 20:34:24.007] 984D000000B162
+[2023-11-02 20:34:24.007] Next opportunity for communication with the Astrocast Network: 77s.
+[2023-11-02 20:35:23.831] Message sent to the Astronode --> 
+[2023-11-02 20:35:23.831] 172683
+[2023-11-02 20:35:23.845] Message received from the Astronode <-- 
+[2023-11-02 20:35:23.861] 97967EFA0A1D2F
+[2023-11-02 20:35:23.861] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188566s.
+[2023-11-02 20:35:23.870] Message sent to the Astronode --> 
+[2023-11-02 20:35:23.877] 18C972
+[2023-11-02 20:35:23.893] Message received from the Astronode <-- 
+[2023-11-02 20:35:23.893] 9811000000B858
+[2023-11-02 20:35:23.908] Next opportunity for communication with the Astrocast Network: 17s.
+[2023-11-02 20:36:23.709] Message sent to the Astronode --> 
+[2023-11-02 20:36:23.719] 172683
+[2023-11-02 20:36:23.724] Message received from the Astronode <-- 
+[2023-11-02 20:36:23.740] 97D27EFA0A708B
+[2023-11-02 20:36:23.740] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188626s.
+[2023-11-02 20:36:23.753] Message sent to the Astronode --> 
+[2023-11-02 20:36:23.753] 18C972
+[2023-11-02 20:36:23.772] Message received from the Astronode <-- 
+[2023-11-02 20:36:23.772] 9800000000AB35
+[2023-11-02 20:36:23.787] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:37:23.596] Message sent to the Astronode --> 
+[2023-11-02 20:37:23.605] 172683
+[2023-11-02 20:37:23.613] Message received from the Astronode <-- 
+[2023-11-02 20:37:23.628] 970E7FFA0A715B
+[2023-11-02 20:37:23.628] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188686s.
+[2023-11-02 20:37:23.628] Message sent to the Astronode --> 
+[2023-11-02 20:37:23.628] 18C972
+[2023-11-02 20:37:23.660] Message received from the Astronode <-- 
+[2023-11-02 20:37:23.660] 9800000000AB35
+[2023-11-02 20:37:23.660] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:38:23.490] Message sent to the Astronode --> 
+[2023-11-02 20:38:23.490] 172683
+[2023-11-02 20:38:23.501] Message received from the Astronode <-- 
+[2023-11-02 20:38:23.501] 974A7FFA0A1CFF
+[2023-11-02 20:38:23.501] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188746s.
+[2023-11-02 20:38:23.517] Message sent to the Astronode --> 
+[2023-11-02 20:38:23.517] 18C972
+[2023-11-02 20:38:23.549] Message received from the Astronode <-- 
+[2023-11-02 20:38:23.549] 9800000000AB35
+[2023-11-02 20:38:23.549] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:39:23.365] Message sent to the Astronode --> 
+[2023-11-02 20:39:23.376] 172683
+[2023-11-02 20:39:23.389] Message received from the Astronode <-- 
+[2023-11-02 20:39:23.389] 97857FFA0A5698
+[2023-11-02 20:39:23.389] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188805s.
+[2023-11-02 20:39:23.404] Message sent to the Astronode --> 
+[2023-11-02 20:39:23.404] 18C972
+[2023-11-02 20:39:23.422] Message received from the Astronode <-- 
+[2023-11-02 20:39:23.436] 9800000000AB35
+[2023-11-02 20:39:23.436] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:40:23.252] Message sent to the Astronode --> 
+[2023-11-02 20:40:23.263] 172683
+[2023-11-02 20:40:23.267] Message received from the Astronode <-- 
+[2023-11-02 20:40:23.283] 97C17FFA0A3B3C
+[2023-11-02 20:40:23.283] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188865s.
+[2023-11-02 20:40:23.283] Message sent to the Astronode --> 
+[2023-11-02 20:40:23.298] 18C972
+[2023-11-02 20:40:23.314] Message received from the Astronode <-- 
+[2023-11-02 20:40:23.314] 9800000000AB35
+[2023-11-02 20:40:23.314] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:41:23.137] Message sent to the Astronode --> 
+[2023-11-02 20:41:23.148] 172683
+[2023-11-02 20:41:23.152] Message received from the Astronode <-- 
+[2023-11-02 20:41:23.167] 97FD7FFA0AE05F
+[2023-11-02 20:41:23.167] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188925s.
+[2023-11-02 20:41:23.167] Message sent to the Astronode --> 
+[2023-11-02 20:41:23.183] 18C972
+[2023-11-02 20:41:23.199] Message received from the Astronode <-- 
+[2023-11-02 20:41:23.208] 9800000000AB35
+[2023-11-02 20:41:23.215] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:42:23.026] Message sent to the Astronode --> 
+[2023-11-02 20:42:23.037] 172683
+[2023-11-02 20:42:23.042] Message received from the Astronode <-- 
+[2023-11-02 20:42:23.058] 973980FA0AD6E9
+[2023-11-02 20:42:23.058] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184188985s.
+[2023-11-02 20:42:23.058] Message sent to the Astronode --> 
+[2023-11-02 20:42:23.073] 18C972
+[2023-11-02 20:42:23.089] Message received from the Astronode <-- 
+[2023-11-02 20:42:23.089] 9800000000AB35
+[2023-11-02 20:42:23.089] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:43:22.918] Message sent to the Astronode --> 
+[2023-11-02 20:43:22.935] 172683
+[2023-11-02 20:43:22.935] Message received from the Astronode <-- 
+[2023-11-02 20:43:22.950] 977580FA0A78C8
+[2023-11-02 20:43:22.950] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184189045s.
+[2023-11-02 20:43:22.961] Message sent to the Astronode --> 
+[2023-11-02 20:43:22.966] 18C972
+[2023-11-02 20:43:22.982] Message received from the Astronode <-- 
+[2023-11-02 20:43:22.982] 9800000000AB35
+[2023-11-02 20:43:22.982] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:44:22.813] Message sent to the Astronode --> 
+[2023-11-02 20:44:22.825] 172683
+[2023-11-02 20:44:22.841] Message received from the Astronode <-- 
+[2023-11-02 20:44:22.841] 97B180FA0A2DB1
+[2023-11-02 20:44:22.841] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184189105s.
+[2023-11-02 20:44:22.857] Message sent to the Astronode --> 
+[2023-11-02 20:44:22.857] 18C972
+[2023-11-02 20:44:22.872] Message received from the Astronode <-- 
+[2023-11-02 20:44:22.888] 9800000000AB35
+[2023-11-02 20:44:22.888] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:45:22.705] Message sent to the Astronode --> 
+[2023-11-02 20:45:22.715] 172683
+[2023-11-02 20:45:22.730] Message received from the Astronode <-- 
+[2023-11-02 20:45:22.736] 97ED80FA0A248B
+[2023-11-02 20:45:22.736] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184189165s.
+[2023-11-02 20:45:22.736] Message sent to the Astronode --> 
+[2023-11-02 20:45:22.736] 18C972
+[2023-11-02 20:45:22.767] Message received from the Astronode <-- 
+[2023-11-02 20:45:22.767] 9800000000AB35
+[2023-11-02 20:45:22.767] Next opportunity for communication with the Astrocast Network: 0s.
+[2023-11-02 20:46:22.615] Message sent to the Astronode --> 
+[2023-11-02 20:46:22.615] 172683
+[2023-11-02 20:46:22.628] Message received from the Astronode <-- 
+[2023-11-02 20:46:22.628] 972981FA0A41C5
+[2023-11-02 20:46:22.628] RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): 184189225s.
+[2023-11-02 20:46:22.628] Message sent to the Astronode --> 
+[2023-11-02 20:46:22.644] 18C972
+[2023-11-02 20:46:22.659] Message received from the Astronode <-- 
+[2023-11-02 20:46:22.675] 9800000000AB35
+[2023-11-02 20:46:22.675] Next opportunity for communication with the Astrocast Network: 0s.
