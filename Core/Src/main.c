@@ -70,8 +70,9 @@ uint8_t		i_nmea = 0 ;
 char* 		nmea_gngsa_label = "GNGSA" ;
 char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
-char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
-char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
+char 		nmea_coordinates_s[24] ; // 10 + ew. znak minus + '\0'
+char 		nmea_latitude_s[12] ; // 10 + ew. znak minus + '\0'
+char 		nmea_longitude_s[12] ; // 10 + ew. znak minus + '\0'
 int32_t		astro_geo_wr_latitude ;
 int32_t		astro_geo_wr_longitude ;
 double		nmea_pdop_ths = 5.1 ;
@@ -88,6 +89,7 @@ uint32_t	agg_tim_seconds = 0 ;
 uint32_t	print_housekeeping_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
 uint32_t 	astro_message_timer = 60000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
+char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 
 // Flags
 bool 		seek_fix_loop_flag = false ;
@@ -179,8 +181,10 @@ int main(void)
 
 
   my_lx6_on () ;
-  nmea_latitude[0] = 0 ;
-  nmea_longitude[0] = 0 ;
+  astro_geo_wr_latitude = 0 ;
+  astro_geo_wr_longitude = 0 ;
+  nmea_latitude_s[0] = 0 ;
+  nmea_longitude_s[0] = 0 ;
   gngll_message[0] = 0 ;
   nmea_fixed_pdop_d = 1000.0 ;
   received_nmea_rmc_flag = false ;
@@ -211,8 +215,7 @@ int main(void)
 				  {
 					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 					  {
-						  get_my_nmea_gngll_coordinates ( (char*) nmea_message , nmea_latitude , nmea_longitude , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
-						  //get_my_nmea_gngll_coordinates_d ( (char*) nmea_message , &nmea_latitude_d , &nmea_longitude_d ) ; // Ten wariant jest na potrzeby funkcji Astro GEO_WR
+						  get_my_nmea_gngll_coordinates ( (char*) nmea_message , nmea_latitude_s , nmea_longitude_s , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
 					  }
 					  else
 					  {
@@ -229,7 +232,7 @@ int main(void)
 	  }
 	  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 	  {
-		  if ( nmea_latitude[0] != 0 )
+		  if ( nmea_latitude_s[0] != 0 )
 		  {
 			  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
 			  {
@@ -242,15 +245,16 @@ int main(void)
 	  }
   }
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
-  if ( nmea_latitude[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
+  if ( nmea_latitude_s[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
   {
-	  get_my_nmea_gngll_coordinates ( (char*) gngll_message , nmea_latitude , nmea_longitude , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ;
+	  get_my_nmea_gngll_coordinates ( (char*) gngll_message , nmea_latitude_s , nmea_longitude_s , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ;
   }
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
   astronode_send_geo_wr ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-  char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
-  sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
+  sprintf ( payload , "%.1f,%d,%lu" , nmea_fixed_pdop_d , tim_seconds , agg_tim_seconds ) ;
+  sprintf ( nmea_coordinates_s , "%s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
+  send_debug_logs ( payload ) ;
   send_debug_logs ( payload ) ;
   if ( strlen ( payload ) <= ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES )
   {

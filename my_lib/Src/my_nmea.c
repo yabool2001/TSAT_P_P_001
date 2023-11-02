@@ -78,32 +78,7 @@ double nmea2decimal ( const char *coord , char dir )
     else
     	return deg + min ;
 }
-double nmea2double ( const char *coord , char dir )
-{
-    double deg ;
-    sscanf ( coord , "%lf" , &deg ) ;
-    deg = round ( deg * 1e6 ) / 1e6 ;
-    if ( dir == 'S' || dir == 'W' )
-    	return deg * -1 ;
-    else
-    	return deg ;
-}
-/*
-double nmea2decimal ( const char *coord , char dir )
-{
-    double deg , min ;
-    sscanf ( coord , "%lf" , &deg ) ;
-    min = deg / 100 ;
-    deg = (int) min ;
-    min = ( min - deg ) / 0.6 ;
-    double c = deg + min ;
-    if ( dir == 'S' || dir == 'W' )
-    	c = c * -1 ;
-    return c ;
-    //double c = ( deg + min / 0.6 ) * ( ( dir == 'S' || dir == 'W' ) ? -1 : 1 ) ;
-    //return ( deg + min / 0.6 ) * ( ( dir == 'S' || dir == 'W' ) ? -1 : 1 ) ;
-}
-*/
+
 void get_my_nmea_gngll_coordinates ( const char* m , char* latitude_s , char* longitude_s , int32_t* latitude_astro_geo_wr , int32_t* longitude_astro_geo_wr )
 {
 	char direction ;
@@ -124,7 +99,6 @@ void get_my_nmea_gngll_coordinates ( const char* m , char* latitude_s , char* lo
 
 	//Longitude part
 	coordinate_position = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2) + 1 ;
-	//coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 1 ) - coordinate_position ;
 	coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2 + 1 ) - coordinate_position ;
 
 	char* longitude_s_temp = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
@@ -136,33 +110,6 @@ void get_my_nmea_gngll_coordinates ( const char* m , char* latitude_s , char* lo
 	longitude_d = round ( longitude_d * 1e6 ) / 1e6 ;
 	snprintf ( longitude_s , 12 , "%.6lf" , longitude_d ) ;
 	*longitude_astro_geo_wr = (int32_t) ( longitude_d * 10000000 ) ;
-}
-void get_my_nmea_gngll_coordinates_d ( const char* m , double* latitude_d , double* longitude_d )
-{
-	char direction ;
-
-	//Latitude part
-	uint8_t coordinate_position = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION ) + 1 ;
-	uint8_t coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 1 ) - coordinate_position ;
-
-	char* s = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
-	strncpy ( s , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
-	s[coordinate_length] = '\0';
-	direction = m[coordinate_position + coordinate_length + 1] ;
-	*latitude_d = nmea2double ( s , direction ) ;
-	free ( s ) ;
-
-
-	//Longitude part
-	coordinate_position = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2) + 1 ;
-	coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2 + 1 ) - coordinate_position ;
-
-	s = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
-	strncpy ( s , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
-	s[coordinate_length] = '\0';
-	direction = m[coordinate_position + coordinate_length + 1] ;
-	*longitude_d = nmea2double ( s , direction ) ;
-	free ( s ) ;
 }
 
 void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
