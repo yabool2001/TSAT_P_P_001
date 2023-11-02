@@ -246,7 +246,7 @@ void astronode_send_cfg_sr(void)
     }
 }
 
-void astronode_send_cfg_wr(bool payload_acknowledgment,
+bool astronode_send_cfg_wr(bool payload_acknowledgment,
                             bool add_geolocation,
                             bool enable_ephemeris,
                             bool deep_sleep_mode,
@@ -277,12 +277,14 @@ void astronode_send_cfg_wr(bool payload_acknowledgment,
         if (answer.op_code == ASTRONODE_OP_CODE_CFG_WA)
         {
             send_debug_logs("Astronode configuration successfully set.");
+            return true ;
         }
         else
         {
             send_debug_logs("Failed to set the Astronode configuration.");
         }
     }
+    return false ;
 }
 
 void astronode_send_ctx_sr(void)

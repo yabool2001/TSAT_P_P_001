@@ -70,7 +70,7 @@ uint8_t		i_nmea = 0 ;
 char* 		nmea_gngsa_label = "GNGSA" ;
 char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
-char 		nmea_coordinates_s[24] ; // 10 + ew. znak minus + '\0'
+char 		nmea_coordinates_log[52] ; // Nagłowek + 12 + ew. znak minus + '\0'
 char 		nmea_latitude_s[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude_s[12] ; // 10 + ew. znak minus + '\0'
 int32_t		astro_geo_wr_latitude ;
@@ -90,7 +90,7 @@ uint32_t	print_housekeeping_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
 uint32_t 	astro_message_timer = 60000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
-
+char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
 // Flags
 bool 		seek_fix_loop_flag = false ;
 bool		received_nmea_rmc_flag = false ;
@@ -151,34 +151,19 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
-  my_astro_off () ;
-  HAL_Delay ( 1000 ) ; // TO JEST KONIECZNE! Chodzi o to, żeby po restarcie przed wgraniem firmware nie rozpoczęła siękomunikacja z Astro, co potem zawiesza komunikację z Astro się nie zawieszała po ponownym restarcie po wgraniu nowego firmware
-  my_astro_on () ;
-  reset_astronode () ;
-  print_housekeeping_timer = get_systick () ;
-  astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
+  do {
+	  my_astro_off () ;
+	  HAL_Delay ( 3000 ) ; // Chodzi o to, żeby po restarcie przed wgraniem firmware nie rozpoczęła siękomunikacja z Astro, co potem zawiesza komunikację z Astro się nie zawieszała po ponownym restarcie po wgraniu nowego firmware
+	  my_astro_on () ;
+	  reset_astronode () ;
+	  print_housekeeping_timer = get_systick () ;
+  } while ( !astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ) ;
   astronode_send_cfg_sr () ;
   astronode_send_mpn_rr () ;
   astronode_send_msn_rr () ;
   astronode_send_mgi_rr () ;
-  /*
-  if ( is_evt_pin_high() )
-  {
-	  astro_manage_evt () ;
-  }
-  if ( is_evt_pin_high() )
-  {
-	  astro_manage_evt () ;
-  }
-  if ( is_evt_pin_high() )
-  {
-	  astro_manage_evt () ;
-  }
-  */
+  astronode_send_pld_fr () ;
   //my_astro_off () ;
-
-
-
 
   my_lx6_on () ;
   astro_geo_wr_latitude = 0 ;
@@ -253,9 +238,10 @@ int main(void)
   send_debug_logs ( rtc_dt ) ;
   astronode_send_geo_wr ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   sprintf ( payload , "%.1f,%d,%lu" , nmea_fixed_pdop_d , tim_seconds , agg_tim_seconds ) ;
-  sprintf ( nmea_coordinates_s , "%s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
-  send_debug_logs ( payload ) ;
-  send_debug_logs ( payload ) ;
+  sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
+  sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
+  send_debug_logs ( astro_payload_log ) ;
+  send_debug_logs ( nmea_coordinates_log ) ;
   if ( strlen ( payload ) <= ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES )
   {
 	  g_payload_id_counter++ ;

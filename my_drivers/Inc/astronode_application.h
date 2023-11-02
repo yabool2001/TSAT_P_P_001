@@ -41,7 +41,7 @@ void astronode_send_cfg_rr(void);
 
 void astronode_send_cfg_sr(void);
 
-void astronode_send_cfg_wr( bool payload_acknowledgment,
+bool astronode_send_cfg_wr( bool payload_acknowledgment,
                             bool add_geolocation,
                             bool enable_ephemeris,
                             bool deep_sleep_mode,
