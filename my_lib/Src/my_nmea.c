@@ -104,7 +104,7 @@ double nmea2decimal ( const char *coord , char dir )
     //return ( deg + min / 0.6 ) * ( ( dir == 'S' || dir == 'W' ) ? -1 : 1 ) ;
 }
 */
-void get_my_nmea_gngll_coordinates_s ( const char* m , char* latitude , char* longitude )
+void get_my_nmea_gngll_coordinates ( const char* m , char* latitude_s , char* longitude_s , int32_t* latitude_astro_geo_wr , int32_t* longitude_astro_geo_wr )
 {
 	char direction ;
 
@@ -112,28 +112,30 @@ void get_my_nmea_gngll_coordinates_s ( const char* m , char* latitude , char* lo
 	uint8_t coordinate_position = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION ) + 1 ;
 	uint8_t coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 1 ) - coordinate_position ;
 
-	char* latitude_s = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
-	strncpy ( latitude_s , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
-	latitude_s[coordinate_length] = '\0';
+	char* latitude_s_temp = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
+	strncpy ( latitude_s_temp , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
+	latitude_s_temp[coordinate_length] = '\0';
 	direction = m[coordinate_position + coordinate_length + 1] ;
-	double latitude_d = nmea2decimal ( latitude_s , direction ) ;
-	free ( latitude_s ) ;
+	double latitude_d = nmea2decimal ( latitude_s_temp , direction ) ;
+	free ( latitude_s_temp ) ;
 	latitude_d = round ( latitude_d * 1e6 ) / 1e6 ;
-	snprintf ( latitude , 12 , "%.6lf" , latitude_d ) ;
+	snprintf ( latitude_s , 12 , "%.6lf" , latitude_d ) ;
+	*latitude_astro_geo_wr = (int32_t) ( latitude_d * 10000000 ) ;
 
 	//Longitude part
 	coordinate_position = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2) + 1 ;
 	//coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 1 ) - coordinate_position ;
 	coordinate_length = my_find_char_position ( m , NMEA_DELIMETER , GLL_LATITUDE_POSITION + 2 + 1 ) - coordinate_position ;
 
-	char* longitude_s = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
-	strncpy ( longitude_s , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
-	longitude_s[coordinate_length] = '\0';
+	char* longitude_s_temp = (char*) malloc ( ( coordinate_length +1 ) * sizeof ( char ) ) ;
+	strncpy ( longitude_s_temp , m + coordinate_position , coordinate_length ) ; // Kopiowanie fragmentu łańcucha
+	longitude_s_temp[coordinate_length] = '\0';
 	direction = m[coordinate_position + coordinate_length + 1] ;
-	double longitude_d = nmea2decimal ( longitude_s , direction ) ;
-	free ( longitude_s ) ;
+	double longitude_d = nmea2decimal ( longitude_s_temp , direction ) ;
+	free ( longitude_s_temp ) ;
 	longitude_d = round ( longitude_d * 1e6 ) / 1e6 ;
-	snprintf ( longitude , 12 , "%.6lf" , longitude_d ) ;
+	snprintf ( longitude_s , 12 , "%.6lf" , longitude_d ) ;
+	*longitude_astro_geo_wr = (int32_t) ( longitude_d * 10000000 ) ;
 }
 void get_my_nmea_gngll_coordinates_d ( const char* m , double* latitude_d , double* longitude_d )
 {
