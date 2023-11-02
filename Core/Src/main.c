@@ -72,9 +72,11 @@ char* 		nmea_gngll_label = "GNGLL" ;
 char* 		nmea_rmc_label = "RMC" ;
 char 		nmea_latitude[12] ; // 10 + ew. znak minus + '\0'
 char 		nmea_longitude[12] ; // 10 + ew. znak minus + '\0'
+double 		nmea_latitude_d ;
+double 		nmea_longitude_d ;
 double		nmea_pdop_ths = 5.1 ;
 uint16_t	nmea_max_rmc_time = 60 ;
-uint16_t	nmea_max_active_time = 240 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+uint16_t	nmea_max_active_time = 480 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
 
@@ -85,7 +87,7 @@ uint32_t	agg_tim_seconds = 0 ;
 // Astrocast
 uint32_t	print_housekeeping_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
-uint32_t 	astro_message_timer = 900000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
+uint32_t 	astro_message_timer = 60000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
 
 // Flags
 bool 		seek_fix_loop_flag = false ;
@@ -210,6 +212,7 @@ int main(void)
 					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
 					  {
 						  get_my_nmea_gngll_coordinates_s ( (char*) nmea_message , nmea_latitude , nmea_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
+						  get_my_nmea_gngll_coordinates_d ( (char*) nmea_message , &nmea_latitude_d , &nmea_longitude_d ) ; // Ten wariant jest na potrzeby funkcji Astro GEO_WR
 					  }
 					  else
 					  {
@@ -245,6 +248,7 @@ int main(void)
   }
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
+  astronode_send_geo_wr ( nmea_latitude_d , nmea_longitude_d ) ;
   char payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0};
   sprintf ( payload , "%.1f,%s,%s,%d,%lu" , nmea_fixed_pdop_d , nmea_latitude , nmea_longitude , tim_seconds , agg_tim_seconds ) ;
   send_debug_logs ( payload ) ;
@@ -284,7 +288,7 @@ int main(void)
 	  }
 	  if ( get_systick () - print_housekeeping_timer >  astro_message_timer )
 	  {
-		  //astronode_send_rtc_rr ();
+		  astronode_send_rtc_rr ();
 		  astronode_send_nco_rr () ;
 		  //astronode_send_lcd_rr () ;
 		  //astronode_send_end_rr () ;
