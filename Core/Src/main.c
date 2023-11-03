@@ -37,6 +37,7 @@
 #define NMEA_3D_FIX						'3'
 #define NMEA_MESSAGE_SIZE				250
 #define TIM_SECONDS_THS_SYSTEM_RESET	3600
+#define ASTRO_MESSAGE_TIMER				60000
 
 /* USER CODE END PD */
 
@@ -84,9 +85,8 @@ uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co nmea_max_active_time
 uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
-uint32_t	astro_log_timer = 0 ;
+uint32_t	astro_log_loop_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
-uint32_t 	astro_message_timer = 60000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
 // Flags
@@ -237,17 +237,17 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  astro_log_timer = get_systick () ;
+  astro_log_loop_timer = get_systick () ;
   while (1)
   {
 	  if ( is_evt_pin_high() )
 	  {
 		  my_astro_read_evt_reg () ;
 	  }
-	  if ( get_systick () - astro_log_timer >  astro_message_timer )
+	  if ( get_systick () - astro_log_loop_timer >  ASTRO_MESSAGE_TIMER )
 	  {
 		  my_astro_log ();
-		  astro_log_timer = get_systick () ;
+		  astro_log_loop_timer = get_systick () ;
 		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
 	  }
 
