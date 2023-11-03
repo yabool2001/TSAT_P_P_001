@@ -217,7 +217,6 @@ int main(void)
 		  }
 	  }
   }
-  tim_seconds = 0 ;
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
   my_lx6_off () ;
   if ( nmea_latitude_s[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
