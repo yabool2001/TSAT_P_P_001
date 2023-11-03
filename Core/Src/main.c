@@ -23,10 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "my_rtc.h"
-#include "my_nmea.h"
-#include "astronode_definitions.h"
-#include "astronode_application.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -150,6 +147,12 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
+  if ( !my_astro_init () )
+  {
+	  HAL_NVIC_SystemReset () ;
+  }
+
+  /* przeniesione do my_astronode.c
   __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
   do {
 	  my_astro_off () ;
@@ -163,6 +166,7 @@ int main(void)
   astronode_send_msn_rr () ;
   astronode_send_mgi_rr () ;
   astronode_send_pld_fr () ;
+  */
   //my_astro_off () ;
 
   my_lx6_on () ;
@@ -179,7 +183,7 @@ int main(void)
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
@@ -236,7 +240,7 @@ int main(void)
   }
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
-  astronode_send_geo_wr ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
+  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   sprintf ( payload , "%.1f,%d,%lu" , nmea_fixed_pdop_d , tim_seconds , agg_tim_seconds ) ;
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
   sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;

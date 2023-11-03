@@ -35,6 +35,11 @@ extern "C" {
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+
+#include "my_rtc.h"
+#include "my_nmea.h"
+#include "astronode_definitions.h"
+#include "astronode_application.h"
 #include "my_astronode.h"
 /* USER CODE END Includes */
 
@@ -71,6 +76,7 @@ void my_astro_on ( void ) ;
 void my_astro_off ( void ) ;
 void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

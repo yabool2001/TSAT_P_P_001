@@ -1,0 +1,2 @@
+../my_drivers/Src/my_astronode.c:9:6:my_astro_init	4
+../my_drivers/Src/my_astronode.c:38:6:my_astro_write_coordinates	1
