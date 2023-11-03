@@ -33,9 +33,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define UART_TIMEOUT 			1000
-#define NMEA_3D_FIX				'3'
-#define NMEA_MESSAGE_SIZE		250
+#define UART_TIMEOUT 					1000
+#define NMEA_3D_FIX						'3'
+#define NMEA_MESSAGE_SIZE				250
+#define TIM_SECONDS_THS_SYSTEM_RESET	3600
 
 /* USER CODE END PD */
 
@@ -83,7 +84,7 @@ uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co nmea_max_active_time
 uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
-uint32_t	print_housekeeping_timer = 0 ;
+uint32_t	astro_log_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
 uint32_t 	astro_message_timer = 60000  /* 5 min.  900000  15 min.  60000  1 min. */ ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
@@ -152,23 +153,6 @@ int main(void)
 	  HAL_NVIC_SystemReset () ;
   }
 
-  /* przeniesione do my_astronode.c
-  __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
-  do {
-	  my_astro_off () ;
-	  HAL_Delay ( 3000 ) ; // Chodzi o to, żeby po restarcie przed wgraniem firmware nie rozpoczęła siękomunikacja z Astro, co potem zawiesza komunikację z Astro się nie zawieszała po ponownym restarcie po wgraniu nowego firmware
-	  my_astro_on () ;
-	  reset_astronode () ;
-	  print_housekeeping_timer = get_systick () ;
-  } while ( !astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ) ;
-  astronode_send_cfg_sr () ;
-  astronode_send_mpn_rr () ;
-  astronode_send_msn_rr () ;
-  astronode_send_mgi_rr () ;
-  astronode_send_pld_fr () ;
-  */
-  //my_astro_off () ;
-
   my_lx6_on () ;
   astro_geo_wr_latitude = 0 ;
   astro_geo_wr_longitude = 0 ;
@@ -233,6 +217,7 @@ int main(void)
 		  }
 	  }
   }
+  tim_seconds = 0 ;
   HAL_TIM_Base_Stop_IT ( &htim6 ) ;
   if ( nmea_latitude_s[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
   {
@@ -240,60 +225,29 @@ int main(void)
   }
   get_my_rtc_time ( rtc_dt ) ;
   send_debug_logs ( rtc_dt ) ;
-  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   sprintf ( payload , "%.1f,%d,%lu" , nmea_fixed_pdop_d , tim_seconds , agg_tim_seconds ) ;
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
   sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
+  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   send_debug_logs ( astro_payload_log ) ;
   send_debug_logs ( nmea_coordinates_log ) ;
-  if ( strlen ( payload ) <= ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES )
-  {
-	  g_payload_id_counter++ ;
-	  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
-  }
-  else
-  {
-	  send_debug_logs ( "ERROR: Payload exceeded ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES value." ) ;
-  }
+  my_astro_add_payload_2_queue ( payload ) ;
   //HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  print_housekeeping_timer = get_systick () ;
+  astro_log_timer = get_systick () ;
   while (1)
   {
 	  if ( is_evt_pin_high() )
 	  {
-		  send_debug_logs ( "Evt pin is high." ) ;
-		  astronode_send_evt_rr () ;
-		  if (is_sak_available () )
-		  {
-			  astronode_send_sak_rr () ;
-			  astronode_send_sak_cr () ;
-			  send_debug_logs ( "Message has been acknowledged." ) ;
-			  //astronode_send_per_rr () ;
-		  }
-		  if ( is_astronode_reset () )
-		  {
-			  send_debug_logs ( "Terminal has been reset." ) ;
-			  astronode_send_res_cr () ;
-		  }
-		  if ( is_command_available () )
-		  {
-			  send_debug_logs ( "Unicast command is available" ) ;
-			  astronode_send_cmd_rr () ;
-			  astronode_send_cmd_cr () ;
-		  }
+		  my_astro_read_evt_reg () ;
 	  }
-	  if ( get_systick () - print_housekeeping_timer >  astro_message_timer )
+	  if ( get_systick () - astro_log_timer >  astro_message_timer )
 	  {
-		  astronode_send_rtc_rr ();
-		  astronode_send_nco_rr () ;
-		  //astronode_send_lcd_rr () ;
-		  //astronode_send_end_rr () ;
-		  //astronode_send_per_rr () ;
-		  print_housekeeping_timer = get_systick () ;
+		  my_astro_log ();
+		  astro_log_timer = get_systick () ;
 		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
 	  }
 
@@ -801,6 +755,10 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 	if ( htim->Instance == TIM6 )
 	{
 		tim_seconds++ ;
+		if ( tim_seconds > TIM_SECONDS_THS_SYSTEM_RESET )
+		  {
+			  HAL_NVIC_SystemReset () ;
+		  }
 	}
 }
 

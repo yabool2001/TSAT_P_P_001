@@ -64,7 +64,7 @@ void astronode_send_geo_wr(int32_t latitude, int32_t longitude);
 
 void astronode_send_pld_dr(void);
 
-void astronode_send_pld_er(uint16_t payload_id, char *p_payload, uint16_t payload_length);
+bool astronode_send_pld_er(uint16_t payload_id, char *p_payload, uint16_t payload_length);
 
 void astronode_send_pld_fr(void);
 

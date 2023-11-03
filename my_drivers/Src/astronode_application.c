@@ -467,7 +467,7 @@ void astronode_send_pld_dr(void)
     }
 }
 
-void astronode_send_pld_er(uint16_t payload_id, char *p_payload, uint16_t payload_length)
+bool astronode_send_pld_er ( uint16_t payload_id , char *p_payload , uint16_t payload_length )
 {
     astronode_app_msg_t request = {0};
     astronode_app_msg_t answer = {0};
@@ -485,12 +485,14 @@ void astronode_send_pld_er(uint16_t payload_id, char *p_payload, uint16_t payloa
         if (answer.op_code == ASTRONODE_OP_CODE_PLD_EA)
         {
             send_debug_logs("Payload was successfully queued.");
+            return true ;
         }
         else
         {
             send_debug_logs("Payload failed to be queued.");
         }
     }
+    return false ;
 }
 
 void astronode_send_pld_fr(void)
