@@ -4802,6 +4802,7 @@ int main(void)
  80025f6:	001a      	movs	r2, r3
  80025f8:	4b4a      	ldr	r3, [pc, #296]	; (8002724 <main+0x17c>)
  80025fa:	701a      	strb	r2, [r3, #0]
+
   if ( !my_astro_init () )
  80025fc:	f006 f8d0 	bl	80087a0 <my_astro_init>
  8002600:	0003      	movs	r3, r0
@@ -4879,6 +4880,7 @@ int main(void)
  8002680:	f008 f9cc 	bl	800aa1c <snprintf>
 	  }
   }
+
   agg_tim_seconds = agg_tim_seconds + tim_seconds  ;
  8002684:	4b31      	ldr	r3, [pc, #196]	; (800274c <main+0x1a4>)
  8002686:	881b      	ldrh	r3, [r3, #0]
@@ -5340,9 +5342,9 @@ static void MX_RTC_Init(void)
  8002944:	187b      	adds	r3, r7, r1
  8002946:	2201      	movs	r2, #1
  8002948:	709a      	strb	r2, [r3, #2]
-  sDate.Year = 0x20;
+  sDate.Year = 0x0;
  800294a:	187b      	adds	r3, r7, r1
- 800294c:	2220      	movs	r2, #32
+ 800294c:	2200      	movs	r2, #0
  800294e:	70da      	strb	r2, [r3, #3]
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)

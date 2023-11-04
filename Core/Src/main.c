@@ -139,6 +139,7 @@ int main(void)
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
 
   is_system_already_initialized = is_system_initialized () ;
+
   if ( !my_astro_init () )
   {
 	  HAL_NVIC_SystemReset () ;
@@ -156,6 +157,7 @@ int main(void)
 		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
 	  }
   }
+
   agg_tim_seconds = agg_tim_seconds + tim_seconds  ;
   sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_seconds ) ;
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
@@ -328,10 +330,10 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-  sDate.WeekDay = RTC_WEEKDAY_WEDNESDAY;
+  sDate.WeekDay = RTC_WEEKDAY_SATURDAY;
   sDate.Month = RTC_MONTH_JANUARY;
   sDate.Date = 0x1;
-  sDate.Year = 0x20;
+  sDate.Year = 0x0;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {

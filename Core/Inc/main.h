@@ -134,7 +134,7 @@ bool is_system_initialized ( void ) ;
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
-#define GNSS_MAX_ACTIVE_TIME			10
+#define GNSS_MAX_ACTIVE_TIME			60 // Więcej nie ma sensu, bo to oznacza, że nie będzie jak wysłać do satelite Astrocast
 #define NMEA_FIX_PDOP_STRING_BUFF_SIZE	5
 /* USER CODE END Private defines */
 
