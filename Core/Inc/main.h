@@ -41,6 +41,7 @@ extern "C" {
 #include "astronode_definitions.h"
 #include "astronode_application.h"
 #include "my_astronode.h"
+#include "my_lx6_gnss.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -126,7 +127,8 @@ void my_lx6_off ( void ) ;
 /* USER CODE BEGIN Private defines */
 #define HUART_ASTRO						&huart1
 #define HUART_DBG						&huart2
-#define HUART_Lx6						&huart3
+//#define HUART_Lx6						&huart3
+#define UART_TIMEOUT 					1000
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100

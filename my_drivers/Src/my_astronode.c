@@ -10,7 +10,7 @@ bool my_astro_init ( void )
 {
 	bool cfg_wr = false ;
 	tim_seconds = 0 ;
-	HAL_TIM_Base_Start_IT ( &htim6 ) ;
+	HAL_TIM_Base_Start_IT ( MY_TIMER ) ;
 	while ( tim_seconds < MY_ASTRO_INIT_TIME && !cfg_wr )
 	{
 		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
@@ -20,7 +20,7 @@ bool my_astro_init ( void )
 		reset_astronode () ;
 	}
 	tim_seconds = 0 ;
-	HAL_TIM_Base_Stop_IT ( &htim6 ) ;
+	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
 	if ( cfg_wr )
 	{
 		astronode_send_cfg_sr () ;
@@ -54,23 +54,23 @@ bool my_astro_add_payload_2_queue ( char* payload )
 }
 bool my_astro_read_evt_reg ( void )
 {
-	send_debug_logs ( "Evt pin is high." ) ;
+	send_debug_logs ( "my_astro: evt pin is high." ) ;
 	astronode_send_evt_rr () ;
 	if (is_sak_available () )
 	{
 	  astronode_send_sak_rr () ;
 	  astronode_send_sak_cr () ;
-	  send_debug_logs ( "Message has been acknowledged." ) ;
+	  send_debug_logs ( "my_astro: message has been acknowledged." ) ;
 	  //astronode_send_per_rr () ;
 	}
 	if ( is_astronode_reset () )
 	{
-	  send_debug_logs ( "Terminal has been reset." ) ;
+	  send_debug_logs ( "my_astro: terminal has been reset." ) ;
 	  astronode_send_res_cr () ;
 	}
 	if ( is_command_available () )
 	{
-	  send_debug_logs ( "Unicast command is available" ) ;
+	  send_debug_logs ( "my_astro: unicast command is available" ) ;
 	  astronode_send_cmd_rr () ;
 	  astronode_send_cmd_cr () ;
 	}

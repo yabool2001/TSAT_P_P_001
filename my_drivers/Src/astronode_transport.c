@@ -23,7 +23,6 @@
                                                 4 + \
                                                 1)
 
-
 //------------------------------------------------------------------------------
 // Global variable definitions
 //------------------------------------------------------------------------------
@@ -310,7 +309,6 @@ static return_status_t receive_astronode_answer(uint8_t *p_rx_buffer, uint16_t *
             }
         }
     }
-
     send_debug_logs("Message received from the Astronode <-- ");
     send_debug_logs((char *) p_rx_buffer);
 

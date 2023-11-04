@@ -479,17 +479,19 @@ bool astronode_send_pld_er ( uint16_t payload_id , char *p_payload , uint16_t pa
 
     memcpy(&request.p_payload[request.payload_len], p_payload, payload_length);
     request.payload_len = 2 + payload_length;
-
-    if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
+    char s[ASTRONODE_UART_DEBUG_BUFFER_LENGTH] ;
+    if ( astronode_transport_send_receive ( &request , &answer ) == RS_SUCCESS )
     {
         if (answer.op_code == ASTRONODE_OP_CODE_PLD_EA)
         {
-            send_debug_logs("Payload was successfully queued.");
+        	sprintf ( s , "Astro payload %d queued." , payload_id ) ;
+            send_debug_logs ( s ) ;
             return true ;
         }
         else
         {
-            send_debug_logs("Payload failed to be queued.");
+            sprintf ( s , "Astro payload %d not queued." , payload_id ) ;
+            send_debug_logs ( s ) ;
         }
     }
     return false ;

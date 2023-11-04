@@ -33,11 +33,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define UART_TIMEOUT 					1000
 #define NMEA_3D_FIX						'3'
 #define NMEA_MESSAGE_SIZE				250
-#define TIM_SECONDS_THS_SYSTEM_RESET	3600
-#define ASTRO_MESSAGE_TIMER				60000
+#define TIM_SECONDS_THS_SYSTEM_RESET	900
+#define ASTRO_LOG_TIMER					60000
 
 /* USER CODE END PD */
 
@@ -76,12 +75,12 @@ int32_t		astro_geo_wr_latitude ;
 int32_t		astro_geo_wr_longitude ;
 double		nmea_pdop_ths = 5.1 ;
 uint16_t	nmea_max_rmc_time = 60 ;
-uint16_t	nmea_max_active_time = 480 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+uint16_t	my_lx6_gnss_max_active_time = 480 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 char		nmea_fixed_mode_s ;
 double 		nmea_fixed_pdop_d = 1000.0 ;
 
 // TIM
-uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co nmea_max_active_time
+uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_max_active_time
 uint32_t	agg_tim_seconds = 0 ;
 
 // Astrocast
@@ -163,11 +162,11 @@ int main(void)
   received_nmea_rmc_flag = false ;
   tim_seconds = 0 ;
   HAL_TIM_Base_Start_IT ( &htim6 ) ;
-  while ( tim_seconds < nmea_max_active_time ) // 1200 = 10 min.
+  while ( tim_seconds < my_lx6_gnss_max_active_time ) // 1200 = 10 min.
   {
 	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
 	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-	  //HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
+	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
 	  if ( rxd_byte )
 	  {
 		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
@@ -244,7 +243,7 @@ int main(void)
 	  {
 		  my_astro_read_evt_reg () ;
 	  }
-	  if ( get_systick () - astro_log_loop_timer >  ASTRO_MESSAGE_TIMER )
+	  if ( get_systick () - astro_log_loop_timer >  ASTRO_LOG_TIMER )
 	  {
 		  my_astro_log ();
 		  astro_log_loop_timer = get_systick () ;
