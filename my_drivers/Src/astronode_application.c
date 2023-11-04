@@ -484,13 +484,13 @@ bool astronode_send_pld_er ( uint16_t payload_id , char *p_payload , uint16_t pa
     {
         if (answer.op_code == ASTRONODE_OP_CODE_PLD_EA)
         {
-        	sprintf ( s , "Astro payload %d queued." , payload_id ) ;
+        	sprintf ( s , "astronode_application: payload %d queued." , payload_id ) ;
             send_debug_logs ( s ) ;
             return true ;
         }
         else
         {
-            sprintf ( s , "Astro payload %d not queued." , payload_id ) ;
+            sprintf ( s , "astronode_application: payload %d not queued." , payload_id ) ;
             send_debug_logs ( s ) ;
         }
     }
@@ -508,11 +508,11 @@ void astronode_send_pld_fr(void)
     {
         if (answer.op_code == ASTRONODE_OP_CODE_PLD_FA)
         {
-            send_debug_logs("Entire payload queue has been cleared.");
+            send_debug_logs("astronode_application: payload queue has been cleared.");
         }
         else
         {
-            send_debug_logs("Failed to clear the payload queue.");
+            send_debug_logs("astronode_application: Failed to clear the payload queue.");
         }
     }
 }
@@ -529,11 +529,11 @@ void astronode_send_res_cr(void)
         if (answer.op_code == ASTRONODE_OP_CODE_RES_CA)
         {
             g_is_astronode_reset = false;
-            send_debug_logs("The reset has been cleared.");
+            send_debug_logs("astronode_application: The reset has been cleared.");
         }
         else
         {
-            send_debug_logs("No reset to clear.");
+            send_debug_logs("astronode_application: No reset to clear.");
         }
     }
 }
@@ -582,7 +582,7 @@ void astronode_send_sak_rr(void)
         }
         else
         {
-            send_debug_logs("No acknowledgment available.");
+            send_debug_logs("astronode_application: No acknowledgment available.");
         }
     }
 }
