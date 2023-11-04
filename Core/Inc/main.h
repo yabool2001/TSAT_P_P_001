@@ -77,6 +77,7 @@ void my_astro_on ( void ) ;
 void my_astro_off ( void ) ;
 void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
+bool is_system_initialized ( void ) ;
 
 /* USER CODE END EFP */
 
@@ -125,6 +126,7 @@ void my_lx6_off ( void ) ;
 #define L86_TXD_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
+#define FIRMWARE_RELEASE_YEAR			2023
 #define HUART_ASTRO						&huart1
 #define HUART_DBG						&huart2
 //#define HUART_Lx6						&huart3
@@ -132,6 +134,8 @@ void my_lx6_off ( void ) ;
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
+#define GNSS_MAX_ACTIVE_TIME			60
+#define NMEA_FIX_PDOP_STRING_BUFF_SIZE	5
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

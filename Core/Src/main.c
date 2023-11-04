@@ -57,27 +57,17 @@ UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
-char* 		hello = "Hello TSAT_P_P_001\n" ;
+char* 		hello = "\nHello TSAT_P_P_001\n\n" ;
 char		rtc_dt[20] ;
 
 // Lx6
-uint8_t		rxd_byte = 0 ;
-uint8_t		nmea_message[NMEA_MESSAGE_SIZE] ;
-uint8_t		gngll_message[NMEA_MESSAGE_SIZE] ;
-uint8_t		i_nmea = 0 ;
-char* 		nmea_gngsa_label = "GNGSA" ;
-char* 		nmea_gngll_label = "GNGLL" ;
-char* 		nmea_rmc_label = "RMC" ;
-char 		nmea_coordinates_log[52] ; // Nagłowek + 12 + ew. znak minus + '\0'
-char 		nmea_latitude_s[12] ; // 10 + ew. znak minus + '\0'
-char 		nmea_longitude_s[12] ; // 10 + ew. znak minus + '\0'
 int32_t		astro_geo_wr_latitude ;
 int32_t		astro_geo_wr_longitude ;
 double		nmea_pdop_ths = 5.1 ;
 uint16_t	nmea_max_rmc_time = 60 ;
-uint16_t	my_lx6_gnss_max_active_time = 480 ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
-char		nmea_fixed_mode_s ;
-double 		nmea_fixed_pdop_d = 1000.0 ;
+uint16_t	my_lx6_gnss_max_active_time = GNSS_MAX_ACTIVE_TIME ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+double 		nmea_fixed_pdop_d = 0.677777 ;
+char 		nmea_fixed_pdop_s[NMEA_FIX_PDOP_STRING_BUFF_SIZE] = {0} ; // 4 znaki wartości i kropka XX.X + '\0'
 
 // TIM
 uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_max_active_time
@@ -88,9 +78,9 @@ uint32_t	astro_log_loop_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
+
 // Flags
-bool 		seek_fix_loop_flag = false ;
-bool		received_nmea_rmc_flag = false ;
+bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -147,89 +137,29 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
+
+  is_system_already_initialized = is_system_initialized () ;
   if ( !my_astro_init () )
   {
 	  HAL_NVIC_SystemReset () ;
   }
 
-  my_lx6_on () ;
   astro_geo_wr_latitude = 0 ;
   astro_geo_wr_longitude = 0 ;
-  nmea_latitude_s[0] = 0 ;
-  nmea_longitude_s[0] = 0 ;
-  gngll_message[0] = 0 ;
-  nmea_fixed_pdop_d = 1000.0 ;
-  received_nmea_rmc_flag = false ;
-  tim_seconds = 0 ;
-  HAL_TIM_Base_Start_IT ( &htim6 ) ;
-  while ( tim_seconds < my_lx6_gnss_max_active_time ) // 1200 = 10 min.
+  if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
   {
-	  HAL_UART_Receive ( HUART_Lx6 , &rxd_byte , 1 , UART_TIMEOUT ) ;
-	  //HAL_UART_Receive ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Receive nmea from DBG "sim_nmea_uart" python script
-	  HAL_UART_Transmit ( HUART_DBG , &rxd_byte , 1 , UART_TIMEOUT ) ; // Transmit all nmea to DBG
-	  if ( rxd_byte )
+	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
+	  get_my_rtc_time ( rtc_dt ) ;
+	  send_debug_logs ( rtc_dt ) ;
+	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
-		  if ( my_nmea_message ( &rxd_byte , nmea_message , &i_nmea ) == 2 )
-		  {
-			  if ( is_my_nmea_checksum_ok ( (char*) nmea_message ) )
-			  {
-				  if ( strstr ( (char*) nmea_message , nmea_rmc_label ) && !received_nmea_rmc_flag )
-				  {
-					  set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ;
-					  received_nmea_rmc_flag = true ;
-				  }
-				  if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
-				  {
-					  nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
-					  nmea_fixed_pdop_d = get_my_nmea_gngsa_pdop_d ( (char*) nmea_message ) ;
-				  }
-				  if ( strstr ( (char*) nmea_message , nmea_gngll_label ) /*&& nmea_fixed_pdop_d <= nmea_pdop_ths */)
-				  {
-					  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
-					  {
-						  get_my_nmea_gngll_coordinates ( (char*) nmea_message , nmea_latitude_s , nmea_longitude_s , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
-					  }
-					  else
-					  {
-						  memcpy ( gngll_message , nmea_message , NMEA_MESSAGE_SIZE ) ; // Zapisuję, żeby potem, jak nie osiągnę jakości nmea_pdop_ths to wykorzystać coordinates do payload
-					  }
-				  }
-			  }
-		  }
-	  }
-	  rxd_byte = 0 ;
-	  if ( tim_seconds > nmea_max_rmc_time && !received_nmea_rmc_flag )
-	  {
-		  break ;
-	  }
-	  if ( nmea_fixed_pdop_d <= nmea_pdop_ths )
-	  {
-		  if ( nmea_latitude_s[0] != 0 )
-		  {
-			  if ( nmea_fixed_mode_s == NMEA_3D_FIX )
-			  {
-				  if ( received_nmea_rmc_flag )
-				  {
-					  break ;
-				  }
-			  }
-		  }
+		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
 	  }
   }
-  HAL_TIM_Base_Stop_IT ( &htim6 ) ;
-  my_lx6_off () ;
-  if ( nmea_latitude_s[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
-  {
-	  get_my_nmea_gngll_coordinates ( (char*) gngll_message , nmea_latitude_s , nmea_longitude_s , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) ;
-  }
-  get_my_rtc_time ( rtc_dt ) ;
-  send_debug_logs ( rtc_dt ) ;
-  sprintf ( payload , "%.1f,%d,%lu" , nmea_fixed_pdop_d , tim_seconds , agg_tim_seconds ) ;
+  agg_tim_seconds = agg_tim_seconds + tim_seconds  ;
+  sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_seconds ) ;
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
-  sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
-  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
   send_debug_logs ( astro_payload_log ) ;
-  send_debug_logs ( nmea_coordinates_log ) ;
   my_astro_add_payload_2_queue ( payload ) ;
   //HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
   /* USER CODE END 2 */
@@ -398,10 +328,10 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-  sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+  sDate.WeekDay = RTC_WEEKDAY_SATURDAY;
   sDate.Month = RTC_MONTH_JANUARY;
   sDate.Date = 0x1;
-  sDate.Year = 0x24;
+  sDate.Year = 0x20;
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {
@@ -747,6 +677,19 @@ void my_lx6_off ( void )
 	HAL_GPIO_WritePin ( GPIOC , L86_PWR_SW_Pin , GPIO_PIN_RESET ) ;
 	HAL_GPIO_WritePin ( GPIOC , L86_RST_Pin , GPIO_PIN_RESET ) ;
 	HAL_UART_DeInit ( HUART_Lx6 ) ;
+}
+
+bool is_system_initialized ( void )
+{
+	uint16_t yyyy ;
+
+	yyyy = get_my_rtc_time ( rtc_dt ) ;
+	send_debug_logs ( rtc_dt ) ;
+	if ( yyyy >= FIRMWARE_RELEASE_YEAR )
+	{
+		return true ;
+	}
+	return false ;
 }
 
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
