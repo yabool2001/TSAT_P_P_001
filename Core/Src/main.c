@@ -551,27 +551,30 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, L86_RST_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, L86_RST_Pin|L86_PWR_SW_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
-                          |ASTRO_WAKEUP_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RST_Pin|ASTRO_WAKEUP_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : L86_RST_Pin ASTRO_RST_Pin L86_PWR_SW_Pin */
-  GPIO_InitStruct.Pin = L86_RST_Pin|ASTRO_RST_Pin|L86_PWR_SW_Pin;
+  /*Configure GPIO pins : L86_RST_Pin L86_PWR_SW_Pin */
+  GPIO_InitStruct.Pin = L86_RST_Pin|L86_PWR_SW_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LDG_Pin ASTRO_PWR_SW_Pin ASTRO_RSTA11_Pin ASTRO_EVENT_Pin
-                           ASTRO_WAKEUP_Pin */
-  GPIO_InitStruct.Pin = LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RSTA11_Pin|ASTRO_EVENT_Pin
-                          |ASTRO_WAKEUP_Pin;
+  /*Configure GPIO pins : LDG_Pin ASTRO_PWR_SW_Pin ASTRO_RST_Pin ASTRO_WAKEUP_Pin */
+  GPIO_InitStruct.Pin = LDG_Pin|ASTRO_PWR_SW_Pin|ASTRO_RST_Pin|ASTRO_WAKEUP_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : ASTRO_EVT_Pin */
+  GPIO_InitStruct.Pin = ASTRO_EVT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(ASTRO_EVT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LIS_INT1_EXTI8_Pin LIS_INT2_EXTI9_Pin */
   GPIO_InitStruct.Pin = LIS_INT1_EXTI8_Pin|LIS_INT2_EXTI9_Pin;
@@ -617,7 +620,7 @@ bool is_astronode_character_received ( uint8_t* p_rx_char )
 }
 bool is_evt_pin_high ( void )
 {
-	return ( HAL_GPIO_ReadPin ( GPIOA , ASTRO_EVENT_Pin ) == GPIO_PIN_SET ? true : false);
+	return ( HAL_GPIO_ReadPin ( GPIOA , ASTRO_EVT_Pin ) == GPIO_PIN_SET ? true : false);
 }
 void astro_manage_evt ( void )
 {
@@ -660,13 +663,20 @@ void my_ldg_off ( void )
 }
 void my_astro_on ( void )
 {
-	HAL_GPIO_WritePin ( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
+	HAL_UART_DeInit		( HUART_ASTRO ) ;
+	HAL_GPIO_WritePin 	( ASTRO_WAKEUP_GPIO_Port , ASTRO_WAKEUP_Pin , GPIO_PIN_RESET ) ;
+	HAL_GPIO_WritePin 	( ASTRO_RST_GPIO_Port , ASTRO_RST_Pin , GPIO_PIN_RESET ) ;
+	HAL_GPIO_WritePin	( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
+	HAL_Delay 			( 1 ) ;
 	MX_USART1_UART_Init () ;
 }
 void my_astro_off ( void )
 {
-	HAL_GPIO_WritePin ( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_RESET ) ;
-	HAL_UART_DeInit ( HUART_ASTRO ) ;
+	HAL_UART_DeInit		( HUART_ASTRO ) ;
+	HAL_GPIO_WritePin 	( ASTRO_WAKEUP_GPIO_Port , ASTRO_WAKEUP_Pin , GPIO_PIN_RESET ) ;
+	HAL_GPIO_WritePin 	( ASTRO_RST_GPIO_Port , ASTRO_RST_Pin , GPIO_PIN_RESET ) ;
+	HAL_Delay 			( 1 ) ;
+	HAL_GPIO_WritePin 	( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_RESET ) ;
 }
 void my_lx6_on ( void )
 {

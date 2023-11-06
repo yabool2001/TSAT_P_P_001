@@ -10,6 +10,7 @@ bool my_astro_init ( void )
 {
 	bool cfg_wr = false ;
 	tim_seconds = 0 ;
+
 	HAL_TIM_Base_Start_IT ( MY_TIMER ) ;
 	while ( tim_seconds < MY_ASTRO_INIT_TIME && !cfg_wr )
 	{
