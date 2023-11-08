@@ -71,7 +71,8 @@ char 		nmea_fixed_pdop_s[NMEA_FIX_PDOP_STRING_BUFF_SIZE] = {0} ; // 4 znaki wart
 
 // TIM
 uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_max_active_time
-uint32_t	agg_tim_seconds = 0 ;
+uint32_t	agg_tim_gnss_seconds = 0 ;
+uint32_t	agg_tim_satcom_seconds = 0 ;
 
 // Astrocast
 uint32_t	astro_log_loop_timer = 0 ;
@@ -158,8 +159,8 @@ int main(void)
 	  }
   }
 
-  agg_tim_seconds = agg_tim_seconds + tim_seconds  ;
-  sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_seconds ) ;
+  agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
+  sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
   send_debug_logs ( astro_payload_log ) ;
   my_astro_add_payload_2_queue ( payload ) ;

@@ -15,6 +15,7 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 	bool 		received_nmea_rmc_flag = false ;
 	uint8_t		nmea_message[NMEA_MESSAGE_SIZE] = {0} ;
 	uint8_t		gngll_message[NMEA_MESSAGE_SIZE] = {0} ;
+	uint8_t		rmc_message[NMEA_MESSAGE_SIZE] = {0} ;
 	uint8_t		i_nmea = 0 ;
 	char 		nmea_latitude_s[MY_GNSS_NMEA_MAX_SIZE] = {0} ; // 10 + ew. znak minus + '\0'
 	char 		nmea_longitude_s[MY_GNSS_NMEA_MAX_SIZE] = {0} ; // 10 + ew. znak minus + '\0'
@@ -42,6 +43,13 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 						set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ;
 						received_nmea_rmc_flag = true ;
 					}
+					/*
+					if ( strstr ( (char*) nmea_message , nmea_rmc_label ) && !received_nmea_rmc_flag )
+					{
+						set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ;
+						received_nmea_rmc_flag = true ;
+					}
+					*/
 					if ( strstr ( (char*) nmea_message , nmea_gngsa_label ) )
 					{
 						nmea_fixed_mode_s = get_my_nmea_gngsa_fixed_mode_s ( (char*) nmea_message ) ;
