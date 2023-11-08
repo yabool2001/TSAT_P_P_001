@@ -111,6 +111,17 @@ void get_my_nmea_gngll_coordinates ( const char* m , char* latitude_s , char* lo
 	snprintf ( longitude_s , 12 , "%.6lf" , longitude_d ) ;
 	*longitude_astro_geo_wr = (int32_t) ( longitude_d * 10000000 ) ;
 }
+uint16_t my_nmea_get_gsv_tns ( const char* m ) //tns = Total Number Satelites
+{
+	uint16_t tns = 0 ;
+	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , GSV_TNS_POSITION ) + 1 ;
+	char* s = (char*) malloc ( ( GSV_TNS_LENGTH +1 ) * sizeof ( uint8_t ) ) ;
+	strncpy ( s , m + position , GSV_TNS_LENGTH ) ; // Kopiowanie fragmentu łańcucha
+	s[GSV_TNS_LENGTH] = '\0';
+	sscanf ( s , "%hu" , &tns ) ;
+	free ( s ) ;
+	return tns ;
+}
 
 void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
 {

@@ -23,6 +23,8 @@
 #define RMC_UTC_SSS_LENGTH		3
 #define GSA_PDOP_POSITION		15
 #define GLL_LATITUDE_POSITION	1
+#define GSV_TNS_POSITION		3
+#define GSV_TNS_LENGTH			2
 
 #include <stdint.h>
 #include <string.h>
@@ -41,6 +43,7 @@ const char	get_my_nmea_gngsa_fixed_mode_s ( const char* ) ;
 double		get_my_nmea_gngsa_pdop_d ( const char* ) ;
 double 		nmea2decimal ( const char* , char ) ;
 void		get_my_nmea_gngll_coordinates ( const char* , char* , char* , int32_t* , int32_t* ) ;
+uint16_t	my_nmea_get_gsv_tns ( const char* ) ;
 void		get_my_nmea_rmc_date_yy	( const char* , uint8_t* ) ;
 void		get_my_nmea_rmc_date_mm	( const char* , uint8_t* ) ;
 void		get_my_nmea_rmc_date_dd	( const char* , uint8_t* ) ;

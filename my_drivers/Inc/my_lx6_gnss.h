@@ -12,13 +12,17 @@
 #include "main.h"
 #include "my_nmea.h"
 
-#define HUART_DBG				&huart2
-#define HUART_Lx6				&huart3
-#define MY_TIMER				&htim6
-#define NMEA_3D_FIX				'3'
-#define NMEA_MESSAGE_SIZE		250
-#define MY_GNSS_RMC_TIME_THS	10
-#define MY_GNSS_NMEA_MAX_SIZE	12 // 10 + ew. znak minus + '\0'
+#define HUART_DBG						&huart2
+#define HUART_Lx6						&huart3
+#define MY_TIMER						&htim6
+#define NMEA_3D_FIX						'3'
+#define NMEA_MESSAGE_SIZE				250
+#define MY_GNSS_NMEA_MAX_SIZE			12 // 10 + ew. znak minus + '\0'
+#define MY_GNSS_MIN_TNS					3 // Minimalna ilość satelitów
+#define MY_GNSS_MIN_TNS_TIME_THS		5 // Czas w jakim powinno być co najmniej MY_GNSS_NMEA_GSV_MIN_TNS satelitów
+#define GNSS_MAX_ACTIVE_TIME			60 // Więcej niż 60 s nie ma sensu, bo to oznacza, że nie będzie jak wysłać do satelite Astrocast
+#define NMEA_FIX_PDOP_STRING_BUFF_SIZE	5
+
 
 extern RTC_HandleTypeDef hrtc;
 
