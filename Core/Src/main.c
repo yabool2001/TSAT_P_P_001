@@ -66,7 +66,7 @@ int32_t		astro_geo_wr_longitude ;
 double		nmea_pdop_ths = 5.1 ;
 uint16_t	nmea_max_rmc_time = 60 ;
 uint16_t	my_lx6_gnss_max_active_time = GNSS_MAX_ACTIVE_TIME ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
-double 		nmea_fixed_pdop_d = 0.677777 ;
+double 		nmea_fixed_pdop_d = 101 ;
 char 		nmea_fixed_pdop_s[NMEA_FIX_PDOP_STRING_BUFF_SIZE] = {0} ; // 4 znaki wartości i kropka XX.X + '\0'
 
 // TIM
