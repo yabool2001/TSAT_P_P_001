@@ -145,6 +145,7 @@ static int32_t	platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
 #define LIS2DW12						&hspi1
+#define LIS2DW12_ID						0x44U// LIS2DW12 Device Identification (Who am I)
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

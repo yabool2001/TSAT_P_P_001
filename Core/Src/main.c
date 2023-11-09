@@ -149,6 +149,10 @@ int main(void)
   lis2dw12_ctx.read_reg = platform_read ;
   lis2dw12_ctx.handle = LIS2DW12 ;
   lis2dw12_device_id_get ( &lis2dw12_ctx , &lis2dw12_whoami_reg ) ;
+  if ( lis2dw12_whoami_reg == LIS2DW12_ID )
+  {
+	  send_debug_logs ( lis2dw12_whoami_reg ) ;
+  }
 
   if ( !my_astro_init () )
   {
@@ -344,7 +348,7 @@ static void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
