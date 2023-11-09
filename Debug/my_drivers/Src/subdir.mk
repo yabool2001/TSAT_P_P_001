@@ -7,21 +7,27 @@
 C_SRCS += \
 ../my_drivers/Src/astronode_application.c \
 ../my_drivers/Src/astronode_transport.c \
+../my_drivers/Src/lis2dw12_reg.c \
 ../my_drivers/Src/my_astronode.c \
+../my_drivers/Src/my_lis2dw12.c \
 ../my_drivers/Src/my_lx6_gnss.c \
 ../my_drivers/Src/my_rtc.c 
 
 OBJS += \
 ./my_drivers/Src/astronode_application.o \
 ./my_drivers/Src/astronode_transport.o \
+./my_drivers/Src/lis2dw12_reg.o \
 ./my_drivers/Src/my_astronode.o \
+./my_drivers/Src/my_lis2dw12.o \
 ./my_drivers/Src/my_lx6_gnss.o \
 ./my_drivers/Src/my_rtc.o 
 
 C_DEPS += \
 ./my_drivers/Src/astronode_application.d \
 ./my_drivers/Src/astronode_transport.d \
+./my_drivers/Src/lis2dw12_reg.d \
 ./my_drivers/Src/my_astronode.d \
+./my_drivers/Src/my_lis2dw12.d \
 ./my_drivers/Src/my_lx6_gnss.d \
 ./my_drivers/Src/my_rtc.d 
 
@@ -33,7 +39,7 @@ my_drivers/Src/%.o my_drivers/Src/%.su my_drivers/Src/%.cyclo: ../my_drivers/Src
 clean: clean-my_drivers-2f-Src
 
 clean-my_drivers-2f-Src:
-	-$(RM) ./my_drivers/Src/astronode_application.cyclo ./my_drivers/Src/astronode_application.d ./my_drivers/Src/astronode_application.o ./my_drivers/Src/astronode_application.su ./my_drivers/Src/astronode_transport.cyclo ./my_drivers/Src/astronode_transport.d ./my_drivers/Src/astronode_transport.o ./my_drivers/Src/astronode_transport.su ./my_drivers/Src/my_astronode.cyclo ./my_drivers/Src/my_astronode.d ./my_drivers/Src/my_astronode.o ./my_drivers/Src/my_astronode.su ./my_drivers/Src/my_lx6_gnss.cyclo ./my_drivers/Src/my_lx6_gnss.d ./my_drivers/Src/my_lx6_gnss.o ./my_drivers/Src/my_lx6_gnss.su ./my_drivers/Src/my_rtc.cyclo ./my_drivers/Src/my_rtc.d ./my_drivers/Src/my_rtc.o ./my_drivers/Src/my_rtc.su
+	-$(RM) ./my_drivers/Src/astronode_application.cyclo ./my_drivers/Src/astronode_application.d ./my_drivers/Src/astronode_application.o ./my_drivers/Src/astronode_application.su ./my_drivers/Src/astronode_transport.cyclo ./my_drivers/Src/astronode_transport.d ./my_drivers/Src/astronode_transport.o ./my_drivers/Src/astronode_transport.su ./my_drivers/Src/lis2dw12_reg.cyclo ./my_drivers/Src/lis2dw12_reg.d ./my_drivers/Src/lis2dw12_reg.o ./my_drivers/Src/lis2dw12_reg.su ./my_drivers/Src/my_astronode.cyclo ./my_drivers/Src/my_astronode.d ./my_drivers/Src/my_astronode.o ./my_drivers/Src/my_astronode.su ./my_drivers/Src/my_lis2dw12.cyclo ./my_drivers/Src/my_lis2dw12.d ./my_drivers/Src/my_lis2dw12.o ./my_drivers/Src/my_lis2dw12.su ./my_drivers/Src/my_lx6_gnss.cyclo ./my_drivers/Src/my_lx6_gnss.d ./my_drivers/Src/my_lx6_gnss.o ./my_drivers/Src/my_lx6_gnss.su ./my_drivers/Src/my_rtc.cyclo ./my_drivers/Src/my_rtc.d ./my_drivers/Src/my_rtc.o ./my_drivers/Src/my_rtc.su
 
 .PHONY: clean-my_drivers-2f-Src
 

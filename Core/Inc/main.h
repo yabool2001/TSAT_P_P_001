@@ -15,6 +15,10 @@
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
+  * Devices:
+  * ACC: ST LIS2DW12
+  * SATCOM: ASTROCAST S+
+  * GNSS: L86
   */
 /* USER CODE END Header */
 
@@ -42,6 +46,8 @@ extern "C" {
 #include "astronode_application.h"
 #include "my_astronode.h"
 #include "my_lx6_gnss.h"
+#include "lis2dw12_reg.h"
+#include "my_lis2dw12.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -78,6 +84,8 @@ void my_astro_off ( void ) ;
 void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
 bool is_system_initialized ( void ) ;
+static int32_t	platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;
+static int32_t	platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
 
 /* USER CODE END EFP */
 
@@ -96,6 +104,8 @@ bool is_system_initialized ( void ) ;
 #define LDG_GPIO_Port GPIOA
 #define ASTRO_PWR_SW_Pin GPIO_PIN_6
 #define ASTRO_PWR_SW_GPIO_Port GPIOA
+#define LIS_SPI1_CS_Pin GPIO_PIN_14
+#define LIS_SPI1_CS_GPIO_Port GPIOB
 #define ASTRO_TXD_Pin GPIO_PIN_9
 #define ASTRO_TXD_GPIO_Port GPIOA
 #define ASTRO_RXD_Pin GPIO_PIN_10
@@ -112,10 +122,12 @@ bool is_system_initialized ( void ) ;
 #define ASTRO_WAKEUP_GPIO_Port GPIOA
 #define L86_PWR_SW_Pin GPIO_PIN_8
 #define L86_PWR_SW_GPIO_Port GPIOC
-#define LIS_SCL_Pin GPIO_PIN_6
-#define LIS_SCL_GPIO_Port GPIOB
-#define LIS_SDA_Pin GPIO_PIN_7
-#define LIS_SDA_GPIO_Port GPIOB
+#define LIS_SPI1_SCK_Pin GPIO_PIN_3
+#define LIS_SPI1_SCK_GPIO_Port GPIOB
+#define LIS_SPI1_MISO_Pin GPIO_PIN_4
+#define LIS_SPI1_MISO_GPIO_Port GPIOB
+#define LIS_SPI1_MOSI_Pin GPIO_PIN_5
+#define LIS_SPI1_MOSI_GPIO_Port GPIOB
 #define LIS_INT1_EXTI8_Pin GPIO_PIN_8
 #define LIS_INT1_EXTI8_GPIO_Port GPIOB
 #define LIS_INT2_EXTI9_Pin GPIO_PIN_9
@@ -132,6 +144,7 @@ bool is_system_initialized ( void ) ;
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
+#define LIS2DW12						&hspi1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
