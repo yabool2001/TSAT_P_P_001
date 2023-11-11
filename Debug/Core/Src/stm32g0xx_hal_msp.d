@@ -42,8 +42,8 @@ Core/Src/stm32g0xx_hal_msp.o: ../Core/Src/stm32g0xx_hal_msp.c \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lx6_gnss.h \
- C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/lis2dw12_reg.h \
- C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lis2dw12.h
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lis2dw12.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/lis2dw12_reg.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Core/Inc/stm32g0xx_hal_conf.h:
@@ -88,5 +88,5 @@ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_application.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_definitions.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lx6_gnss.h:
-C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/lis2dw12_reg.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lis2dw12.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/lis2dw12_reg.h:

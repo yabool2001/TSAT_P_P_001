@@ -80,9 +80,6 @@ uint16_t	g_payload_id_counter = 0 ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
 
-//ACC
-static stmdev_ctx_t lis2dw12_ctx ;
-uint8_t lis2dw12_whoami_reg = 0 ;
 
 // Flags
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
@@ -145,14 +142,7 @@ int main(void)
 
   is_system_already_initialized = is_system_initialized () ;
 
-  lis2dw12_ctx.write_reg = platform_write ;
-  lis2dw12_ctx.read_reg = platform_read ;
-  lis2dw12_ctx.handle = LIS2DW12 ;
-  lis2dw12_device_id_get ( &lis2dw12_ctx , &lis2dw12_whoami_reg ) ;
-  if ( lis2dw12_whoami_reg == LIS2DW12_ID )
-  {
-	  send_debug_logs ( lis2dw12_whoami_reg ) ;
-  }
+  my_lis2dw12_init ( &hspi1 ) ;
 
   if ( !my_astro_init () )
   {
@@ -720,28 +710,6 @@ bool is_system_initialized ( void )
 	return false ;
 }
 
-static int32_t platform_write ( void *handle , uint8_t reg , const uint8_t *bufp , uint16_t len )
-{
-	HAL_GPIO_WritePin	( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_RESET ) ;
-	HAL_Delay ( 20 ) ;
-	HAL_SPI_Transmit	( handle , &reg , 1 , 1000 ) ;
-	HAL_SPI_Transmit	( handle , (uint8_t*) bufp , len , 1000 ) ;
-	HAL_GPIO_WritePin	( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_SET) ;
-
-	return 0;
-}
-static int32_t platform_read ( void *handle , uint8_t reg , uint8_t *bufp , uint16_t len )
-{
-	reg |= 0x80;
-	HAL_GPIO_WritePin ( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_RESET) ;
-	HAL_Delay ( 20 ) ;
-	HAL_SPI_Transmit ( handle , &reg , 1 , 1000 ) ;
-	HAL_SPI_Receive ( handle , bufp , len , 1000 ) ;
-	HAL_GPIO_WritePin ( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_SET) ;
-
-	return 0;
-}
-
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 {
 	if ( htim->Instance == TIM6 )
@@ -752,6 +720,13 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 			  HAL_NVIC_SystemReset () ;
 		  }
 	}
+}
+
+void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
+{
+	char buff[50] = {0} ;
+	sprintf ( buff , "INT on GPIO_Pin %d detected!\n" , GPIO_Pin ) ;
+	send_debug_logs ( buff ) ;
 }
 
 /* USER CODE END 4 */
