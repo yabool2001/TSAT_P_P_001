@@ -82,6 +82,8 @@ void my_astro_on ( void ) ;
 void my_astro_off ( void ) ;
 void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
+int32_t	my_lis2dw12_platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;
+int32_t	my_lis2dw12_platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
 bool is_system_initialized ( void ) ;
 
 
@@ -128,8 +130,10 @@ bool is_system_initialized ( void ) ;
 #define LIS_SPI1_MOSI_GPIO_Port GPIOB
 #define LIS_INT1_EXTI8_Pin GPIO_PIN_8
 #define LIS_INT1_EXTI8_GPIO_Port GPIOB
+#define LIS_INT1_EXTI8_EXTI_IRQn EXTI4_15_IRQn
 #define LIS_INT2_EXTI9_Pin GPIO_PIN_9
 #define LIS_INT2_EXTI9_GPIO_Port GPIOB
+#define LIS_INT2_EXTI9_EXTI_IRQn EXTI4_15_IRQn
 #define L86_TXD_Pin GPIO_PIN_10
 #define L86_TXD_GPIO_Port GPIOC
 
@@ -142,6 +146,7 @@ bool is_system_initialized ( void ) ;
 #define UART_TX_MAX_BUFF_SIZE			250
 #define UART_TX_TIMEOUT					100
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
+#define HSPI1							&hspi1
 
 /* USER CODE END Private defines */
 

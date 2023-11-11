@@ -36,7 +36,7 @@
 #define NMEA_3D_FIX						'3'
 #define NMEA_MESSAGE_SIZE				250
 #define TIM_SECONDS_THS_SYSTEM_RESET	900
-#define ASTRO_LOG_TIMER					60000
+#define ASTRO_LOG_TIMER					5000
 
 /* USER CODE END PD */
 
@@ -58,6 +58,7 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 char* 		hello = "\nHello TSAT_P_P_001\n\n" ;
+char		dbg_buff[100] ;
 char		rtc_dt[20] ;
 
 // Lx6
@@ -79,6 +80,9 @@ uint32_t	astro_log_loop_timer = 0 ;
 uint16_t	g_payload_id_counter = 0 ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
+
+// ACC
+stmdev_ctx_t my_lis2dw12_ctx ;
 
 
 // Flags
@@ -142,13 +146,12 @@ int main(void)
 
   is_system_already_initialized = is_system_initialized () ;
 
-  my_lis2dw12_init ( &hspi1 ) ;
-
+  // ASTRO INIT
   if ( !my_astro_init () )
   {
 	  HAL_NVIC_SystemReset () ;
   }
-
+  // GNSS INIT AND ACQ
   astro_geo_wr_latitude = 0 ;
   astro_geo_wr_longitude = 0 ;
   if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
@@ -167,7 +170,17 @@ int main(void)
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
   send_debug_logs ( astro_payload_log ) ;
   my_astro_add_payload_2_queue ( payload ) ;
-  //HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
+
+  // ACC INIT
+  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
+  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
+  my_lis2dw12_ctx.handle = HSPI1 ;
+  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
+  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+  HAL_ResumeTick () ;
+  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -185,6 +198,10 @@ int main(void)
 		  astro_log_loop_timer = get_systick () ;
 		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
 	  }
+	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
+	  //dbg_buff[0] = 0 ;
+	  //sprintf ( dbg_buff , "INT status on LIS_INT1_EXTI8_Pin: %d!\n" , HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ) ;
+	  //send_debug_logs ( dbg_buff ) ;
 
     /* USER CODE END WHILE */
 
@@ -588,6 +605,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -696,7 +717,27 @@ void my_lx6_off ( void )
 	HAL_GPIO_WritePin ( GPIOC , L86_RST_Pin , GPIO_PIN_RESET ) ;
 	HAL_UART_DeInit ( HUART_Lx6 ) ;
 }
+int32_t my_lis2dw12_platform_write ( void *handle , uint8_t reg , const uint8_t *bufp , uint16_t len )
+{
+	HAL_GPIO_WritePin	( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_RESET ) ;
+	HAL_Delay ( 20 ) ;
+	HAL_SPI_Transmit	( handle , &reg , 1 , 1000 ) ;
+	HAL_SPI_Transmit	( handle , (uint8_t*) bufp , len , 1000 ) ;
+	HAL_GPIO_WritePin	( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_SET) ;
 
+	return 0;
+}
+int32_t my_lis2dw12_platform_read ( void *handle , uint8_t reg , uint8_t *bufp , uint16_t len )
+{
+	reg |= 0x80;
+	HAL_GPIO_WritePin ( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_RESET) ;
+	HAL_Delay ( 20 ) ;
+	HAL_SPI_Transmit ( handle , &reg , 1 , 1000 ) ;
+	HAL_SPI_Receive ( handle , bufp , len , 1000 ) ;
+	HAL_GPIO_WritePin ( LIS_SPI1_CS_GPIO_Port , LIS_SPI1_CS_Pin , GPIO_PIN_SET) ;
+
+	return 0;
+}
 bool is_system_initialized ( void )
 {
 	uint16_t yyyy ;
@@ -722,11 +763,11 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 	}
 }
 
-void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
+void HAL_GPIO_EXTI_Rising_Callback ( uint16_t GPIO_Pin )
 {
-	char buff[50] = {0} ;
-	sprintf ( buff , "INT on GPIO_Pin %d detected!\n" , GPIO_Pin ) ;
-	send_debug_logs ( buff ) ;
+	dbg_buff[0] = 0 ;
+	sprintf ( dbg_buff , "INT on GPIO_Pin %04x detected!\n" , GPIO_Pin ) ;
+	send_debug_logs ( dbg_buff ) ;
 }
 
 /* USER CODE END 4 */
