@@ -5,10 +5,10 @@
 ../my_lib/Src/my_nmea.c:67:8:nmea2decimal	3
 ../my_lib/Src/my_nmea.c:82:6:get_my_nmea_gngll_coordinates	1
 ../my_lib/Src/my_nmea.c:114:10:my_nmea_get_gsv_tns	1
-../my_lib/Src/my_nmea.c:126:6:get_my_nmea_rmc_date_yy	1
-../my_lib/Src/my_nmea.c:140:6:get_my_nmea_rmc_date_mm	1
-../my_lib/Src/my_nmea.c:154:6:get_my_nmea_rmc_date_dd	1
-../my_lib/Src/my_nmea.c:168:6:get_my_nmea_rmc_utc_hh	1
-../my_lib/Src/my_nmea.c:182:6:get_my_nmea_rmc_utc_mm	1
-../my_lib/Src/my_nmea.c:196:6:get_my_nmea_rmc_utc_ss	1
-../my_lib/Src/my_nmea.c:210:6:get_my_nmea_rmc_utc_sss	1
+../my_lib/Src/my_nmea.c:126:6:my_nmea_get_rmc_date_yy	1
+../my_lib/Src/my_nmea.c:140:6:my_nmea_get_rmc_date_mm	1
+../my_lib/Src/my_nmea.c:154:6:my_nmea_get_rmc_date_dd	1
+../my_lib/Src/my_nmea.c:168:6:my_nmea_get_rmc_utc_hh	1
+../my_lib/Src/my_nmea.c:182:6:my_nmea_get_rmc_utc_mm	1
+../my_lib/Src/my_nmea.c:196:6:my_nmea_get_rmc_utc_ss	1
+../my_lib/Src/my_nmea.c:210:6:my_nmea_get_rmc_utc_sss	1

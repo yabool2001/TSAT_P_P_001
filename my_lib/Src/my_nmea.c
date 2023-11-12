@@ -123,7 +123,7 @@ uint16_t my_nmea_get_gsv_tns ( const char* m ) //tns = Total Number Satelites
 	return tns ;
 }
 
-void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
+void my_nmea_get_rmc_date_yy ( const char* m , uint8_t* yy )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_YY_OFFSET ;
@@ -137,7 +137,7 @@ void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
 	*yy = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
+void my_nmea_get_rmc_date_mm ( const char* m , uint8_t* mm )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_MM_OFFSET ;
@@ -151,7 +151,7 @@ void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
 	*mm = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
+void my_nmea_get_rmc_date_dd ( const char* m , uint8_t* dd )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_DATE_POSITION ) + 1 + RMC_DATE_DD_OFFSET ;
@@ -165,7 +165,7 @@ void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
 	*dd = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
+void my_nmea_get_rmc_utc_hh ( const char* m , uint8_t* hh )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_HH_OFFSET ;
@@ -179,7 +179,7 @@ void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
 	*hh = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
+void my_nmea_get_rmc_utc_mm ( const char* m , uint8_t* mm )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_MM_OFFSET ;
@@ -193,7 +193,7 @@ void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
 	*mm = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
+void my_nmea_get_rmc_utc_ss ( const char* m , uint8_t* ss )
 {
 	uint16_t temp ;
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_SS_OFFSET ;
@@ -207,7 +207,7 @@ void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
 	*ss = (uint8_t) temp ;
 
 }
-void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
+void my_nmea_get_rmc_utc_sss ( const char* m , uint32_t* sss )
 {
 	uint8_t position = my_find_char_position ( m , NMEA_DELIMETER , RMC_UTC_POSITION ) + 1 + RMC_UTC_SSS_OFFSET ;
 	char* s = (char*) malloc ( ( RMC_UTC_SSS_LENGTH +1 ) * sizeof ( uint8_t ) ) ;

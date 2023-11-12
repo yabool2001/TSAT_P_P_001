@@ -36,7 +36,7 @@ uint8_t my_find_char_position ( const char* m , const char c , uint8_t n )
 	return i ;
 }
 
-// Function converting RTC date and time to Unix timestamp: number of seconds after the Epoch (1970.01.01).
+// Function converting RTC date and time to Unix timestamp (ts): number of seconds after the Epoch (1970.01.01).
 uint32_t my_conv_rtc2timestamp ( RTC_DateTypeDef* d , RTC_TimeTypeDef* t )
 {
     // Number of days in months (considering leap years).
@@ -50,20 +50,55 @@ uint32_t my_conv_rtc2timestamp ( RTC_DateTypeDef* d , RTC_TimeTypeDef* t )
     {
         days += monthDays[i] ;
     }
-    if ( d->Month > 2 && isLeapYear ( years ) )
+    if ( d->Month > 2 && my_conv_is_leap_year ( years ) )
     {
         days++ ;  // Add one day in a leap year.
     }
     // add the days of the month
     days += d->Date - 1 ;
     // Convert days into seconds and add hours, minutes, seconds.
-    uint32_t seconds = days * 86400 + t->Hours * 3600 + t->Minutes * 60 + t->Seconds ;
+    uint32_t ts = days * 86400 + t->Hours * 3600 + t->Minutes * 60 + t->Seconds ;
 
-    return seconds ;
+    return ts ;
+}
+
+// Function converting Unix timestamp (ts) to RTC date and time
+void my_conv_timestamp2rtc ( uint32_t ts , RTC_DateTypeDef* d , RTC_TimeTypeDef* t )
+{
+	static const uint16_t daysInMonth[12] = { 31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 } ;
+	uint32_t seconds = ts % 60 ;
+	uint32_t minutes = ( ts / 60 ) % 60 ;
+	uint32_t hours = ( ts / 3600 ) % 24 ;
+
+	// Counting days since Epoch
+	uint32_t days = ts / 86400 ;
+
+	// Calculating the year
+	uint32_t year = 1970 ;
+	while ( days >= 365 + my_conv_is_leap_year ( year ) )
+	{
+		days -= 365 + my_conv_is_leap_year ( year ) ;
+		year++ ;
+	}
+
+	// Calculating the month
+	uint32_t month = 0 ;
+	while ( days >= daysInMonth[month] + ( month == 1 && my_conv_is_leap_year ( year ) ) ) {
+		days -= daysInMonth[month] + ( month == 1 && my_conv_is_leap_year ( year ) ) ;
+		month++ ;
+	}
+
+	// Setting date and time in RTC structures
+	d->Year = year - 2000 ; // RTC_DateTypeDef.Year expects years since 2000
+	d->Month = month + 1 ;  // +1 because month is counted from 0
+	d->Date = days + 1 ;    // +1 because days are counted from 0
+	t->Hours = hours ;
+	t->Minutes = minutes ;
+	t->Seconds = seconds ;
 }
 
 // Function checking for leap years
-int isLeapYear ( int yyyy )
+int my_conv_is_leap_year ( int yyyy )
 {
     return ( ( yyyy % 4 == 0 ) && ( yyyy % 100 != 0 ) ) || ( yyyy % 400 == 0 ) ;
 }

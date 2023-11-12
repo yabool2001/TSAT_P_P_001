@@ -61,7 +61,7 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 						if ( *nmea_fixed_pdop_d <= nmea_pdop_ths && nmea_fixed_mode_s == NMEA_3D_FIX )
 						{
 							get_my_nmea_gngll_coordinates ( (char*) nmea_message , nmea_latitude_s , nmea_longitude_s , astro_geo_wr_latitude , astro_geo_wr_longitude ) ; // Nie musze nic kombinować z przenoszeniem tej operacji, bo po niej nie będzie już dalej odbierania wiadomości tylko wyjście
-							set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
+							my_rtc_set_dt_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
 							r = true ;
 							break ;
 						}
@@ -79,7 +79,7 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 	if ( nmea_latitude_s[0] == 0 && gngll_message[0] != 0 ) // Jeśli nie masz współrzędnych pdop to wykorzystaja gorsze i zrób ich backup
 	{
 		get_my_nmea_gngll_coordinates ( (char*) gngll_message , nmea_latitude_s , nmea_longitude_s , astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-		set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
+		my_rtc_set_dt_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
 		r = true ;
 	}
 	sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;

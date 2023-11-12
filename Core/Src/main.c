@@ -164,7 +164,7 @@ int main(void)
   if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-	  get_my_rtc_time ( rtc_dt ) ;
+	  my_rtc_get_time_s ( rtc_dt ) ;
 	  send_debug_logs ( rtc_dt ) ;
 	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
@@ -747,7 +747,7 @@ bool is_system_initialized ( void )
 {
 	uint16_t yyyy ;
 
-	yyyy = get_my_rtc_time ( rtc_dt ) ;
+	yyyy = my_rtc_get_time_s ( rtc_dt ) ;
 	send_debug_logs ( rtc_dt ) ;
 	if ( yyyy >= FIRMWARE_RELEASE_YEAR )
 	{

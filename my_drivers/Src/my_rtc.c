@@ -14,18 +14,18 @@
 
 extern RTC_HandleTypeDef hrtc ;
 
-void set_my_rtc_from_nmea_rmc ( const char* m )
+void my_rtc_set_dt_from_nmea_rmc ( const char* m )
 {
 	  RTC_TimeTypeDef sTime;
 	  RTC_DateTypeDef sDate;
 
-	  get_my_nmea_rmc_date_yy ( m , &sDate.Year ) ;
-	  get_my_nmea_rmc_date_mm ( m , &sDate.Month ) ;
-	  get_my_nmea_rmc_date_dd ( m , &sDate.Date ) ;
-	  get_my_nmea_rmc_utc_hh ( m , &sTime.Hours ) ;
-	  get_my_nmea_rmc_utc_mm ( m , &sTime.Minutes ) ;
-	  get_my_nmea_rmc_utc_ss ( m , &sTime.Seconds ) ;
-	  get_my_nmea_rmc_utc_sss ( m , &sTime.SubSeconds ) ;
+	  my_nmea_get_rmc_date_yy ( m , &sDate.Year ) ;
+	  my_nmea_get_rmc_date_mm ( m , &sDate.Month ) ;
+	  my_nmea_get_rmc_date_dd ( m , &sDate.Date ) ;
+	  my_nmea_get_rmc_utc_hh ( m , &sTime.Hours ) ;
+	  my_nmea_get_rmc_utc_mm ( m , &sTime.Minutes ) ;
+	  my_nmea_get_rmc_utc_ss ( m , &sTime.Seconds ) ;
+	  my_nmea_get_rmc_utc_sss ( m , &sTime.SubSeconds ) ;
 	  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
 	  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
 
@@ -34,7 +34,12 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
 	  HAL_RTC_SetDate ( &hrtc , &sDate , RTC_FORMAT_BIN ) ;
 	  HAL_RTCEx_DisableBypassShadow ( &hrtc ) ;
 }
-uint16_t get_my_rtc_time ( char* dt_s )
+void my_rtc_get_dt ( RTC_DateTypeDef* d , RTC_TimeTypeDef* t )
+{
+	HAL_RTC_GetDate ( &hrtc , d , RTC_FORMAT_BIN ) ;
+	HAL_RTC_GetTime ( &hrtc , t , RTC_FORMAT_BIN ) ;
+}
+uint16_t my_rtc_get_time_s ( char* dt_s )
 {
 	RTC_DateTypeDef gDate;
 	RTC_TimeTypeDef gTime;
@@ -48,7 +53,7 @@ uint16_t get_my_rtc_time ( char* dt_s )
 
 	return (uint16_t) ( 2000 + gDate.Year ) ;
 }
-void set_my_rtc_alarm ( uint8_t Hours , uint8_t Minutes , uint32_t Seconds , uint8_t Date )
+void my_rtc_set_alarm ( uint8_t Hours , uint8_t Minutes , uint32_t Seconds , uint8_t Date )
 {
 	//__NOP () ;
 }

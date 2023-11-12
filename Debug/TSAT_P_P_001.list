@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  00030708  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0001dbc2  00000000  00000000  0003074b  2**0
+ 13 .debug_info   0001dcc8  00000000  00000000  0003074b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00003e9f  00000000  00000000  0004e30d  2**0
+ 14 .debug_abbrev 00003ed6  00000000  00000000  0004e413  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001ad8  00000000  00000000  000521b0  2**3
+ 15 .debug_aranges 00001ae8  00000000  00000000  000522f0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000014f6  00000000  00000000  00053c88  2**0
+ 16 .debug_rnglists 00001503  00000000  00000000  00053dd8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001e0ad  00000000  00000000  0005517e  2**0
+ 17 .debug_macro  0001e0ad  00000000  00000000  000552db  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0001ec62  00000000  00000000  0007322b  2**0
+ 18 .debug_line   0001ed38  00000000  00000000  00073388  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000b178d  00000000  00000000  00091e8d  2**0
+ 19 .debug_str    000b17e8  00000000  00000000  000920c0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00007cf8  00000000  00000000  0014361c  2**2
+ 20 .debug_frame  00007d38  00000000  00000000  001438a8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000053  00000000  00000000  0014b314  2**0
+ 21 .debug_line_str 00000053  00000000  00000000  0014b5e0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -4817,128 +4817,133 @@ int main(void)
 	  HAL_NVIC_SystemReset () ;
  800260e:	f001 faac 	bl	8003b6a <HAL_NVIC_SystemReset>
   }
+
+  // ACC INIT
+  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
+ 8002612:	4b54      	ldr	r3, [pc, #336]	; (8002764 <main+0x1bc>)
+ 8002614:	4a54      	ldr	r2, [pc, #336]	; (8002768 <main+0x1c0>)
+ 8002616:	601a      	str	r2, [r3, #0]
+  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
+ 8002618:	4b52      	ldr	r3, [pc, #328]	; (8002764 <main+0x1bc>)
+ 800261a:	4a54      	ldr	r2, [pc, #336]	; (800276c <main+0x1c4>)
+ 800261c:	605a      	str	r2, [r3, #4]
+  my_lis2dw12_ctx.handle = HSPI1 ;
+ 800261e:	4b51      	ldr	r3, [pc, #324]	; (8002764 <main+0x1bc>)
+ 8002620:	4a53      	ldr	r2, [pc, #332]	; (8002770 <main+0x1c8>)
+ 8002622:	60da      	str	r2, [r3, #12]
+  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+ 8002624:	4b4f      	ldr	r3, [pc, #316]	; (8002764 <main+0x1bc>)
+ 8002626:	0018      	movs	r0, r3
+ 8002628:	f007 fbcb 	bl	8009dc2 <my_lis2dw12_init>
+
   // GNSS INIT AND ACQ
   astro_geo_wr_latitude = 0 ;
- 8002612:	4b54      	ldr	r3, [pc, #336]	; (8002764 <main+0x1bc>)
- 8002614:	2200      	movs	r2, #0
- 8002616:	601a      	str	r2, [r3, #0]
+ 800262c:	4b51      	ldr	r3, [pc, #324]	; (8002774 <main+0x1cc>)
+ 800262e:	2200      	movs	r2, #0
+ 8002630:	601a      	str	r2, [r3, #0]
   astro_geo_wr_longitude = 0 ;
- 8002618:	4b53      	ldr	r3, [pc, #332]	; (8002768 <main+0x1c0>)
- 800261a:	2200      	movs	r2, #0
- 800261c:	601a      	str	r2, [r3, #0]
+ 8002632:	4b51      	ldr	r3, [pc, #324]	; (8002778 <main+0x1d0>)
+ 8002634:	2200      	movs	r2, #0
+ 8002636:	601a      	str	r2, [r3, #0]
   if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
- 800261e:	4b53      	ldr	r3, [pc, #332]	; (800276c <main+0x1c4>)
- 8002620:	8818      	ldrh	r0, [r3, #0]
- 8002622:	4b53      	ldr	r3, [pc, #332]	; (8002770 <main+0x1c8>)
- 8002624:	681a      	ldr	r2, [r3, #0]
- 8002626:	685b      	ldr	r3, [r3, #4]
- 8002628:	494f      	ldr	r1, [pc, #316]	; (8002768 <main+0x1c0>)
- 800262a:	9102      	str	r1, [sp, #8]
- 800262c:	494d      	ldr	r1, [pc, #308]	; (8002764 <main+0x1bc>)
- 800262e:	9101      	str	r1, [sp, #4]
- 8002630:	4950      	ldr	r1, [pc, #320]	; (8002774 <main+0x1cc>)
- 8002632:	9100      	str	r1, [sp, #0]
- 8002634:	f007 fc54 	bl	8009ee0 <my_lx6_get_coordinates>
- 8002638:	1e03      	subs	r3, r0, #0
- 800263a:	d023      	beq.n	8002684 <main+0xdc>
+ 8002638:	4b50      	ldr	r3, [pc, #320]	; (800277c <main+0x1d4>)
+ 800263a:	8818      	ldrh	r0, [r3, #0]
+ 800263c:	4b50      	ldr	r3, [pc, #320]	; (8002780 <main+0x1d8>)
+ 800263e:	681a      	ldr	r2, [r3, #0]
+ 8002640:	685b      	ldr	r3, [r3, #4]
+ 8002642:	494d      	ldr	r1, [pc, #308]	; (8002778 <main+0x1d0>)
+ 8002644:	9102      	str	r1, [sp, #8]
+ 8002646:	494b      	ldr	r1, [pc, #300]	; (8002774 <main+0x1cc>)
+ 8002648:	9101      	str	r1, [sp, #4]
+ 800264a:	494e      	ldr	r1, [pc, #312]	; (8002784 <main+0x1dc>)
+ 800264c:	9100      	str	r1, [sp, #0]
+ 800264e:	f007 fc47 	bl	8009ee0 <my_lx6_get_coordinates>
+ 8002652:	1e03      	subs	r3, r0, #0
+ 8002654:	d023      	beq.n	800269e <main+0xf6>
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
- 800263c:	4b49      	ldr	r3, [pc, #292]	; (8002764 <main+0x1bc>)
- 800263e:	681a      	ldr	r2, [r3, #0]
- 8002640:	4b49      	ldr	r3, [pc, #292]	; (8002768 <main+0x1c0>)
- 8002642:	681b      	ldr	r3, [r3, #0]
- 8002644:	0019      	movs	r1, r3
- 8002646:	0010      	movs	r0, r2
- 8002648:	f007 fbac 	bl	8009da4 <my_astro_write_coordinates>
-	  get_my_rtc_time ( rtc_dt ) ;
- 800264c:	4b4a      	ldr	r3, [pc, #296]	; (8002778 <main+0x1d0>)
- 800264e:	0018      	movs	r0, r3
- 8002650:	f007 fe84 	bl	800a35c <get_my_rtc_time>
+ 8002656:	4b47      	ldr	r3, [pc, #284]	; (8002774 <main+0x1cc>)
+ 8002658:	681a      	ldr	r2, [r3, #0]
+ 800265a:	4b47      	ldr	r3, [pc, #284]	; (8002778 <main+0x1d0>)
+ 800265c:	681b      	ldr	r3, [r3, #0]
+ 800265e:	0019      	movs	r1, r3
+ 8002660:	0010      	movs	r0, r2
+ 8002662:	f007 fb9f 	bl	8009da4 <my_astro_write_coordinates>
+	  my_rtc_get_time_s ( rtc_dt ) ;
+ 8002666:	4b48      	ldr	r3, [pc, #288]	; (8002788 <main+0x1e0>)
+ 8002668:	0018      	movs	r0, r3
+ 800266a:	f007 fe77 	bl	800a35c <my_rtc_get_time_s>
 	  send_debug_logs ( rtc_dt ) ;
- 8002654:	4b48      	ldr	r3, [pc, #288]	; (8002778 <main+0x1d0>)
- 8002656:	0018      	movs	r0, r3
- 8002658:	f000 fbae 	bl	8002db8 <send_debug_logs>
+ 800266e:	4b46      	ldr	r3, [pc, #280]	; (8002788 <main+0x1e0>)
+ 8002670:	0018      	movs	r0, r3
+ 8002672:	f000 fba1 	bl	8002db8 <send_debug_logs>
 	  if ( nmea_fixed_pdop_d < 100.0 )
- 800265c:	4b45      	ldr	r3, [pc, #276]	; (8002774 <main+0x1cc>)
- 800265e:	6818      	ldr	r0, [r3, #0]
- 8002660:	6859      	ldr	r1, [r3, #4]
- 8002662:	2200      	movs	r2, #0
- 8002664:	4b45      	ldr	r3, [pc, #276]	; (800277c <main+0x1d4>)
- 8002666:	f7fd fef5 	bl	8000454 <__aeabi_dcmplt>
- 800266a:	1e03      	subs	r3, r0, #0
- 800266c:	d00a      	beq.n	8002684 <main+0xdc>
+ 8002676:	4b43      	ldr	r3, [pc, #268]	; (8002784 <main+0x1dc>)
+ 8002678:	6818      	ldr	r0, [r3, #0]
+ 800267a:	6859      	ldr	r1, [r3, #4]
+ 800267c:	2200      	movs	r2, #0
+ 800267e:	4b43      	ldr	r3, [pc, #268]	; (800278c <main+0x1e4>)
+ 8002680:	f7fd fee8 	bl	8000454 <__aeabi_dcmplt>
+ 8002684:	1e03      	subs	r3, r0, #0
+ 8002686:	d00a      	beq.n	800269e <main+0xf6>
 	  {
 		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
- 800266e:	4b41      	ldr	r3, [pc, #260]	; (8002774 <main+0x1cc>)
- 8002670:	681a      	ldr	r2, [r3, #0]
- 8002672:	685b      	ldr	r3, [r3, #4]
- 8002674:	4942      	ldr	r1, [pc, #264]	; (8002780 <main+0x1d8>)
- 8002676:	4843      	ldr	r0, [pc, #268]	; (8002784 <main+0x1dc>)
- 8002678:	9200      	str	r2, [sp, #0]
- 800267a:	9301      	str	r3, [sp, #4]
- 800267c:	000a      	movs	r2, r1
- 800267e:	2105      	movs	r1, #5
- 8002680:	f009 fd14 	bl	800c0ac <snprintf>
+ 8002688:	4b3e      	ldr	r3, [pc, #248]	; (8002784 <main+0x1dc>)
+ 800268a:	681a      	ldr	r2, [r3, #0]
+ 800268c:	685b      	ldr	r3, [r3, #4]
+ 800268e:	4940      	ldr	r1, [pc, #256]	; (8002790 <main+0x1e8>)
+ 8002690:	4840      	ldr	r0, [pc, #256]	; (8002794 <main+0x1ec>)
+ 8002692:	9200      	str	r2, [sp, #0]
+ 8002694:	9301      	str	r3, [sp, #4]
+ 8002696:	000a      	movs	r2, r1
+ 8002698:	2105      	movs	r1, #5
+ 800269a:	f009 fd07 	bl	800c0ac <snprintf>
 	  }
   }
 
   agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
- 8002684:	4b40      	ldr	r3, [pc, #256]	; (8002788 <main+0x1e0>)
- 8002686:	881b      	ldrh	r3, [r3, #0]
- 8002688:	001a      	movs	r2, r3
- 800268a:	4b40      	ldr	r3, [pc, #256]	; (800278c <main+0x1e4>)
- 800268c:	681b      	ldr	r3, [r3, #0]
- 800268e:	18d2      	adds	r2, r2, r3
- 8002690:	4b3e      	ldr	r3, [pc, #248]	; (800278c <main+0x1e4>)
- 8002692:	601a      	str	r2, [r3, #0]
+ 800269e:	4b3e      	ldr	r3, [pc, #248]	; (8002798 <main+0x1f0>)
+ 80026a0:	881b      	ldrh	r3, [r3, #0]
+ 80026a2:	001a      	movs	r2, r3
+ 80026a4:	4b3d      	ldr	r3, [pc, #244]	; (800279c <main+0x1f4>)
+ 80026a6:	681b      	ldr	r3, [r3, #0]
+ 80026a8:	18d2      	adds	r2, r2, r3
+ 80026aa:	4b3c      	ldr	r3, [pc, #240]	; (800279c <main+0x1f4>)
+ 80026ac:	601a      	str	r2, [r3, #0]
   sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
- 8002694:	4b3c      	ldr	r3, [pc, #240]	; (8002788 <main+0x1e0>)
- 8002696:	881b      	ldrh	r3, [r3, #0]
- 8002698:	001c      	movs	r4, r3
- 800269a:	4b3c      	ldr	r3, [pc, #240]	; (800278c <main+0x1e4>)
- 800269c:	681b      	ldr	r3, [r3, #0]
- 800269e:	4a39      	ldr	r2, [pc, #228]	; (8002784 <main+0x1dc>)
- 80026a0:	493b      	ldr	r1, [pc, #236]	; (8002790 <main+0x1e8>)
- 80026a2:	483c      	ldr	r0, [pc, #240]	; (8002794 <main+0x1ec>)
- 80026a4:	9300      	str	r3, [sp, #0]
- 80026a6:	0023      	movs	r3, r4
- 80026a8:	f009 fd34 	bl	800c114 <sprintf>
+ 80026ae:	4b3a      	ldr	r3, [pc, #232]	; (8002798 <main+0x1f0>)
+ 80026b0:	881b      	ldrh	r3, [r3, #0]
+ 80026b2:	001c      	movs	r4, r3
+ 80026b4:	4b39      	ldr	r3, [pc, #228]	; (800279c <main+0x1f4>)
+ 80026b6:	681b      	ldr	r3, [r3, #0]
+ 80026b8:	4a36      	ldr	r2, [pc, #216]	; (8002794 <main+0x1ec>)
+ 80026ba:	4939      	ldr	r1, [pc, #228]	; (80027a0 <main+0x1f8>)
+ 80026bc:	4839      	ldr	r0, [pc, #228]	; (80027a4 <main+0x1fc>)
+ 80026be:	9300      	str	r3, [sp, #0]
+ 80026c0:	0023      	movs	r3, r4
+ 80026c2:	f009 fd27 	bl	800c114 <sprintf>
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
- 80026ac:	4a39      	ldr	r2, [pc, #228]	; (8002794 <main+0x1ec>)
- 80026ae:	493a      	ldr	r1, [pc, #232]	; (8002798 <main+0x1f0>)
- 80026b0:	4b3a      	ldr	r3, [pc, #232]	; (800279c <main+0x1f4>)
- 80026b2:	0018      	movs	r0, r3
- 80026b4:	f009 fd2e 	bl	800c114 <sprintf>
+ 80026c6:	4a37      	ldr	r2, [pc, #220]	; (80027a4 <main+0x1fc>)
+ 80026c8:	4937      	ldr	r1, [pc, #220]	; (80027a8 <main+0x200>)
+ 80026ca:	4b38      	ldr	r3, [pc, #224]	; (80027ac <main+0x204>)
+ 80026cc:	0018      	movs	r0, r3
+ 80026ce:	f009 fd21 	bl	800c114 <sprintf>
   send_debug_logs ( astro_payload_log ) ;
- 80026b8:	4b38      	ldr	r3, [pc, #224]	; (800279c <main+0x1f4>)
- 80026ba:	0018      	movs	r0, r3
- 80026bc:	f000 fb7c 	bl	8002db8 <send_debug_logs>
+ 80026d2:	4b36      	ldr	r3, [pc, #216]	; (80027ac <main+0x204>)
+ 80026d4:	0018      	movs	r0, r3
+ 80026d6:	f000 fb6f 	bl	8002db8 <send_debug_logs>
   my_astro_add_payload_2_queue ( payload ) ;
- 80026c0:	4b34      	ldr	r3, [pc, #208]	; (8002794 <main+0x1ec>)
- 80026c2:	0018      	movs	r0, r3
- 80026c4:	f007 fb06 	bl	8009cd4 <my_astro_add_payload_2_queue>
-
-  // ACC INIT
-  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
- 80026c8:	4b35      	ldr	r3, [pc, #212]	; (80027a0 <main+0x1f8>)
- 80026ca:	4a36      	ldr	r2, [pc, #216]	; (80027a4 <main+0x1fc>)
- 80026cc:	601a      	str	r2, [r3, #0]
-  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
- 80026ce:	4b34      	ldr	r3, [pc, #208]	; (80027a0 <main+0x1f8>)
- 80026d0:	4a35      	ldr	r2, [pc, #212]	; (80027a8 <main+0x200>)
- 80026d2:	605a      	str	r2, [r3, #4]
-  my_lis2dw12_ctx.handle = HSPI1 ;
- 80026d4:	4b32      	ldr	r3, [pc, #200]	; (80027a0 <main+0x1f8>)
- 80026d6:	4a35      	ldr	r2, [pc, #212]	; (80027ac <main+0x204>)
- 80026d8:	60da      	str	r2, [r3, #12]
-  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
- 80026da:	4b31      	ldr	r3, [pc, #196]	; (80027a0 <main+0x1f8>)
+ 80026da:	4b32      	ldr	r3, [pc, #200]	; (80027a4 <main+0x1fc>)
  80026dc:	0018      	movs	r0, r3
- 80026de:	f007 fb70 	bl	8009dc2 <my_lis2dw12_init>
+ 80026de:	f007 faf9 	bl	8009cd4 <my_astro_add_payload_2_queue>
+
+  // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
- 80026e2:	4b2f      	ldr	r3, [pc, #188]	; (80027a0 <main+0x1f8>)
+ 80026e2:	4b20      	ldr	r3, [pc, #128]	; (8002764 <main+0x1bc>)
  80026e4:	0018      	movs	r0, r3
  80026e6:	f007 fbc5 	bl	8009e74 <my_lis2dw12_int1_wu_enable>
+
+  // STOP SYSTEM
   HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
  80026ea:	f001 f93f 	bl	800396c <HAL_SuspendTick>
   HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
@@ -4950,7 +4955,7 @@ int main(void)
   HAL_ResumeTick () ;
  80026fa:	f001 f945 	bl	8003988 <HAL_ResumeTick>
   my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
- 80026fe:	4b28      	ldr	r3, [pc, #160]	; (80027a0 <main+0x1f8>)
+ 80026fe:	4b19      	ldr	r3, [pc, #100]	; (8002764 <main+0x1bc>)
  8002700:	0018      	movs	r0, r3
  8002702:	f007 fbd2 	bl	8009eaa <my_lis2dw12_int1_wu_disable>
   /* USER CODE END 2 */
@@ -4992,12 +4997,12 @@ int main(void)
 		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
  800273c:	4b1e      	ldr	r3, [pc, #120]	; (80027b8 <main+0x210>)
  800273e:	881c      	ldrh	r4, [r3, #0]
- 8002740:	4b14      	ldr	r3, [pc, #80]	; (8002794 <main+0x1ec>)
+ 8002740:	4b18      	ldr	r3, [pc, #96]	; (80027a4 <main+0x1fc>)
  8002742:	0018      	movs	r0, r3
  8002744:	f7fd fcde 	bl	8000104 <strlen>
  8002748:	0003      	movs	r3, r0
  800274a:	b29a      	uxth	r2, r3
- 800274c:	4b11      	ldr	r3, [pc, #68]	; (8002794 <main+0x1ec>)
+ 800274c:	4b15      	ldr	r3, [pc, #84]	; (80027a4 <main+0x1fc>)
  800274e:	0019      	movs	r1, r3
  8002750:	0020      	movs	r0, r4
  8002752:	f005 fe8f 	bl	8008474 <astronode_send_pld_er>
@@ -5006,25 +5011,25 @@ int main(void)
  8002758:	20000000 	.word	0x20000000
  800275c:	2000086c 	.word	0x2000086c
  8002760:	20000b90 	.word	0x20000b90
- 8002764:	20000a0c 	.word	0x20000a0c
- 8002768:	20000a10 	.word	0x20000a10
- 800276c:	20000010 	.word	0x20000010
- 8002770:	20000008 	.word	0x20000008
- 8002774:	20000018 	.word	0x20000018
- 8002778:	200009f8 	.word	0x200009f8
- 800277c:	40590000 	.word	0x40590000
- 8002780:	08012d78 	.word	0x08012d78
- 8002784:	20000a14 	.word	0x20000a14
- 8002788:	20000a1a 	.word	0x20000a1a
- 800278c:	20000a1c 	.word	0x20000a1c
- 8002790:	08012d80 	.word	0x08012d80
- 8002794:	20000a28 	.word	0x20000a28
- 8002798:	08012d8c 	.word	0x08012d8c
- 800279c:	20000ac8 	.word	0x20000ac8
- 80027a0:	20000b80 	.word	0x20000b80
- 80027a4:	08003019 	.word	0x08003019
- 80027a8:	08003089 	.word	0x08003089
- 80027ac:	20000728 	.word	0x20000728
+ 8002764:	20000b80 	.word	0x20000b80
+ 8002768:	08003019 	.word	0x08003019
+ 800276c:	08003089 	.word	0x08003089
+ 8002770:	20000728 	.word	0x20000728
+ 8002774:	20000a0c 	.word	0x20000a0c
+ 8002778:	20000a10 	.word	0x20000a10
+ 800277c:	20000010 	.word	0x20000010
+ 8002780:	20000008 	.word	0x20000008
+ 8002784:	20000018 	.word	0x20000018
+ 8002788:	200009f8 	.word	0x200009f8
+ 800278c:	40590000 	.word	0x40590000
+ 8002790:	08012d78 	.word	0x08012d78
+ 8002794:	20000a14 	.word	0x20000a14
+ 8002798:	20000a1a 	.word	0x20000a1a
+ 800279c:	20000a1c 	.word	0x20000a1c
+ 80027a0:	08012d80 	.word	0x08012d80
+ 80027a4:	20000a28 	.word	0x20000a28
+ 80027a8:	08012d8c 	.word	0x08012d8c
+ 80027ac:	20000ac8 	.word	0x20000ac8
  80027b0:	20000a20 	.word	0x20000a20
  80027b4:	00001388 	.word	0x00001388
  80027b8:	20000a24 	.word	0x20000a24
@@ -6616,11 +6621,11 @@ bool is_system_initialized ( void )
  800310c:	af00      	add	r7, sp, #0
 	uint16_t yyyy ;
 
-	yyyy = get_my_rtc_time ( rtc_dt ) ;
+	yyyy = my_rtc_get_time_s ( rtc_dt ) ;
  800310e:	1dbc      	adds	r4, r7, #6
  8003110:	4b0a      	ldr	r3, [pc, #40]	; (800313c <is_system_initialized+0x34>)
  8003112:	0018      	movs	r0, r3
- 8003114:	f007 f922 	bl	800a35c <get_my_rtc_time>
+ 8003114:	f007 f922 	bl	800a35c <my_rtc_get_time_s>
  8003118:	0003      	movs	r3, r0
  800311a:	8023      	strh	r3, [r4, #0]
 	send_debug_logs ( rtc_dt ) ;
@@ -26455,10 +26460,10 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
  800a176:	9300      	str	r3, [sp, #0]
  800a178:	0023      	movs	r3, r4
  800a17a:	f000 fb03 	bl	800a784 <get_my_nmea_gngll_coordinates>
-							set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
+							my_rtc_set_dt_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
  800a17e:	197b      	adds	r3, r7, r5
  800a180:	0018      	movs	r0, r3
- 800a182:	f000 f895 	bl	800a2b0 <set_my_rtc_from_nmea_rmc>
+ 800a182:	f000 f895 	bl	800a2b0 <my_rtc_set_dt_from_nmea_rmc>
 							r = true ;
  800a186:	4b37      	ldr	r3, [pc, #220]	; (800a264 <my_lx6_get_coordinates+0x384>)
  800a188:	18fb      	adds	r3, r7, r3
@@ -26547,12 +26552,12 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
  800a212:	9300      	str	r3, [sp, #0]
  800a214:	0023      	movs	r3, r4
  800a216:	f000 fab5 	bl	800a784 <get_my_nmea_gngll_coordinates>
-		set_my_rtc_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
+		my_rtc_set_dt_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
  800a21a:	2396      	movs	r3, #150	; 0x96
  800a21c:	009b      	lsls	r3, r3, #2
  800a21e:	18fb      	adds	r3, r7, r3
  800a220:	0018      	movs	r0, r3
- 800a222:	f000 f845 	bl	800a2b0 <set_my_rtc_from_nmea_rmc>
+ 800a222:	f000 f845 	bl	800a2b0 <my_rtc_set_dt_from_nmea_rmc>
 		r = true ;
  800a226:	4b0f      	ldr	r3, [pc, #60]	; (800a264 <my_lx6_get_coordinates+0x384>)
  800a228:	18fb      	adds	r3, r7, r3
@@ -26606,12 +26611,12 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
  800a2a8:	2000086c 	.word	0x2000086c
  800a2ac:	08014624 	.word	0x08014624
 
-0800a2b0 <set_my_rtc_from_nmea_rmc>:
+0800a2b0 <my_rtc_set_dt_from_nmea_rmc>:
 */
 
 extern RTC_HandleTypeDef hrtc ;
 
-void set_my_rtc_from_nmea_rmc ( const char* m )
+void my_rtc_set_dt_from_nmea_rmc ( const char* m )
 {
  800a2b0:	b5b0      	push	{r4, r5, r7, lr}
  800a2b2:	b088      	sub	sp, #32
@@ -26620,56 +26625,56 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
 	  RTC_TimeTypeDef sTime;
 	  RTC_DateTypeDef sDate;
 
-	  get_my_nmea_rmc_date_yy ( m , &sDate.Year ) ;
+	  my_nmea_get_rmc_date_yy ( m , &sDate.Year ) ;
  800a2b8:	2508      	movs	r5, #8
  800a2ba:	197b      	adds	r3, r7, r5
  800a2bc:	1cda      	adds	r2, r3, #3
  800a2be:	687b      	ldr	r3, [r7, #4]
  800a2c0:	0011      	movs	r1, r2
  800a2c2:	0018      	movs	r0, r3
- 800a2c4:	f000 fb98 	bl	800a9f8 <get_my_nmea_rmc_date_yy>
-	  get_my_nmea_rmc_date_mm ( m , &sDate.Month ) ;
+ 800a2c4:	f000 fb98 	bl	800a9f8 <my_nmea_get_rmc_date_yy>
+	  my_nmea_get_rmc_date_mm ( m , &sDate.Month ) ;
  800a2c8:	197b      	adds	r3, r7, r5
  800a2ca:	1c5a      	adds	r2, r3, #1
  800a2cc:	687b      	ldr	r3, [r7, #4]
  800a2ce:	0011      	movs	r1, r2
  800a2d0:	0018      	movs	r0, r3
- 800a2d2:	f000 fbcb 	bl	800aa6c <get_my_nmea_rmc_date_mm>
-	  get_my_nmea_rmc_date_dd ( m , &sDate.Date ) ;
+ 800a2d2:	f000 fbcb 	bl	800aa6c <my_nmea_get_rmc_date_mm>
+	  my_nmea_get_rmc_date_dd ( m , &sDate.Date ) ;
  800a2d6:	197b      	adds	r3, r7, r5
  800a2d8:	1c9a      	adds	r2, r3, #2
  800a2da:	687b      	ldr	r3, [r7, #4]
  800a2dc:	0011      	movs	r1, r2
  800a2de:	0018      	movs	r0, r3
- 800a2e0:	f000 fbfe 	bl	800aae0 <get_my_nmea_rmc_date_dd>
-	  get_my_nmea_rmc_utc_hh ( m , &sTime.Hours ) ;
+ 800a2e0:	f000 fbfe 	bl	800aae0 <my_nmea_get_rmc_date_dd>
+	  my_nmea_get_rmc_utc_hh ( m , &sTime.Hours ) ;
  800a2e4:	240c      	movs	r4, #12
  800a2e6:	193a      	adds	r2, r7, r4
  800a2e8:	687b      	ldr	r3, [r7, #4]
  800a2ea:	0011      	movs	r1, r2
  800a2ec:	0018      	movs	r0, r3
- 800a2ee:	f000 fc31 	bl	800ab54 <get_my_nmea_rmc_utc_hh>
-	  get_my_nmea_rmc_utc_mm ( m , &sTime.Minutes ) ;
+ 800a2ee:	f000 fc31 	bl	800ab54 <my_nmea_get_rmc_utc_hh>
+	  my_nmea_get_rmc_utc_mm ( m , &sTime.Minutes ) ;
  800a2f2:	193b      	adds	r3, r7, r4
  800a2f4:	1c5a      	adds	r2, r3, #1
  800a2f6:	687b      	ldr	r3, [r7, #4]
  800a2f8:	0011      	movs	r1, r2
  800a2fa:	0018      	movs	r0, r3
- 800a2fc:	f000 fc64 	bl	800abc8 <get_my_nmea_rmc_utc_mm>
-	  get_my_nmea_rmc_utc_ss ( m , &sTime.Seconds ) ;
+ 800a2fc:	f000 fc64 	bl	800abc8 <my_nmea_get_rmc_utc_mm>
+	  my_nmea_get_rmc_utc_ss ( m , &sTime.Seconds ) ;
  800a300:	193b      	adds	r3, r7, r4
  800a302:	1c9a      	adds	r2, r3, #2
  800a304:	687b      	ldr	r3, [r7, #4]
  800a306:	0011      	movs	r1, r2
  800a308:	0018      	movs	r0, r3
- 800a30a:	f000 fc97 	bl	800ac3c <get_my_nmea_rmc_utc_ss>
-	  get_my_nmea_rmc_utc_sss ( m , &sTime.SubSeconds ) ;
+ 800a30a:	f000 fc97 	bl	800ac3c <my_nmea_get_rmc_utc_ss>
+	  my_nmea_get_rmc_utc_sss ( m , &sTime.SubSeconds ) ;
  800a30e:	193b      	adds	r3, r7, r4
  800a310:	1d1a      	adds	r2, r3, #4
  800a312:	687b      	ldr	r3, [r7, #4]
  800a314:	0011      	movs	r1, r2
  800a316:	0018      	movs	r0, r3
- 800a318:	f000 fcca 	bl	800acb0 <get_my_nmea_rmc_utc_sss>
+ 800a318:	f000 fcca 	bl	800acb0 <my_nmea_get_rmc_utc_sss>
 	  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
  800a31c:	193b      	adds	r3, r7, r4
  800a31e:	2200      	movs	r2, #0
@@ -26680,23 +26685,23 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
  800a326:	611a      	str	r2, [r3, #16]
 
 	  HAL_RTCEx_EnableBypassShadow ( &hrtc ) ;
- 800a328:	4b0b      	ldr	r3, [pc, #44]	; (800a358 <set_my_rtc_from_nmea_rmc+0xa8>)
+ 800a328:	4b0b      	ldr	r3, [pc, #44]	; (800a358 <my_rtc_set_dt_from_nmea_rmc+0xa8>)
  800a32a:	0018      	movs	r0, r3
  800a32c:	f7fb fa6f 	bl	800580e <HAL_RTCEx_EnableBypassShadow>
 	  HAL_RTC_SetTime ( &hrtc , &sTime , RTC_FORMAT_BIN ) ;
  800a330:	1939      	adds	r1, r7, r4
- 800a332:	4b09      	ldr	r3, [pc, #36]	; (800a358 <set_my_rtc_from_nmea_rmc+0xa8>)
+ 800a332:	4b09      	ldr	r3, [pc, #36]	; (800a358 <my_rtc_set_dt_from_nmea_rmc+0xa8>)
  800a334:	2200      	movs	r2, #0
  800a336:	0018      	movs	r0, r3
  800a338:	f7fa fe6c 	bl	8005014 <HAL_RTC_SetTime>
 	  HAL_RTC_SetDate ( &hrtc , &sDate , RTC_FORMAT_BIN ) ;
  800a33c:	1979      	adds	r1, r7, r5
- 800a33e:	4b06      	ldr	r3, [pc, #24]	; (800a358 <set_my_rtc_from_nmea_rmc+0xa8>)
+ 800a33e:	4b06      	ldr	r3, [pc, #24]	; (800a358 <my_rtc_set_dt_from_nmea_rmc+0xa8>)
  800a340:	2200      	movs	r2, #0
  800a342:	0018      	movs	r0, r3
  800a344:	f7fa ff6a 	bl	800521c <HAL_RTC_SetDate>
 	  HAL_RTCEx_DisableBypassShadow ( &hrtc ) ;
- 800a348:	4b03      	ldr	r3, [pc, #12]	; (800a358 <set_my_rtc_from_nmea_rmc+0xa8>)
+ 800a348:	4b03      	ldr	r3, [pc, #12]	; (800a358 <my_rtc_set_dt_from_nmea_rmc+0xa8>)
  800a34a:	0018      	movs	r0, r3
  800a34c:	f7fb fa93 	bl	8005876 <HAL_RTCEx_DisableBypassShadow>
 }
@@ -26706,8 +26711,12 @@ void set_my_rtc_from_nmea_rmc ( const char* m )
  800a356:	bdb0      	pop	{r4, r5, r7, pc}
  800a358:	200006fc 	.word	0x200006fc
 
-0800a35c <get_my_rtc_time>:
-uint16_t get_my_rtc_time ( char* dt_s )
+0800a35c <my_rtc_get_time_s>:
+{
+	HAL_RTC_GetDate ( &hrtc , d , RTC_FORMAT_BIN ) ;
+	HAL_RTC_GetTime ( &hrtc , t , RTC_FORMAT_BIN ) ;
+}
+uint16_t my_rtc_get_time_s ( char* dt_s )
 {
  800a35c:	b5f0      	push	{r4, r5, r6, r7, lr}
  800a35e:	b08d      	sub	sp, #52	; 0x34
@@ -26721,14 +26730,14 @@ uint16_t get_my_rtc_time ( char* dt_s )
 	HAL_RTC_GetTime ( &hrtc , &gTime , RTC_FORMAT_BIN ) ;
  800a364:	2508      	movs	r5, #8
  800a366:	1979      	adds	r1, r7, r5
- 800a368:	4b1b      	ldr	r3, [pc, #108]	; (800a3d8 <get_my_rtc_time+0x7c>)
+ 800a368:	4b1b      	ldr	r3, [pc, #108]	; (800a3d8 <my_rtc_get_time_s+0x7c>)
  800a36a:	2200      	movs	r2, #0
  800a36c:	0018      	movs	r0, r3
  800a36e:	f7fa fef9 	bl	8005164 <HAL_RTC_GetTime>
 	HAL_RTC_GetDate ( &hrtc , &gDate , RTC_FORMAT_BIN ) ;
  800a372:	241c      	movs	r4, #28
  800a374:	1939      	adds	r1, r7, r4
- 800a376:	4b18      	ldr	r3, [pc, #96]	; (800a3d8 <get_my_rtc_time+0x7c>)
+ 800a376:	4b18      	ldr	r3, [pc, #96]	; (800a3d8 <my_rtc_get_time_s+0x7c>)
  800a378:	2200      	movs	r2, #0
  800a37a:	0018      	movs	r0, r3
  800a37c:	f7fa ffe0 	bl	8005340 <HAL_RTC_GetDate>
@@ -26755,7 +26764,7 @@ uint16_t get_my_rtc_time ( char* dt_s )
  800a3a4:	001e      	movs	r6, r3
  800a3a6:	183b      	adds	r3, r7, r0
  800a3a8:	789b      	ldrb	r3, [r3, #2]
- 800a3aa:	490c      	ldr	r1, [pc, #48]	; (800a3dc <get_my_rtc_time+0x80>)
+ 800a3aa:	490c      	ldr	r1, [pc, #48]	; (800a3dc <my_rtc_get_time_s+0x80>)
  800a3ac:	6878      	ldr	r0, [r7, #4]
  800a3ae:	9303      	str	r3, [sp, #12]
  800a3b0:	9602      	str	r6, [sp, #8]
@@ -27675,9 +27684,9 @@ uint16_t my_nmea_get_gsv_tns ( const char* m ) //tns = Total Number Satelites
  800a9f2:	bdb0      	pop	{r4, r5, r7, pc}
  800a9f4:	08014668 	.word	0x08014668
 
-0800a9f8 <get_my_nmea_rmc_date_yy>:
+0800a9f8 <my_nmea_get_rmc_date_yy>:
 
-void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
+void my_nmea_get_rmc_date_yy ( const char* m , uint8_t* yy )
 {
  800a9f8:	b590      	push	{r4, r7, lr}
  800a9fa:	b087      	sub	sp, #28
@@ -27721,7 +27730,7 @@ void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
 	sscanf ( s , "%hu" , &temp ) ;
  800aa3e:	240e      	movs	r4, #14
  800aa40:	193a      	adds	r2, r7, r4
- 800aa42:	4909      	ldr	r1, [pc, #36]	; (800aa68 <get_my_nmea_rmc_date_yy+0x70>)
+ 800aa42:	4909      	ldr	r1, [pc, #36]	; (800aa68 <my_nmea_get_rmc_date_yy+0x70>)
  800aa44:	693b      	ldr	r3, [r7, #16]
  800aa46:	0018      	movs	r0, r3
  800aa48:	f001 fb84 	bl	800c154 <sscanf>
@@ -27744,8 +27753,8 @@ void get_my_nmea_rmc_date_yy ( const char* m , uint8_t* yy )
  800aa66:	46c0      	nop			; (mov r8, r8)
  800aa68:	08014668 	.word	0x08014668
 
-0800aa6c <get_my_nmea_rmc_date_mm>:
-void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
+0800aa6c <my_nmea_get_rmc_date_mm>:
+void my_nmea_get_rmc_date_mm ( const char* m , uint8_t* mm )
 {
  800aa6c:	b590      	push	{r4, r7, lr}
  800aa6e:	b087      	sub	sp, #28
@@ -27789,7 +27798,7 @@ void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
 	sscanf ( s , "%hu" , &temp ) ;
  800aab2:	240e      	movs	r4, #14
  800aab4:	193a      	adds	r2, r7, r4
- 800aab6:	4909      	ldr	r1, [pc, #36]	; (800aadc <get_my_nmea_rmc_date_mm+0x70>)
+ 800aab6:	4909      	ldr	r1, [pc, #36]	; (800aadc <my_nmea_get_rmc_date_mm+0x70>)
  800aab8:	693b      	ldr	r3, [r7, #16]
  800aaba:	0018      	movs	r0, r3
  800aabc:	f001 fb4a 	bl	800c154 <sscanf>
@@ -27812,8 +27821,8 @@ void get_my_nmea_rmc_date_mm ( const char* m , uint8_t* mm )
  800aada:	46c0      	nop			; (mov r8, r8)
  800aadc:	08014668 	.word	0x08014668
 
-0800aae0 <get_my_nmea_rmc_date_dd>:
-void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
+0800aae0 <my_nmea_get_rmc_date_dd>:
+void my_nmea_get_rmc_date_dd ( const char* m , uint8_t* dd )
 {
  800aae0:	b590      	push	{r4, r7, lr}
  800aae2:	b087      	sub	sp, #28
@@ -27857,7 +27866,7 @@ void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
 	sscanf ( s , "%hu" , &temp ) ;
  800ab26:	240e      	movs	r4, #14
  800ab28:	193a      	adds	r2, r7, r4
- 800ab2a:	4909      	ldr	r1, [pc, #36]	; (800ab50 <get_my_nmea_rmc_date_dd+0x70>)
+ 800ab2a:	4909      	ldr	r1, [pc, #36]	; (800ab50 <my_nmea_get_rmc_date_dd+0x70>)
  800ab2c:	693b      	ldr	r3, [r7, #16]
  800ab2e:	0018      	movs	r0, r3
  800ab30:	f001 fb10 	bl	800c154 <sscanf>
@@ -27880,8 +27889,8 @@ void get_my_nmea_rmc_date_dd ( const char* m , uint8_t* dd )
  800ab4e:	46c0      	nop			; (mov r8, r8)
  800ab50:	08014668 	.word	0x08014668
 
-0800ab54 <get_my_nmea_rmc_utc_hh>:
-void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
+0800ab54 <my_nmea_get_rmc_utc_hh>:
+void my_nmea_get_rmc_utc_hh ( const char* m , uint8_t* hh )
 {
  800ab54:	b590      	push	{r4, r7, lr}
  800ab56:	b087      	sub	sp, #28
@@ -27925,7 +27934,7 @@ void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
 	sscanf ( s , "%hu" , &temp ) ;
  800ab9a:	240e      	movs	r4, #14
  800ab9c:	193a      	adds	r2, r7, r4
- 800ab9e:	4909      	ldr	r1, [pc, #36]	; (800abc4 <get_my_nmea_rmc_utc_hh+0x70>)
+ 800ab9e:	4909      	ldr	r1, [pc, #36]	; (800abc4 <my_nmea_get_rmc_utc_hh+0x70>)
  800aba0:	693b      	ldr	r3, [r7, #16]
  800aba2:	0018      	movs	r0, r3
  800aba4:	f001 fad6 	bl	800c154 <sscanf>
@@ -27948,8 +27957,8 @@ void get_my_nmea_rmc_utc_hh ( const char* m , uint8_t* hh )
  800abc2:	46c0      	nop			; (mov r8, r8)
  800abc4:	08014668 	.word	0x08014668
 
-0800abc8 <get_my_nmea_rmc_utc_mm>:
-void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
+0800abc8 <my_nmea_get_rmc_utc_mm>:
+void my_nmea_get_rmc_utc_mm ( const char* m , uint8_t* mm )
 {
  800abc8:	b590      	push	{r4, r7, lr}
  800abca:	b087      	sub	sp, #28
@@ -27993,7 +28002,7 @@ void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
 	sscanf ( s , "%hu" , &temp ) ;
  800ac0e:	240e      	movs	r4, #14
  800ac10:	193a      	adds	r2, r7, r4
- 800ac12:	4909      	ldr	r1, [pc, #36]	; (800ac38 <get_my_nmea_rmc_utc_mm+0x70>)
+ 800ac12:	4909      	ldr	r1, [pc, #36]	; (800ac38 <my_nmea_get_rmc_utc_mm+0x70>)
  800ac14:	693b      	ldr	r3, [r7, #16]
  800ac16:	0018      	movs	r0, r3
  800ac18:	f001 fa9c 	bl	800c154 <sscanf>
@@ -28016,8 +28025,8 @@ void get_my_nmea_rmc_utc_mm ( const char* m , uint8_t* mm )
  800ac36:	46c0      	nop			; (mov r8, r8)
  800ac38:	08014668 	.word	0x08014668
 
-0800ac3c <get_my_nmea_rmc_utc_ss>:
-void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
+0800ac3c <my_nmea_get_rmc_utc_ss>:
+void my_nmea_get_rmc_utc_ss ( const char* m , uint8_t* ss )
 {
  800ac3c:	b590      	push	{r4, r7, lr}
  800ac3e:	b087      	sub	sp, #28
@@ -28061,7 +28070,7 @@ void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
 	sscanf ( s , "%hu" , &temp ) ;
  800ac82:	240e      	movs	r4, #14
  800ac84:	193a      	adds	r2, r7, r4
- 800ac86:	4909      	ldr	r1, [pc, #36]	; (800acac <get_my_nmea_rmc_utc_ss+0x70>)
+ 800ac86:	4909      	ldr	r1, [pc, #36]	; (800acac <my_nmea_get_rmc_utc_ss+0x70>)
  800ac88:	693b      	ldr	r3, [r7, #16]
  800ac8a:	0018      	movs	r0, r3
  800ac8c:	f001 fa62 	bl	800c154 <sscanf>
@@ -28084,8 +28093,8 @@ void get_my_nmea_rmc_utc_ss ( const char* m , uint8_t* ss )
  800acaa:	46c0      	nop			; (mov r8, r8)
  800acac:	08014668 	.word	0x08014668
 
-0800acb0 <get_my_nmea_rmc_utc_sss>:
-void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
+0800acb0 <my_nmea_get_rmc_utc_sss>:
+void my_nmea_get_rmc_utc_sss ( const char* m , uint32_t* sss )
 {
  800acb0:	b590      	push	{r4, r7, lr}
  800acb2:	b085      	sub	sp, #20
@@ -28125,7 +28134,7 @@ void get_my_nmea_rmc_utc_sss ( const char* m , uint32_t* sss )
  800acf4:	701a      	strb	r2, [r3, #0]
 	sscanf ( s , "%lu" , sss ) ;
  800acf6:	683a      	ldr	r2, [r7, #0]
- 800acf8:	4906      	ldr	r1, [pc, #24]	; (800ad14 <get_my_nmea_rmc_utc_sss+0x64>)
+ 800acf8:	4906      	ldr	r1, [pc, #24]	; (800ad14 <my_nmea_get_rmc_utc_sss+0x64>)
  800acfa:	68bb      	ldr	r3, [r7, #8]
  800acfc:	0018      	movs	r0, r3
  800acfe:	f001 fa29 	bl	800c154 <sscanf>
