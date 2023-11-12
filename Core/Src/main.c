@@ -84,8 +84,8 @@ char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek 
 stmdev_ctx_t my_lis2dw12_ctx ;
 
 // RTC
-RTC_TimeTypeDef rtc_t ;
-RTC_DateTypeDef rtc_d ;
+RTC_TimeTypeDef* rtc_t ;
+RTC_DateTypeDef* rtc_d ;
 
 // Flags
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
@@ -174,7 +174,11 @@ int main(void)
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
 	  my_rtc_get_time_s ( rtc_dt ) ;
-	  last_fix_ts = my_rtc_get_time_s ;
+
+	  // Update ts of last fix
+	  my_rtc_get_dt ( rtc_d , rtc_t ) ;
+	  last_fix_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
+
 	  send_debug_logs ( rtc_dt ) ;
 	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
