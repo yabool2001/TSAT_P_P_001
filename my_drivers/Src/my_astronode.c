@@ -24,6 +24,7 @@ bool my_astro_init ( void )
 	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
 	if ( cfg_wr )
 	{
+		astronode_send_rtc_rr () ;
 		astronode_send_cfg_sr () ;
 		astronode_send_mpn_rr () ;
 		astronode_send_msn_rr () ;

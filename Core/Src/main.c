@@ -142,21 +142,25 @@ int main(void)
   MX_RTC_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+
+  // System hello
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
 
-  is_system_already_initialized = is_system_initialized () ;
-
-  // ASTRO INIT
-  if ( !my_astro_init () )
+  // Is system initialized?
+  if ( ! is_system_initialized () )
   {
-	  HAL_NVIC_SystemReset () ;
-  }
+	  // ASTRO INIT
+	  if ( !my_astro_init () )
+	  {
+		  HAL_NVIC_SystemReset () ;
+	  }
 
-  // ACC INIT
-  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
-  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
-  my_lis2dw12_ctx.handle = HSPI1 ;
-  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+	  // ACC INIT
+	  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
+	  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
+	  my_lis2dw12_ctx.handle = HSPI1 ;
+	  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+  }
 
   // GNSS INIT AND ACQ
   astro_geo_wr_latitude = 0 ;
