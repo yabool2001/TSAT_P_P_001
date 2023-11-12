@@ -75,7 +75,6 @@ bool is_astronode_character_received ( uint8_t* ) ;
 uint32_t get_systick ( void ) ;
 bool is_systick_timeout_over ( uint32_t , uint16_t ) ;
 bool is_evt_pin_high ( void ) ;
-void astro_manage_evt ( void ) ;
 void my_ldg_on ( void ) ;
 void my_ldg_off ( void ) ;
 void my_astro_on ( void ) ;
@@ -152,6 +151,7 @@ bool is_system_initialized ( void ) ;
 #define TIM_SECONDS_THS_SYSTEM_RESET	900
 #define ASTRO_LOG_TIMER					60000
 
+#define SECONDS_IN_1_HOUR				3600
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

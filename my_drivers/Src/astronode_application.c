@@ -352,30 +352,32 @@ void astronode_send_msn_rr(void)
     }
 }
 
-void astronode_send_nco_rr(void)
+uint32_t astronode_send_nco_rr ( void )
 {
-    astronode_app_msg_t request = {0};
-    astronode_app_msg_t answer = {0};
+    astronode_app_msg_t request = {0} ;
+    astronode_app_msg_t answer = {0} ;
 
-    request.op_code = ASTRONODE_OP_CODE_NCO_RR;
+    request.op_code = ASTRONODE_OP_CODE_NCO_RR ;
 
-    if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
+    if ( astronode_transport_send_receive ( &request , &answer ) == RS_SUCCESS )
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_NCO_RA)
+        if ( answer.op_code == ASTRONODE_OP_CODE_NCO_RA )
         {
             uint32_t time_to_next_pass = answer.p_payload[0]
-                                        + (answer.p_payload[1] << 8)
-                                        + (answer.p_payload[2] << 16)
-                                        + (answer.p_payload[3] << 24);
+                                        + ( answer.p_payload[1] << 8 )
+                                        + ( answer.p_payload[2] << 16 )
+                                        + ( answer.p_payload[3] << 24 ) ;
             char str[ASTRONODE_UART_DEBUG_BUFFER_LENGTH];
-            sprintf(str, "Next opportunity for communication with the Astrocast Network: %lds.", time_to_next_pass);
-            send_debug_logs(str);
+            sprintf (str , "Next opportunity for communication with the Astrocast Network: %lds." , time_to_next_pass ) ;
+            send_debug_logs ( str ) ;
+            return time_to_next_pass ;
         }
         else
         {
-            send_debug_logs("Failed to read satellite constellation ephemeris data.");
+            send_debug_logs ( "Failed to read satellite constellation ephemeris data." ) ;
         }
     }
+    return 0xFFFFFFFF ; // Longest possible time
 }
 
 void astronode_send_evt_rr(void)

@@ -167,6 +167,8 @@ int main(void)
 	  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
 	  my_lis2dw12_ctx.handle = HSPI1 ;
 	  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+
+	  // RTC INIT
   }
 
   // GNSS INIT AND ACQ
@@ -236,15 +238,25 @@ int main(void)
 	  }
 	  if ( is_acc_int1_wkup_flag )
 	  {
+		  // Turn off next int1_wkups for the end of procedure
 		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
 		  is_acc_int1_wkup_flag = false ;
 
 		  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
 		  current_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
+		  /*
 		  dbg_buff[0] = 0 ;
 		  sprintf ( dbg_buff , "Seconds elapsed from last fix: %lu" , current_ts - last_fix_ts ) ;
 		  send_debug_logs ( dbg_buff ) ;
+		  */
+		  if ( ( current_ts - last_fix_ts ) > SECONDS_IN_1_HOUR ) // If more than 1 hour has elapsed from last fix.
+		  {
+			  if ( astronode_send_rtc_rr () && !astronode_send_nco_rr () ) // If Astro's RC know time and has opportunity to contact SV
+			  {
 
+			  }
+		  }
+		  // Turn on int1_wkup
 		  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
@@ -698,29 +710,7 @@ bool is_evt_pin_high ( void )
 {
 	return ( HAL_GPIO_ReadPin ( GPIOA , ASTRO_EVT_Pin ) == GPIO_PIN_SET ? true : false);
 }
-void astro_manage_evt ( void )
-{
-	send_debug_logs ( "Evt pin is high." ) ;
-	astronode_send_evt_rr () ;
-	if (is_sak_available () )
-	{
-		astronode_send_sak_rr () ;
-		astronode_send_sak_cr () ;
-		send_debug_logs ( "Message has been acknowledged." ) ;
-		astronode_send_per_rr () ;
-	}
-	if ( is_astronode_reset () )
-	{
-		send_debug_logs ( "Terminal has been reset." ) ;
-		astronode_send_res_cr () ;
-	}
-	if ( is_command_available () )
-	{
-		send_debug_logs ( "Unicast command is available" ) ;
-		astronode_send_cmd_rr () ;
-		astronode_send_cmd_cr () ;
-	}
-}
+
 uint32_t get_systick ( void )
 {
     return HAL_GetTick() ;

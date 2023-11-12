@@ -56,7 +56,7 @@ void astronode_send_mgi_rr(void);
 
 void astronode_send_msn_rr(void);
 
-void astronode_send_nco_rr(void);
+uint32_t astronode_send_nco_rr ( void ) ;
 
 void astronode_send_evt_rr(void);
 
