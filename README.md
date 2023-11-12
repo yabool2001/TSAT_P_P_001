@@ -4,3 +4,6 @@ TSAT P Prototype v001
 Astronode S+ is the only Communication (COMMN) element. If COMMN is not working, system restart is used.
 
 LIS2DW12 accelerometer (ACC) is the only movement detection element. If ACC is not working, system is periodicaly (RTC events based) check locations and uses COMMN. So the ACC function is not critical and restart is not used.
+
+Abbreviation list:
+ts: timestamp - number of seconds after the Epoch time 1970.01.01 00:00:00
