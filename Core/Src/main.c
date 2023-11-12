@@ -85,12 +85,13 @@ char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek 
 stmdev_ctx_t my_lis2dw12_ctx ;
 
 // RTC
-RTC_TimeTypeDef* rtc_t ;
-RTC_DateTypeDef* rtc_d ;
+RTC_TimeTypeDef rtc_t ;
+RTC_DateTypeDef rtc_d ;
 
 // Flags
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
 bool		is_acc_int1_wkup_flag = false ;
+bool		is_astro_evt_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -177,8 +178,8 @@ int main(void)
 	  my_rtc_get_time_s ( rtc_dt_s ) ;
 
 	  // Update ts of last fix
-	  my_rtc_get_dt ( rtc_d , rtc_t ) ;
-	  last_fix_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
+	  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
+	  last_fix_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
 	  dbg_buff[0] = 0 ;
 	  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
 	  send_debug_logs ( dbg_buff ) ;
@@ -216,10 +217,17 @@ int main(void)
   // MAIN STATE MACHINE
   while (1)
   {
+	  if ( is_astro_evt_flag )
+	  {
+		  my_astro_read_evt_reg () ;
+		  is_astro_evt_flag = false ;
+	  }
+	  /*
 	  if ( is_evt_pin_high() )
 	  {
 		  my_astro_read_evt_reg () ;
 	  }
+	  */
 	  if ( get_systick () - astro_log_loop_timer >  ASTRO_LOG_TIMER )
 	  {
 		  my_astro_log ();
@@ -229,11 +237,15 @@ int main(void)
 	  if ( is_acc_int1_wkup_flag )
 	  {
 		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
-		  my_rtc_get_dt ( rtc_d , rtc_t ) ;
-		  current_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
+		  is_acc_int1_wkup_flag = false ;
+
+		  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
+		  current_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
 		  dbg_buff[0] = 0 ;
 		  sprintf ( dbg_buff , "Seconds elapsed from last fix: %lu" , current_ts - last_fix_ts ) ;
 		  send_debug_logs ( dbg_buff ) ;
+
+		  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
 	  //dbg_buff[0] = 0 ;
@@ -330,40 +342,40 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0x0;
-  sTime.Minutes = 0x0;
-  sTime.Seconds = 0x0;
-  sTime.SubSeconds = 0x0;
+  sTime.Hours = 0;
+  sTime.Minutes = 0;
+  sTime.Seconds = 0;
+  sTime.SubSeconds = 0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
   {
     Error_Handler();
   }
   sDate.WeekDay = RTC_WEEKDAY_SATURDAY;
   sDate.Month = RTC_MONTH_JANUARY;
-  sDate.Date = 0x1;
-  sDate.Year = 0x0;
+  sDate.Date = 1;
+  sDate.Year = 0;
 
-  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN) != HAL_OK)
   {
     Error_Handler();
   }
 
   /** Enable the Alarm A
   */
-  sAlarm.AlarmTime.Hours = 0x0;
-  sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x0;
-  sAlarm.AlarmTime.SubSeconds = 0x0;
+  sAlarm.AlarmTime.Hours = 0;
+  sAlarm.AlarmTime.Minutes = 0;
+  sAlarm.AlarmTime.Seconds = 0;
+  sAlarm.AlarmTime.SubSeconds = 0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
   sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
   sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-  sAlarm.AlarmDateWeekDay = 0x1;
+  sAlarm.AlarmDateWeekDay = 1;
   sAlarm.Alarm = RTC_ALARM_A;
-  if (HAL_RTC_SetAlarm(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+  if (HAL_RTC_SetAlarm(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
   {
     Error_Handler();
   }
@@ -632,7 +644,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : ASTRO_EVT_Pin */
   GPIO_InitStruct.Pin = ASTRO_EVT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(ASTRO_EVT_GPIO_Port, &GPIO_InitStruct);
 
@@ -643,7 +655,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -804,12 +816,19 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 
 void HAL_GPIO_EXTI_Rising_Callback ( uint16_t GPIO_Pin )
 {
-	if ( GPIO_Pin == 0x100 )
+	if ( GPIO_Pin == 0x100 ) // LIS_INT1_EXTI8_Pin = 0x100
 	{
 		is_acc_int1_wkup_flag = true ;
+		/*
 		dbg_buff[0] = 0 ;
 		sprintf ( dbg_buff , "INT on GPIO_Pin %04x detected!\n" , GPIO_Pin ) ;
 		send_debug_logs ( dbg_buff ) ;
+		*/
+	}
+	//zamiast poniższego może lepiej wrócić do pierwotnego przeglądania GPIO w trybie input bez przerwania
+	if ( GPIO_Pin == 0x1000 ) // ASTRO_EVT_Pin = 0x1000
+	{
+		is_astro_evt_flag = true ;
 	}
 }
 

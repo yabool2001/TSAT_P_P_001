@@ -114,6 +114,7 @@ bool is_system_initialized ( void ) ;
 #define ASTRO_RST_GPIO_Port GPIOA
 #define ASTRO_EVT_Pin GPIO_PIN_12
 #define ASTRO_EVT_GPIO_Port GPIOA
+#define ASTRO_EVT_EXTI_IRQn EXTI4_15_IRQn
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
