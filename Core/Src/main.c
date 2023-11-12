@@ -172,21 +172,25 @@ int main(void)
   }
 
   // GNSS INIT AND ACQ
+  prepare_payload () ;
+  /*
   astro_geo_wr_latitude = 0 ;
   astro_geo_wr_longitude = 0 ;
   if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-	  my_rtc_get_time_s ( rtc_dt_s ) ;
 
 	  // Update ts of last fix
 	  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
 	  last_fix_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
+
 	  dbg_buff[0] = 0 ;
 	  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
 	  send_debug_logs ( dbg_buff ) ;
 
+	  my_rtc_get_time_s ( rtc_dt_s ) ;
 	  send_debug_logs ( rtc_dt_s ) ;
+
 	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
 		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
@@ -198,6 +202,7 @@ int main(void)
   sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
   send_debug_logs ( astro_payload_log ) ;
   my_astro_add_payload_2_queue ( payload ) ;
+  */
 
   // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
@@ -675,6 +680,42 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+bool prepare_payload ( void )
+{
+	bool r = false ;
+	astro_geo_wr_latitude = 0 ;
+	astro_geo_wr_longitude = 0 ;
+	if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
+	{
+		r = true ;
+		my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
+
+		// Update ts of last fix
+		my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
+		last_fix_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
+
+		dbg_buff[0] = 0 ;
+		sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
+		send_debug_logs ( dbg_buff ) ;
+
+		my_rtc_get_time_s ( rtc_dt_s ) ;
+		send_debug_logs ( rtc_dt_s ) ;
+
+		if ( nmea_fixed_pdop_d < 100.0 )
+		{
+			snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
+		}
+	}
+
+	agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
+	sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
+	sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
+	send_debug_logs ( astro_payload_log ) ;
+	my_astro_add_payload_2_queue ( payload ) ;
+
+	return r ;
+}
+
 void send_debug_logs ( char* p_tx_buffer )
 {
     uint32_t length = strlen ( p_tx_buffer ) ;

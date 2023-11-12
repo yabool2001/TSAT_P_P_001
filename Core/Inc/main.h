@@ -84,7 +84,7 @@ void my_lx6_off ( void ) ;
 int32_t	my_lis2dw12_platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;
 int32_t	my_lis2dw12_platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
 bool is_system_initialized ( void ) ;
-
+bool prepare_payload ( void ) ;
 
 /* USER CODE END EFP */
 
