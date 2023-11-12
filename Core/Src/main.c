@@ -67,6 +67,7 @@ uint16_t	nmea_max_rmc_time = 60 ;
 uint16_t	my_lx6_gnss_max_active_time = GNSS_MAX_ACTIVE_TIME ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 double 		nmea_fixed_pdop_d = 101 ;
 char 		nmea_fixed_pdop_s[NMEA_FIX_PDOP_STRING_BUFF_SIZE] = {0} ; // 4 znaki wartości i kropka XX.X + '\0'
+uint32_t	last_fix_ts = 0 ; // 0 timestamp (ts) is 1970.01.01 00:00:00
 
 // TIM
 uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_max_active_time
@@ -82,6 +83,9 @@ char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek 
 // ACC
 stmdev_ctx_t my_lis2dw12_ctx ;
 
+// RTC
+RTC_TimeTypeDef rtc_t ;
+RTC_DateTypeDef rtc_d ;
 
 // Flags
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
@@ -170,6 +174,7 @@ int main(void)
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
 	  my_rtc_get_time_s ( rtc_dt ) ;
+	  last_fix_ts = my_rtc_get_time_s ;
 	  send_debug_logs ( rtc_dt ) ;
 	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
@@ -212,6 +217,11 @@ int main(void)
 		  my_astro_log ();
 		  astro_log_loop_timer = get_systick () ;
 		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
+	  }
+	  if ( is_acc_int1_wkup_flag )
+	  {
+		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
+		  __NOP () ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
 	  //dbg_buff[0] = 0 ;
