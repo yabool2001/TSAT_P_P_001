@@ -207,7 +207,7 @@ int main(void)
   my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
   */
 
-  my_astro_on () ;
+  //my_astro_on () ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -232,7 +232,7 @@ int main(void)
 		  my_rtc_get_dt ( rtc_d , rtc_t ) ;
 		  current_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
 		  dbg_buff[0] = 0 ;
-		  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
+		  sprintf ( dbg_buff , "Seconds elapsed from last fix: %lu" , current_ts - last_fix_ts ) ;
 		  send_debug_logs ( dbg_buff ) ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
