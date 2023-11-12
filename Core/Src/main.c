@@ -151,6 +151,13 @@ int main(void)
   {
 	  HAL_NVIC_SystemReset () ;
   }
+
+  // ACC INIT
+  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
+  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
+  my_lis2dw12_ctx.handle = HSPI1 ;
+  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+
   // GNSS INIT AND ACQ
   astro_geo_wr_latitude = 0 ;
   astro_geo_wr_longitude = 0 ;
@@ -171,12 +178,10 @@ int main(void)
   send_debug_logs ( astro_payload_log ) ;
   my_astro_add_payload_2_queue ( payload ) ;
 
-  // ACC INIT
-  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
-  my_lis2dw12_ctx.read_reg = my_lis2dw12_platform_read ;
-  my_lis2dw12_ctx.handle = HSPI1 ;
-  my_lis2dw12_init ( &my_lis2dw12_ctx ) ;
+  // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+
+  // STOP SYSTEM
   HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
   HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
   HAL_ResumeTick () ;
