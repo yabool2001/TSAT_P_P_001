@@ -11,9 +11,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "stm32g0xx_hal.h"
 
 double my_string2double_conv ( const char* ) ;
 float my_string2float_conv ( const char* ) ;
 uint8_t my_find_char_position ( const char* , const char , uint8_t ) ;
+uint32_t my_conv_rtc2timestamp ( RTC_DateTypeDef* , RTC_TimeTypeDef* ) ;
+int isLeapYear ( int ) ;
 
 #endif /* MY_CONVERSIONS_H_ */

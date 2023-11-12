@@ -1,3 +1,5 @@
 ../my_lib/Src/my_conversions.c:10:8:my_string2double_conv	24	static
 ../my_lib/Src/my_conversions.c:16:7:my_string2float_conv	24	static
 ../my_lib/Src/my_conversions.c:23:9:my_find_char_position	24	static
+../my_lib/Src/my_conversions.c:40:10:my_conv_rtc2timestamp	32	static
+../my_lib/Src/my_conversions.c:66:5:isLeapYear	16	static
