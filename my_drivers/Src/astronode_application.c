@@ -538,30 +538,32 @@ void astronode_send_res_cr(void)
     }
 }
 
-void astronode_send_rtc_rr(void)
+uint32_t astronode_send_rtc_rr ( void )
 {
-    astronode_app_msg_t request = {0};
-    astronode_app_msg_t answer = {0};
+    astronode_app_msg_t request = {0} ;
+    astronode_app_msg_t answer = {0} ;
 
-    request.op_code = ASTRONODE_OP_CODE_RTC_RR;
+    request.op_code = ASTRONODE_OP_CODE_RTC_RR ;
 
-    if (astronode_transport_send_receive(&request, &answer) == RS_SUCCESS)
+    if ( astronode_transport_send_receive ( &request , &answer ) == RS_SUCCESS )
     {
-        if (answer.op_code == ASTRONODE_OP_CODE_RTC_RA)
+        if ( answer.op_code == ASTRONODE_OP_CODE_RTC_RA )
         {
             uint32_t rtc_time = answer.p_payload[0]
-                                        + (answer.p_payload[1] << 8)
-                                        + (answer.p_payload[2] << 16)
-                                        + (answer.p_payload[3] << 24);
-            char str[ASTRONODE_UART_DEBUG_BUFFER_LENGTH];
-            sprintf(str, "RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): %lds.", rtc_time);
-            send_debug_logs(str);
+                                        + ( answer.p_payload[1] << 8 )
+                                        + ( answer.p_payload[2] << 16 )
+                                        + ( answer.p_payload[3] << 24 ) ;
+            char str[ASTRONODE_UART_DEBUG_BUFFER_LENGTH] ;
+            sprintf ( str , "RTC time since Astrocast Epoch (2018-01-01 00:00:00 UTC): %lds." , rtc_time ) ;
+            send_debug_logs ( str ) ;
+            return rtc_time ;
         }
         else
         {
-            send_debug_logs("Failed to read rtc time.");
+            send_debug_logs ( "Failed to read rtc time." ) ;
         }
     }
+    return 0 ;
 }
 
 void astronode_send_sak_rr(void)

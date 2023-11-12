@@ -35,8 +35,6 @@
 /* USER CODE BEGIN PD */
 #define NMEA_3D_FIX						'3'
 #define NMEA_MESSAGE_SIZE				250
-#define TIM_SECONDS_THS_SYSTEM_RESET	900
-#define ASTRO_LOG_TIMER					5000
 
 /* USER CODE END PD */
 
@@ -87,6 +85,7 @@ stmdev_ctx_t my_lis2dw12_ctx ;
 
 // Flags
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
+bool		is_acc_int1_wkup_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -150,10 +149,12 @@ int main(void)
   if ( ! is_system_initialized () )
   {
 	  // ASTRO INIT
+	  my_astro_on () ;
 	  if ( !my_astro_init () )
 	  {
 		  HAL_NVIC_SystemReset () ;
 	  }
+	  my_astro_off () ;
 
 	  // ACC INIT
 	  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
@@ -185,16 +186,21 @@ int main(void)
   // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
 
-  // STOP SYSTEM
+  // TEST STOP SYSTEM
+  /*
   HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
   HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
   HAL_ResumeTick () ;
   my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
+  */
+
+  my_astro_on () ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   astro_log_loop_timer = get_systick () ;
+  // MAIN STATE MACHINE
   while (1)
   {
 	  if ( is_evt_pin_high() )
@@ -751,9 +757,11 @@ bool is_system_initialized ( void )
 {
 	uint16_t yyyy ;
 
+	uint32_t commn_ts = astronode_send_rtc_rr () ;
+
 	yyyy = my_rtc_get_time_s ( rtc_dt ) ;
 	send_debug_logs ( rtc_dt ) ;
-	if ( yyyy >= FIRMWARE_RELEASE_YEAR )
+	if ( yyyy >= FIRMWARE_RELEASE_YEAR || commn_ts != 0 )
 	{
 		return true ;
 	}
@@ -774,9 +782,13 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef *htim )
 
 void HAL_GPIO_EXTI_Rising_Callback ( uint16_t GPIO_Pin )
 {
-	dbg_buff[0] = 0 ;
-	sprintf ( dbg_buff , "INT on GPIO_Pin %04x detected!\n" , GPIO_Pin ) ;
-	send_debug_logs ( dbg_buff ) ;
+	if ( GPIO_Pin == 0x100 )
+	{
+		is_acc_int1_wkup_flag = true ;
+		dbg_buff[0] = 0 ;
+		sprintf ( dbg_buff , "INT on GPIO_Pin %04x detected!\n" , GPIO_Pin ) ;
+		send_debug_logs ( dbg_buff ) ;
+	}
 }
 
 /* USER CODE END 4 */

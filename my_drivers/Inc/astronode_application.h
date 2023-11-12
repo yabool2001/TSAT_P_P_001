@@ -70,7 +70,7 @@ void astronode_send_pld_fr(void);
 
 void astronode_send_res_cr(void);
 
-void astronode_send_rtc_rr(void);
+uint32_t astronode_send_rtc_rr ( void ) ;
 
 void astronode_send_sak_cr(void);
 

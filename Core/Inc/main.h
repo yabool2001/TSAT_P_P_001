@@ -148,6 +148,9 @@ bool is_system_initialized ( void ) ;
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
 #define HSPI1							&hspi1
 
+#define TIM_SECONDS_THS_SYSTEM_RESET	900
+#define ASTRO_LOG_TIMER					60000
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

@@ -16,7 +16,7 @@ bool my_astro_init ( void )
 	{
 		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
 		my_astro_off () ;
-		HAL_Delay ( 3000 ) ;
+		HAL_Delay ( 100 ) ;
 		my_astro_on () ;
 		reset_astronode () ;
 	}
