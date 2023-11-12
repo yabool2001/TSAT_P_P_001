@@ -57,7 +57,8 @@ UART_HandleTypeDef huart3;
 /* USER CODE BEGIN PV */
 char* 		hello = "\nHello TSAT_P_P_001\n\n" ;
 char		dbg_buff[100] ;
-char		rtc_dt[20] ;
+char		rtc_dt_s[20] ;
+uint32_t	current_ts = 0 ;
 
 // Lx6
 int32_t		astro_geo_wr_latitude ;
@@ -173,13 +174,16 @@ int main(void)
   if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
   {
 	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-	  my_rtc_get_time_s ( rtc_dt ) ;
+	  my_rtc_get_time_s ( rtc_dt_s ) ;
 
 	  // Update ts of last fix
 	  my_rtc_get_dt ( rtc_d , rtc_t ) ;
 	  last_fix_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
+	  dbg_buff[0] = 0 ;
+	  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
+	  send_debug_logs ( dbg_buff ) ;
 
-	  send_debug_logs ( rtc_dt ) ;
+	  send_debug_logs ( rtc_dt_s ) ;
 	  if ( nmea_fixed_pdop_d < 100.0 )
 	  {
 		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
@@ -225,7 +229,11 @@ int main(void)
 	  if ( is_acc_int1_wkup_flag )
 	  {
 		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
-		  __NOP () ;
+		  my_rtc_get_dt ( rtc_d , rtc_t ) ;
+		  current_ts = my_conv_rtc2timestamp ( rtc_d , rtc_t ) ;
+		  dbg_buff[0] = 0 ;
+		  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
+		  send_debug_logs ( dbg_buff ) ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
 	  //dbg_buff[0] = 0 ;
@@ -773,8 +781,8 @@ bool is_system_initialized ( void )
 
 	uint32_t commn_ts = astronode_send_rtc_rr () ;
 
-	yyyy = my_rtc_get_time_s ( rtc_dt ) ;
-	send_debug_logs ( rtc_dt ) ;
+	yyyy = my_rtc_get_time_s ( rtc_dt_s ) ;
+	send_debug_logs ( rtc_dt_s ) ;
 	if ( yyyy >= FIRMWARE_RELEASE_YEAR || commn_ts != 0 )
 	{
 		return true ;
