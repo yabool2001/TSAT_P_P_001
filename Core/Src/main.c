@@ -176,24 +176,26 @@ int main(void)
 	  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
 	  send_debug_logs ( "Enter STOPMode during preparation process" ) ;
 	  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
-	  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+	  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
 	  HAL_ResumeTick () ;
 	  if ( is_acc_int1_wkup_flag )
 	  {
-		  send_debug_logs ( "lis2dw12_int1 wake up after STOPMode" ) ;
+		  send_debug_logs ( "main.c - preparation sm: lis2dw12_int1 wake up after STOPMode" ) ;
 		  // Turn off next int1_wkups for the end of procedure
 		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
 		  is_acc_int1_wkup_flag = false ;
 		  HAL_Delay ( 500 ) ; // docelowo 2000
 	  }
   }
+  // Ciągle w ramach preparation process otrzyaj chociaż 1 potwierdzenie wysłania wiadomosci, żeby Astro miało czas rtc do NCO
+  // Poniżej zrób kod do tego
 
 
 
   // TEST STOP SYSTEM
   /*
   HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
-  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
   HAL_ResumeTick () ;
   my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
   */
@@ -203,37 +205,36 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   astro_log_loop_timer = get_systick () ;
-  // MAIN STATE MACHINE
+  // RUNNING STATE MACHINE
   while (1)
   {
 	  if ( is_evt_pin_high() )
 	  {
+		  send_debug_logs ( "main.c - running sm: is_evt_pin_high" ) ;
 		  my_astro_read_evt_reg () ;
 	  }
 	  else
 	  {
-		  send_debug_logs ( "Enter STOPMode when no EVT during running process" ) ;
+		  send_debug_logs ( "main.c - running sm: no is_evt_pin_high" ) ;
 		  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
-		  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+		  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
 		  HAL_ResumeTick () ;
 	  }
 	  if ( is_astro_evt_flag )
 	  {
+		  send_debug_logs ( "main.c - running sm: is_astro_evt_flag" ) ;
 		  my_astro_read_evt_reg () ;
 		  is_astro_evt_flag = false ;
-	  }
-
-	  if ( get_systick () - astro_log_loop_timer >  ASTRO_LOG_TIMER )
-	  {
-		  my_astro_log ();
-		  astro_log_loop_timer = get_systick () ;
-		  astronode_send_pld_er ( 0 , payload , strlen ( payload ) ) ;
 	  }
 	  if ( is_acc_int1_wkup_flag )
 	  {
 		  // Turn off next int1_wkups for the end of procedure
 		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
 		  is_acc_int1_wkup_flag = false ;
+
+		  send_debug_logs ( "main.c - running sm: lis2dw12_int1 wake up after STOPMode" ) ;
+		  my_astro_log ();
+
 
 		  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
 		  current_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
@@ -250,12 +251,14 @@ int main(void)
 			  }
 		  }
 		  // Turn on int1_wkup
+		  my_astro_log ();
 		  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
 	  }
 	  if ( is_rtc_alarm_a_flag )
 	  {
-		  send_debug_logs ( "RTC alarm A event" ) ;
+		  send_debug_logs ( "main.c - running sm: rtc alarm A event" ) ;
 		  enqueue_payload () ;
+		  my_astro_log () ;
 		  my_rtc_set_alarm ( SECONDS_IN_1_HOUR ) ;
 		  is_rtc_alarm_a_flag = false ;
 	  }
