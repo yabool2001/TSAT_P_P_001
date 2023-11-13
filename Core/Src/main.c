@@ -77,7 +77,7 @@ uint32_t	agg_tim_satcom_seconds = 0 ;
 
 // Astrocast
 uint32_t	astro_log_loop_timer = 0 ;
-uint16_t	g_payload_id_counter = 0 ;
+uint16_t	astro_payload_id_counter = 1 ;
 char		payload[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES] = {0}; // 160 bajtów
 char 		astro_payload_log[ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES+21] ; // Nagłowek + 12 + ew. znak minus + '\0'
 
@@ -92,6 +92,7 @@ RTC_DateTypeDef rtc_d ;
 bool		is_system_already_initialized = false ; // Recognize if system has successful GNSS contact and has real time, Based on rtc settings.
 bool		is_acc_int1_wkup_flag = false ;
 bool		is_astro_evt_flag = false ;
+bool		is_rtc_alarm_a_flag = false ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,12 +156,10 @@ int main(void)
   if ( ! is_system_initialized () )
   {
 	  // ASTRO INIT
-	  my_astro_on () ;
 	  if ( !my_astro_init () )
 	  {
 		  HAL_NVIC_SystemReset () ;
 	  }
-	  my_astro_off () ;
 
 	  // ACC INIT
 	  my_lis2dw12_ctx.write_reg = my_lis2dw12_platform_write ;
@@ -173,36 +172,6 @@ int main(void)
 
   // GNSS INIT AND ACQ
   prepare_payload () ;
-  /*
-  astro_geo_wr_latitude = 0 ;
-  astro_geo_wr_longitude = 0 ;
-  if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
-  {
-	  my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
-
-	  // Update ts of last fix
-	  my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
-	  last_fix_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
-
-	  dbg_buff[0] = 0 ;
-	  sprintf ( dbg_buff , "Last fix timestap: %lu" , last_fix_ts ) ;
-	  send_debug_logs ( dbg_buff ) ;
-
-	  my_rtc_get_time_s ( rtc_dt_s ) ;
-	  send_debug_logs ( rtc_dt_s ) ;
-
-	  if ( nmea_fixed_pdop_d < 100.0 )
-	  {
-		  snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
-	  }
-  }
-
-  agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
-  sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
-  sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
-  send_debug_logs ( astro_payload_log ) ;
-  my_astro_add_payload_2_queue ( payload ) ;
-  */
 
   // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
@@ -215,7 +184,6 @@ int main(void)
   my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
   */
 
-  //my_astro_on () ;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -229,17 +197,16 @@ int main(void)
 		  my_astro_read_evt_reg () ;
 		  is_astro_evt_flag = false ;
 	  }
-	  /*
 	  if ( is_evt_pin_high() )
 	  {
 		  my_astro_read_evt_reg () ;
 	  }
-	  */
+
 	  if ( get_systick () - astro_log_loop_timer >  ASTRO_LOG_TIMER )
 	  {
 		  my_astro_log ();
 		  astro_log_loop_timer = get_systick () ;
-		  astronode_send_pld_er ( g_payload_id_counter , payload , strlen ( payload ) ) ;
+		  astronode_send_pld_er ( 0 , payload , strlen ( payload ) ) ;
 	  }
 	  if ( is_acc_int1_wkup_flag )
 	  {
@@ -258,11 +225,17 @@ int main(void)
 		  {
 			  if ( astronode_send_rtc_rr () && !astronode_send_nco_rr () ) // If Astro's RC know time and has opportunity to contact SV
 			  {
-
+				  prepare_payload () ;
 			  }
 		  }
 		  // Turn on int1_wkup
 		  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+	  }
+	  if ( is_rtc_alarm_a_flag )
+	  {
+		  send_debug_logs ( "RTC alarm A event managed." ) ;
+		  my_rtc_set_alarm ( SECONDS_IN_1_HOUR ) ;
+		  is_rtc_alarm_a_flag = false ;
 	  }
 	  //HAL_GPIO_ReadPin ( GPIOB , LIS_INT1_EXTI8_Pin ) ;
 	  //dbg_buff[0] = 0 ;
@@ -682,12 +655,10 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 bool prepare_payload ( void )
 {
-	bool r = false ;
 	astro_geo_wr_latitude = 0 ;
 	astro_geo_wr_longitude = 0 ;
 	if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
 	{
-		r = true ;
 		my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
 
 		// Update ts of last fix
@@ -705,15 +676,22 @@ bool prepare_payload ( void )
 		{
 			snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
 		}
+
+		agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
+
+		sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
+		sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
+		send_debug_logs ( astro_payload_log ) ;
+		// astronode_send_pld_fr () ; // Don't clear entire payload queue because it's worth having a travel history, even if sent with delay.
+		my_astro_add_payload_2_queue ( astro_payload_id_counter++ , payload ) ;
+		if ( astro_payload_id_counter == 0 ) // Avoid id = 0 to avoid collision with control test payload that is always 0
+		{
+			astro_payload_id_counter++ ;
+		}
+		return true ;
 	}
 
-	agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
-	sprintf ( payload , "%s,%d,%lu" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds ) ;
-	sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
-	send_debug_logs ( astro_payload_log ) ;
-	my_astro_add_payload_2_queue ( payload ) ;
-
-	return r ;
+	return false ;
 }
 
 void send_debug_logs ( char* p_tx_buffer )
@@ -767,23 +745,6 @@ void my_ldg_on ( void )
 void my_ldg_off ( void )
 {
 	HAL_GPIO_WritePin ( GPIOA , LDG_Pin , GPIO_PIN_RESET ) ;
-}
-void my_astro_on ( void )
-{
-	HAL_UART_DeInit		( HUART_ASTRO ) ;
-	HAL_GPIO_WritePin 	( ASTRO_WAKEUP_GPIO_Port , ASTRO_WAKEUP_Pin , GPIO_PIN_RESET ) ;
-	HAL_GPIO_WritePin 	( ASTRO_RST_GPIO_Port , ASTRO_RST_Pin , GPIO_PIN_RESET ) ;
-	HAL_GPIO_WritePin	( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_SET ) ;
-	HAL_Delay 			( 1 ) ;
-	MX_USART1_UART_Init () ;
-}
-void my_astro_off ( void )
-{
-	HAL_UART_DeInit		( HUART_ASTRO ) ;
-	HAL_GPIO_WritePin 	( ASTRO_WAKEUP_GPIO_Port , ASTRO_WAKEUP_Pin , GPIO_PIN_RESET ) ;
-	HAL_GPIO_WritePin 	( ASTRO_RST_GPIO_Port , ASTRO_RST_Pin , GPIO_PIN_RESET ) ;
-	HAL_Delay 			( 1 ) ;
-	HAL_GPIO_WritePin 	( GPIOA , ASTRO_PWR_SW_Pin , GPIO_PIN_RESET ) ;
 }
 void my_lx6_on ( void )
 {
@@ -861,6 +822,10 @@ void HAL_GPIO_EXTI_Rising_Callback ( uint16_t GPIO_Pin )
 	{
 		is_astro_evt_flag = true ;
 	}
+}
+void HAL_RTC_AlarmAEventCallback ( RTC_HandleTypeDef *hrtc )
+{
+	is_rtc_alarm_a_flag = true ;
 }
 
 /* USER CODE END 4 */

@@ -14,11 +14,9 @@ bool my_astro_init ( void )
 	HAL_TIM_Base_Start_IT ( MY_TIMER ) ;
 	while ( tim_seconds < MY_ASTRO_INIT_TIME && !cfg_wr )
 	{
-		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
-		my_astro_off () ;
-		HAL_Delay ( 100 ) ;
-		my_astro_on () ;
 		reset_astronode () ;
+		HAL_Delay ( 100 ) ;
+		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
 	}
 	tim_seconds = 0 ;
 	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
@@ -37,9 +35,8 @@ bool my_astro_init ( void )
 		return false ;
 	}
 }
-bool my_astro_add_payload_2_queue ( char* payload )
+bool my_astro_add_payload_2_queue ( uint16_t id , char* payload )
 {
-	uint16_t id = 0 ;
 	size_t l = strlen ( payload ) ;
 	if ( l <= ASTRONODE_APP_PAYLOAD_MAX_LEN_BYTES )
 	{

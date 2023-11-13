@@ -77,8 +77,6 @@ bool is_systick_timeout_over ( uint32_t , uint16_t ) ;
 bool is_evt_pin_high ( void ) ;
 void my_ldg_on ( void ) ;
 void my_ldg_off ( void ) ;
-void my_astro_on ( void ) ;
-void my_astro_off ( void ) ;
 void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
 int32_t	my_lis2dw12_platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;

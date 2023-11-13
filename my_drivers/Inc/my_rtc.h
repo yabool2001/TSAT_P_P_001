@@ -17,6 +17,6 @@
 void		my_rtc_set_dt_from_nmea_rmc ( const char* ) ;
 void		my_rtc_get_dt ( RTC_DateTypeDef* d , RTC_TimeTypeDef* t ) ;
 uint16_t	my_rtc_get_time_s ( char* ) ;
-void		my_rtc_set_alarm ( uint8_t , uint8_t , uint32_t , uint8_t ) ;
+void		my_rtc_set_alarm ( uint32_t ) ;
 
 #endif /* MY_RTC_H_ */
