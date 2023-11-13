@@ -171,7 +171,7 @@ int main(void)
   }
 
   // GNSS INIT AND ACQ
-  prepare_payload () ;
+  enqueue_payload () ;
 
   // ACC INT1 WAKEUP ENABLE
   my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
@@ -225,7 +225,7 @@ int main(void)
 		  {
 			  if ( astronode_send_rtc_rr () && !astronode_send_nco_rr () ) // If Astro's RC know time and has opportunity to contact SV
 			  {
-				  prepare_payload () ;
+				  enqueue_payload () ;
 			  }
 		  }
 		  // Turn on int1_wkup
@@ -653,7 +653,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-bool prepare_payload ( void )
+bool enqueue_payload ( void )
 {
 	astro_geo_wr_latitude = 0 ;
 	astro_geo_wr_longitude = 0 ;

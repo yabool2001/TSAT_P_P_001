@@ -18,7 +18,7 @@ bool my_astro_init ( void )
 		HAL_Delay ( 100 ) ;
 		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
 	}
-	tim_seconds = 0 ;
+	//tim_seconds = 0 ;
 	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
 	if ( cfg_wr )
 	{

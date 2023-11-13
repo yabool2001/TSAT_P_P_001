@@ -53,27 +53,39 @@ uint16_t my_rtc_get_time_s ( char* dt_s )
 
 	return (uint16_t) ( 2000 + gDate.Year ) ;
 }
-void my_rtc_set_alarm ( uint32_t s )
+bool my_rtc_set_alarm ( uint32_t s )
 {
+	tim_seconds = 0 ;
+
 	RTC_DateTypeDef 	d ;
 	RTC_TimeTypeDef 	t ;
 	RTC_AlarmTypeDef	a ;
 
+	bool r = false ;
+
 	my_rtc_get_dt ( &d , &t ) ;
-	alarm_ts = my_conv_rtc2timestamp ( &d , &t ) + a ;
-	my_conv_timestamp2rtc ( &d , &t ) ;
-	sAlarm.AlarmTime.Hours = t.Hours ;
-	sAlarm.AlarmTime.Minutes = t.Minutes ;
-	sAlarm.AlarmTime.Seconds = t.Seconds ;
-	sAlarm.AlarmTime.SubSeconds = 0;
-	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-	sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY ;
-	sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
-	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-	sAlarm.Alarm = RTC_ALARM_A;
-	if (HAL_RTC_SetAlarm(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
+	uint32_t alarm_ts = my_conv_rtc2timestamp ( &d , &t ) + s ;
+	my_conv_timestamp2rtc ( alarm_ts , &d , &t ) ;
+	a.AlarmTime.Hours = t.Hours ;
+	a.AlarmTime.Minutes = t.Minutes ;
+	a.AlarmTime.Seconds = t.Seconds ;
+	a.AlarmTime.SubSeconds = 0 ;
+	a.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE ;
+	a.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET ;
+	a.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY ;
+	a.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL ;
+	a.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE ;
+	a.Alarm = RTC_ALARM_A ;
+
+	HAL_TIM_Base_Start_IT ( MY_TIMER ) ;
+	while ( tim_seconds < HAL_STD_TIME_OPS_THS )
 	{
-	Error_Handler();
+		if ( HAL_RTC_SetAlarm ( &hrtc , &a , RTC_FORMAT_BIN ) == HAL_OK )
+		{
+			r = true ;
+			break ;
+		}
 	}
+	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
+	return r ;
 }

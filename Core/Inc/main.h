@@ -82,7 +82,7 @@ void my_lx6_off ( void ) ;
 int32_t	my_lis2dw12_platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;
 int32_t	my_lis2dw12_platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
 bool is_system_initialized ( void ) ;
-bool prepare_payload ( void ) ;
+bool enqueue_payload ( void ) ;
 
 /* USER CODE END EFP */
 
@@ -146,10 +146,11 @@ bool prepare_payload ( void ) ;
 #define UART_ASTRO_RX_MAX_BUFF_SIZE		100
 #define HSPI1							&hspi1
 
-#define TIM_SECONDS_THS_SYSTEM_RESET	900
-#define ASTRO_LOG_TIMER					60000
+#define TIM_SECONDS_THS_SYSTEM_RESET	900		// 900 s = 15 min.
+#define ASTRO_LOG_TIMER					60000 	// 60 000 ms = 60 s
 
 #define SECONDS_IN_1_HOUR				3600
+#define HAL_STD_TIME_OPS_THS			2		// 2 s
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

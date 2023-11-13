@@ -43,6 +43,7 @@ my_drivers/Src/astronode_application.o: \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_rtc.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h \
+ C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lx6_gnss.h \
  C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lis2dw12.h \
@@ -90,6 +91,7 @@ C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/astronode_application.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_rtc.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_nmea.h:
+C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_lib/Inc/my_conversions.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_astronode.h:
 C:/Users/mzeml/embedded/TSAT_P_P_001/my_drivers/Inc/my_lx6_gnss.h:
