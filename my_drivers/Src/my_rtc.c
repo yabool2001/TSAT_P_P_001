@@ -77,6 +77,12 @@ bool my_rtc_set_alarm ( uint32_t s )
 	a.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE ;
 	a.Alarm = RTC_ALARM_A ;
 
+	if ( HAL_RTC_SetAlarm ( &hrtc , &a , RTC_FORMAT_BIN ) == HAL_OK )
+	{
+		r = true ;
+	}
+
+	/* Docelowo przetestować poniższą procedurę i wdrażać powszechnie
 	HAL_TIM_Base_Start_IT ( MY_TIMER ) ;
 	while ( tim_seconds < HAL_STD_TIME_OPS_THS )
 	{
@@ -87,5 +93,6 @@ bool my_rtc_set_alarm ( uint32_t s )
 		}
 	}
 	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;
+	*/
 	return r ;
 }

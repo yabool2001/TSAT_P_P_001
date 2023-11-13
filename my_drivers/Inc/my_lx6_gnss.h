@@ -20,7 +20,6 @@
 #define MY_GNSS_NMEA_MAX_SIZE			12 // 10 + ew. znak minus + '\0'
 #define MY_GNSS_MIN_TNS					3 // Minimalna ilość satelitów
 #define MY_GNSS_MIN_TNS_TIME_THS		10 // Czas w jakim powinno być co najmniej MY_GNSS_NMEA_GSV_MIN_TNS satelitów
-#define GNSS_MAX_ACTIVE_TIME			60 // Więcej niż 60 s nie ma sensu, bo to oznacza, że nie będzie jak wysłać do satelite Astrocast
 #define NMEA_FIX_PDOP_STRING_BUFF_SIZE	5
 
 

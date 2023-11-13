@@ -63,17 +63,15 @@ uint32_t	current_ts = 0 ;
 // Lx6
 int32_t		astro_geo_wr_latitude ;
 int32_t		astro_geo_wr_longitude ;
-double		nmea_pdop_ths = 5.1 ;
-uint16_t	nmea_max_rmc_time = 60 ;
-uint16_t	my_lx6_gnss_max_active_time = GNSS_MAX_ACTIVE_TIME ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
+double		nmea_pdop_ths = PDOP_THS ;
+uint16_t	my_lx6_gnss_active_time_ths = GNSS_ACTIVE_TIME_THS ; // Powinien być ten sam typ co tim_seconds // 240: 4 min.,
 double 		nmea_fixed_pdop_d = 101 ;
 char 		nmea_fixed_pdop_s[NMEA_FIX_PDOP_STRING_BUFF_SIZE] = {0} ; // 4 znaki wartości i kropka XX.X + '\0'
 uint32_t	last_fix_ts = 0 ; // 0 timestamp (ts) is 1970.01.01 00:00:00
 
 // TIM
-uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_max_active_time
+uint16_t	tim_seconds = 0 ; // Powinien być ten sam typ co my_lx6_gnss_active_time_ths
 uint32_t	agg_tim_gnss_seconds = 0 ;
-uint32_t	agg_tim_satcom_seconds = 0 ;
 
 // Astrocast
 uint32_t	astro_log_loop_timer = 0 ;
@@ -657,7 +655,7 @@ bool enqueue_payload ( void )
 {
 	astro_geo_wr_latitude = 0 ;
 	astro_geo_wr_longitude = 0 ;
-	if ( my_lx6_get_coordinates ( my_lx6_gnss_max_active_time , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
+	if ( my_lx6_get_coordinates ( my_lx6_gnss_active_time_ths , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
 	{
 		my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
 
@@ -692,6 +690,21 @@ bool enqueue_payload ( void )
 	}
 
 	return false ;
+}
+
+bool enqueue_hello_payload ( void )
+{
+	bool r = false ;
+	char* fv = "FIRMWARE_RELEASE_YEAR" ;
+
+	int32_t astro_geo_wr_latitude = 0 , astro_geo_wr_longitude = 0 ;
+
+	if ( my_lx6_get_coordinates ( my_lx6_gnss_active_time_ths , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
+	{
+		__NOP();
+	}
+	sprintf ( payload , "%s,%d,%lu;%s" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds , fv ) ;
+	return r ;
 }
 
 void send_debug_logs ( char* p_tx_buffer )

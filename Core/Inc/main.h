@@ -81,6 +81,7 @@ void my_lx6_on ( void ) ;
 void my_lx6_off ( void ) ;
 int32_t	my_lis2dw12_platform_write ( void* , uint8_t , const uint8_t* , uint16_t ) ;
 int32_t	my_lis2dw12_platform_read ( void* , uint8_t , uint8_t* , uint16_t ) ;
+bool enqueue_hello_payload ( void ) ;
 bool is_system_initialized ( void ) ;
 bool enqueue_payload ( void ) ;
 
@@ -137,6 +138,7 @@ bool enqueue_payload ( void ) ;
 
 /* USER CODE BEGIN Private defines */
 #define FIRMWARE_RELEASE_YEAR			2023
+#define FIRMWARE_VERSION				0.0.15
 #define HUART_ASTRO						&huart1
 #define HUART_DBG						&huart2
 //#define HUART_Lx6						&huart3
@@ -151,6 +153,9 @@ bool enqueue_payload ( void ) ;
 
 #define SECONDS_IN_1_HOUR				3600
 #define HAL_STD_TIME_OPS_THS			2		// 2 s
+
+#define GNSS_ACTIVE_TIME_THS			60 // Więcej niż 60 s nie ma sensu, bo to oznacza, że nie będzie jak wysłać do satelite Astrocast
+#define PDOP_THS						5.1
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
