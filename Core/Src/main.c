@@ -174,7 +174,7 @@ int main(void)
   while ( !enqueue_hello_payload () )
   {
 	  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
-	  send_debug_logs ( "Enter STOPMode during preparation process" ) ;
+	  send_debug_logs ( "main.c - preparation sm: Enter STOPMode during preparation process" ) ;
 	  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
 	  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
 	  HAL_ResumeTick () ;
@@ -186,6 +186,8 @@ int main(void)
 		  is_acc_int1_wkup_flag = false ;
 		  HAL_Delay ( 500 ) ; // docelowo 2000
 	  }
+	  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+	  //break ; // Comment it later! It's only necessary for indoor test
   }
   // Ciągle w ramach preparation process otrzyaj chociaż 1 potwierdzenie wysłania wiadomosci, żeby Astro miało czas rtc do NCO
   // Poniżej zrób kod do tego
@@ -204,9 +206,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  astro_log_loop_timer = get_systick () ;
+
   // RUNNING STATE MACHINE
-  while (1)
+  while ( 1 )
   {
 	  if ( is_evt_pin_high() )
 	  {
@@ -216,6 +218,7 @@ int main(void)
 	  else
 	  {
 		  send_debug_logs ( "main.c - running sm: no is_evt_pin_high" ) ;
+		  send_debug_logs ( "main.c - preparation sm: Enter STOPMode during preparation process" ) ;
 		  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
 		  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFE ) ;
 		  HAL_ResumeTick () ;
@@ -722,7 +725,7 @@ bool enqueue_payload ( void )
 bool enqueue_hello_payload ( void )
 {
 	bool r = false ;
-	char* fv = "FIRMWARE_RELEASE_YEAR" ;
+	const char* fv = "0.1.0" ;
 
 	int32_t astro_geo_wr_latitude = 0 , astro_geo_wr_longitude = 0 ;
 

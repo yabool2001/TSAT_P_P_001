@@ -138,7 +138,6 @@ bool enqueue_payload ( void ) ;
 
 /* USER CODE BEGIN Private defines */
 #define FIRMWARE_RELEASE_YEAR			2023
-#define FIRMWARE_VERSION				0.0.15
 #define HUART_ASTRO						&huart1
 #define HUART_DBG						&huart2
 //#define HUART_Lx6						&huart3

@@ -430,6 +430,7 @@ void HAL_PWR_EnterSTOPMode(uint32_t Regulator, uint8_t STOPEntry)
   }
 
   /* Reset SLEEPDEEP bit of Cortex System Control Register */
+
   CLEAR_BIT(SCB->SCR, ((uint32_t)SCB_SCR_SLEEPDEEP_Msk));
 }
 
