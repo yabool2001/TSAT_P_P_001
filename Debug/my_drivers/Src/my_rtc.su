@@ -1,4 +1,4 @@
 ../my_drivers/Src/my_rtc.c:17:6:my_rtc_set_dt_from_nmea_rmc	48	static
 ../my_drivers/Src/my_rtc.c:37:6:my_rtc_get_dt	16	static
 ../my_drivers/Src/my_rtc.c:42:10:my_rtc_get_time_s	72	static
-../my_drivers/Src/my_rtc.c:56:6:my_rtc_set_alarm	104	static
+../my_drivers/Src/my_rtc.c:56:6:my_rtc_set_alarm	168	static

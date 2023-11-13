@@ -6,6 +6,7 @@
  */
 #include "my_astronode.h"
 
+
 bool my_astro_init ( void )
 {
 	bool cfg_wr = false ;
@@ -16,7 +17,15 @@ bool my_astro_init ( void )
 	{
 		reset_astronode () ;
 		HAL_Delay ( 100 ) ;
-		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false ) ;
+		// Satellite Acknowledgement (true): Asset informed of ACK to satellite (default)
+		// Add Geolocation (true)
+		// Enable_ephemeris (true)
+		// Deep Sleep Mode (false) NOT used
+		// Satellite Ack Event Pin Mask (true): EVT pin shows EVT register Payload Ack bit state
+		// Reset Notification Event Pin Mask (true):  EVT pin shows EVT register Reset Event Notification bit state
+		// Command Available Event Pin Mask (true): EVT pin shows EVT register Command Available bit state
+		// Message Transmission (Tx) Pending Event Pin Mask (false):  EVT pin does not show EVT register Msg Tx Pending bit state
+		cfg_wr = astronode_send_cfg_wr ( true , true , true , false , true , true , true , false  ) ;
 	}
 	//tim_seconds = 0 ;
 	HAL_TIM_Base_Stop_IT ( MY_TIMER ) ;

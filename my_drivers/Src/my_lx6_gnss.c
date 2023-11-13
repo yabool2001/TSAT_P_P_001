@@ -19,7 +19,6 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 	uint8_t		gsv_tns = 0 ;
 	char 		nmea_latitude_s[MY_GNSS_NMEA_MAX_SIZE] = {0} ; // 10 + ew. znak minus + '\0'
 	char 		nmea_longitude_s[MY_GNSS_NMEA_MAX_SIZE] = {0} ; // 10 + ew. znak minus + '\0'
-	char 		nmea_coordinates_log[52] ; // Nagłowek + 12 + ew. znak minus + '\0'
 	char* 		nmea_gngsa_label = "GNGSA" ;
 	char* 		nmea_gngll_label = "GNGLL" ;
 	char* 		nmea_rmc_label = "RMC" ;
@@ -82,7 +81,9 @@ bool my_lx6_get_coordinates ( uint16_t active_time_ths , double nmea_pdop_ths , 
 		my_rtc_set_dt_from_nmea_rmc ( (char*) nmea_message ) ; // Jeśli masz fix to na pewno czas jest dobry
 		r = true ;
 	}
-	sprintf ( nmea_coordinates_log , "NMEA coordinates: %s,%s" , nmea_latitude_s , nmea_longitude_s ) ;
-	send_debug_logs ( nmea_coordinates_log ) ;
+	if ( r )
+		send_debug_logs ( "my_lx6_gnss.c: Successful fix." ) ;
+	else
+		send_debug_logs ( "my_lx6_gnss.c: No fix." ) ;
 	return r ;
 }

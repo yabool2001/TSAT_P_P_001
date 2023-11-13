@@ -151,6 +151,7 @@ int main(void)
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
 
   // Is system initialized?
+  send_debug_logs ( "Start initialization process" ) ;
   if ( ! is_system_initialized () )
   {
 	  // ASTRO INIT
@@ -168,11 +169,26 @@ int main(void)
 	  // RTC INIT
   }
 
-  // GNSS INIT AND ACQ
-  enqueue_payload () ;
+  // Preparation process
+  send_debug_logs ( "Start preparation process" ) ;
+  while ( !enqueue_hello_payload () )
+  {
+	  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+	  send_debug_logs ( "Enter STOPMode during preparation process" ) ;
+	  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
+	  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+	  HAL_ResumeTick () ;
+	  if ( is_acc_int1_wkup_flag )
+	  {
+		  send_debug_logs ( "lis2dw12_int1 wake up after STOPMode" ) ;
+		  // Turn off next int1_wkups for the end of procedure
+		  my_lis2dw12_int1_wu_disable ( &my_lis2dw12_ctx ) ;
+		  is_acc_int1_wkup_flag = false ;
+		  HAL_Delay ( 500 ) ; // docelowo 2000
+	  }
+  }
 
-  // ACC INT1 WAKEUP ENABLE
-  my_lis2dw12_int1_wu_enable ( &my_lis2dw12_ctx ) ;
+
 
   // TEST STOP SYSTEM
   /*
@@ -190,14 +206,21 @@ int main(void)
   // MAIN STATE MACHINE
   while (1)
   {
+	  if ( is_evt_pin_high() )
+	  {
+		  my_astro_read_evt_reg () ;
+	  }
+	  else
+	  {
+		  send_debug_logs ( "Enter STOPMode when no EVT during running process" ) ;
+		  HAL_SuspendTick () ; // Jak nie wyłączę to mnie przerwanie SysTick od razu wybudzi!!!
+		  HAL_PWR_EnterSTOPMode ( PWR_LOWPOWERREGULATOR_ON , PWR_STOPENTRY_WFI ) ;
+		  HAL_ResumeTick () ;
+	  }
 	  if ( is_astro_evt_flag )
 	  {
 		  my_astro_read_evt_reg () ;
 		  is_astro_evt_flag = false ;
-	  }
-	  if ( is_evt_pin_high() )
-	  {
-		  my_astro_read_evt_reg () ;
 	  }
 
 	  if ( get_systick () - astro_log_loop_timer >  ASTRO_LOG_TIMER )
@@ -231,7 +254,8 @@ int main(void)
 	  }
 	  if ( is_rtc_alarm_a_flag )
 	  {
-		  send_debug_logs ( "RTC alarm A event managed." ) ;
+		  send_debug_logs ( "RTC alarm A event" ) ;
+		  enqueue_payload () ;
 		  my_rtc_set_alarm ( SECONDS_IN_1_HOUR ) ;
 		  is_rtc_alarm_a_flag = false ;
 	  }
@@ -701,9 +725,32 @@ bool enqueue_hello_payload ( void )
 
 	if ( my_lx6_get_coordinates ( my_lx6_gnss_active_time_ths , nmea_pdop_ths , &nmea_fixed_pdop_d , &astro_geo_wr_latitude , &astro_geo_wr_longitude ) )
 	{
-		__NOP();
+		my_astro_write_coordinates ( astro_geo_wr_latitude , astro_geo_wr_longitude ) ;
+
+		// Update ts of last fix
+		my_rtc_get_dt ( &rtc_d , &rtc_t ) ;
+		last_fix_ts = my_conv_rtc2timestamp ( &rtc_d , &rtc_t ) ;
+
+		dbg_buff[0] = 0 ;
+		sprintf ( dbg_buff , "Hello payload and first fix timestap: %lu" , last_fix_ts ) ;
+		send_debug_logs ( dbg_buff ) ;
+
+		my_rtc_get_time_s ( rtc_dt_s ) ;
+		send_debug_logs ( rtc_dt_s ) ;
+
+		snprintf ( nmea_fixed_pdop_s , NMEA_FIX_PDOP_STRING_BUFF_SIZE , "%.1f", nmea_fixed_pdop_d );
+
+		agg_tim_gnss_seconds = agg_tim_gnss_seconds + tim_seconds  ;
+
+		sprintf ( payload , "%s,%d,%lu;%s" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds , fv ) ;
+		sprintf ( astro_payload_log , "Astronode payload: %s" , payload ) ;
+		send_debug_logs ( astro_payload_log ) ;
+		// astronode_send_pld_fr () ; // Don't clear entire payload queue because it's worth having a travel history, even if sent with delay.
+		my_astro_add_payload_2_queue ( 0 , payload ) ;
+
+		return true ;
 	}
-	sprintf ( payload , "%s,%d,%lu;%s" , nmea_fixed_pdop_s , tim_seconds , agg_tim_gnss_seconds , fv ) ;
+
 	return r ;
 }
 

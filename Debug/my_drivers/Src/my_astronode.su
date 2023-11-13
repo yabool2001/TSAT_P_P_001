@@ -1,5 +1,5 @@
-../my_drivers/Src/my_astronode.c:9:6:my_astro_init	40	static
-../my_drivers/Src/my_astronode.c:38:6:my_astro_add_payload_2_queue	24	static
-../my_drivers/Src/my_astronode.c:54:6:my_astro_read_evt_reg	8	static
-../my_drivers/Src/my_astronode.c:78:6:my_astro_log	8	static
-../my_drivers/Src/my_astronode.c:88:6:my_astro_write_coordinates	16	static
+../my_drivers/Src/my_astronode.c:10:6:my_astro_init	40	static
+../my_drivers/Src/my_astronode.c:47:6:my_astro_add_payload_2_queue	24	static
+../my_drivers/Src/my_astronode.c:63:6:my_astro_read_evt_reg	8	static
+../my_drivers/Src/my_astronode.c:87:6:my_astro_log	8	static
+../my_drivers/Src/my_astronode.c:97:6:my_astro_write_coordinates	16	static

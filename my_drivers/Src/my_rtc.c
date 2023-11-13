@@ -79,6 +79,9 @@ bool my_rtc_set_alarm ( uint32_t s )
 
 	if ( HAL_RTC_SetAlarm ( &hrtc , &a , RTC_FORMAT_BIN ) == HAL_OK )
 	{
+		char s[60] = {0} ;
+		sprintf ( s , "Alarm set to %lu" , alarm_ts ) ;
+		send_debug_logs ( s ) ;
 		r = true ;
 	}
 
