@@ -149,6 +149,7 @@ int main(void)
 
   // System hello
   HAL_UART_Transmit ( &huart2 , (uint8_t*) hello , strlen (hello) , UART_TIMEOUT ) ;
+  __HAL_TIM_CLEAR_IT ( &htim6 , TIM_IT_UPDATE ) ;
 
   // Is system initialized?
   send_debug_logs ( "Start initialization process" ) ;
